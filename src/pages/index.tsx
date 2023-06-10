@@ -3,6 +3,8 @@ import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 
+import Carousel from "./components/Carousel";
+
 const Home: NextPage = () => {
     const homePageImages = [
         "1_front.jpg",
@@ -40,6 +42,8 @@ const Home: NextPage = () => {
                 />
                 <link rel="manifest" href="/favicon/site.webmanifest" />
             </Head>
+
+            <Carousel images={homePageImages} />
         </>
     );
 };
