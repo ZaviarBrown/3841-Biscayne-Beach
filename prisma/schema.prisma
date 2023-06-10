@@ -11,10 +11,29 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
+model Booking {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    userId    String
+    startDate DateTime
+    endDate   DateTime
+
+    user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    Review Review[]
+}
+
+model Review {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    userId    String
+    bookingId String
+
+    user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
 // Necessary for Next auth
@@ -52,6 +71,8 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    Booking       Booking[]
+    Review        Review[]
 }
 
 model VerificationToken {
