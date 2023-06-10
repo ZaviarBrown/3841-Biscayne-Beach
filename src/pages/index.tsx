@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 
 import Carousel from "./components/Carousel";
 import Navbar from "./components/NavBar";
+import Booking from "./components/Booking";
 
 const Home: NextPage = () => {
     const homePageImages = [
@@ -45,6 +46,7 @@ const Home: NextPage = () => {
             </Head>
             <Navbar />
             <Carousel images={homePageImages} />
+            <Booking />
         </>
     );
 };
