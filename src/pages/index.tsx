@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 
 import Carousel from "./components/Carousel";
+import Navbar from "./components/NavBar";
 
 const Home: NextPage = () => {
     const homePageImages = [
@@ -42,7 +43,7 @@ const Home: NextPage = () => {
                 />
                 <link rel="manifest" href="/favicon/site.webmanifest" />
             </Head>
-
+            <Navbar />
             <Carousel images={homePageImages} />
         </>
     );
