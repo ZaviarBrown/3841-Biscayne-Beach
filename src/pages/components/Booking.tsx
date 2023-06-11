@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import type { DateRange } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import PayPreview from "./PayPreview";
 
 const Booking = () => {
     const [dates, setDates] = useState<DateRange>();
@@ -28,10 +29,14 @@ const Booking = () => {
     };
 
     return (
-        <div>
-            <h1>Booking</h1>
-            <DayPicker mode="range" selected={dates} onSelect={setDates} />
-            <button onClick={handleBooking}>Book Appointment</button>
+        <div className="m-3 flex justify-around">
+            <DayPicker
+                mode="range"
+                selected={dates}
+                onSelect={setDates}
+                className="rounded-lg shadow-2xl"
+            />
+            <PayPreview selected={dates} />
         </div>
     );
 };

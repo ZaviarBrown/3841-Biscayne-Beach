@@ -19,12 +19,12 @@ const Carousel = ({ images }: CarouselProps) => {
     };
 
     return (
-        <div className="relative bg-black">
-            <div className="overflow-hidden opacity-70">
+        <div className="relative h-[80vh] bg-black">
+            <div className="h-[80vh] overflow-hidden opacity-70">
                 <img
                     src={`/tempPhotos/${images[currentImage] ?? "1_front.jpg"}`}
                     alt="Carousel Image"
-                    className="h-auto w-full"
+                    className=""
                 />
             </div>
 
