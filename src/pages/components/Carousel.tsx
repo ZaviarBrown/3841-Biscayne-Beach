@@ -1,11 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 
-interface CarouselProps {
-    images: string[];
-}
+const images = [
+    "1_front.jpg",
+    "2_side.jpg",
+    "3_kitchen.jpg",
+    "4_roomAndBath.jpg",
+    "5_beach.jpg",
+    "6_sunset.jpg",
+];
 
-const Carousel = ({ images }: CarouselProps) => {
+const Carousel = () => {
     const [currentImage, setCurrentImage] = useState(0);
 
     const nextImage = () => {
