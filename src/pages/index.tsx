@@ -61,8 +61,18 @@ const Home: NextPage = () => {
             </Head>
             <Navbar />
             <Carousel />
-            <Booking />
-            <HomeDetails />
+            <div>
+                <div className="absolute mt-10">
+                    <div className="m-auto flex gap-16">
+                        <div className="ml-32 mt-28">
+                            <HomeDetails />
+                        </div>
+                        <div className="mr-32">
+                            <Booking />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     );
 };

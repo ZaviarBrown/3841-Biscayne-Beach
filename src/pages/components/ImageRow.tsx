@@ -21,7 +21,7 @@ function ImageRow({ image, description, order }: ImageRowProps) {
             {
                 root: null,
                 rootMargin: "0px",
-                threshold: 0.1,
+                threshold: 0.3,
             }
         );
 
@@ -37,30 +37,30 @@ function ImageRow({ image, description, order }: ImageRowProps) {
     }, []);
 
     const leftOrRight = order % 2 === 0 ? "" : "flex-row-reverse";
+    const leftTranslate = isVisible
+        ? "transform-gpu opacity-100"
+        : "-translate-x-32 transform-gpu opacity-0";
+    const rightTranslate = isVisible
+        ? "transform-gpu opacity-100"
+        : "translate-x-32 transform-gpu opacity-0";
 
     return (
         <div
             ref={ref}
-            className={`mb-4 flex items-center justify-between transition-all duration-1000 ${
-                isVisible
-                    ? "transform-gpu opacity-100"
-                    : "-translate-x-32 transform-gpu opacity-0"
-            } ${leftOrRight} mx-4`}
+            className={`mb-32 flex items-center justify-between transition-all duration-1000 ${leftOrRight} mx-4`}
         >
             <img
-                className={`mr-4 w-2/5 transition-all duration-1000 ${
-                    isVisible
-                        ? "transform-gpu opacity-100"
-                        : "-translate-x-32 transform-gpu opacity-0"
+                className={`mx-4 w-1/2 transition-all duration-1000 ${
+                    leftOrRight === ""
+                        ? leftTranslate + " shadow-4xlL"
+                        : rightTranslate + " shadow-4xlR"
                 }`}
                 src={image}
                 alt={description}
             />
             <div
-                className={`ml-4 w-3/5 transition-all duration-1000 ${
-                    isVisible
-                        ? "transform-gpu opacity-100"
-                        : "translate-x-32 transform-gpu opacity-0"
+                className={`mx-4 transition-all duration-1000 ${
+                    leftOrRight === "" ? rightTranslate : leftTranslate
                 } h-auto max-h-[60%] overflow-auto`}
             >
                 {description}

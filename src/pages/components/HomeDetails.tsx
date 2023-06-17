@@ -31,7 +31,6 @@ function HomeDetails() {
             {dummyData.map((el, i) => (
                 <ImageRow key={i} {...el} order={i} />
             ))}
-            ;
         </div>
     );
 }
