@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect } from "react";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
@@ -91,7 +92,17 @@ const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
                 disabled={disabled}
                 className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
             >
-                Book now
+                <Link
+                    href={{
+                        pathname: "/confirmation",
+                        query: {
+                            from: dates.from?.toLocaleDateString(),
+                            to: dates.to?.toLocaleDateString(),
+                        },
+                    }}
+                >
+                    Book now
+                </Link>
             </button>
         </div>
     );

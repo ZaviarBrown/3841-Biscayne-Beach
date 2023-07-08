@@ -7,8 +7,6 @@ import PayPreview from "./PayPreview";
 const Booking = () => {
     const [dates, setDates] = useState<DateRange>();
 
-
-
     return (
         <div className="sticky top-32 z-50 flex flex-col items-center">
             <DayPicker
