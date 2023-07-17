@@ -5,9 +5,9 @@ import {
     publicProcedure,
     protectedProcedure,
 } from "~/server/api/trpc";
-import chargeCreditCard from "./charge-credit-card";
+import chargeCreditCard from "../paymentSDK/charge-credit-card";
 
-export const exampleRouter = createTRPCRouter({
+export const paymentRouter = createTRPCRouter({
     hello: publicProcedure
         .input(z.object({ text: z.string() }))
         .query(({ input }) => {
