@@ -1,4 +1,8 @@
 import { api } from "~/utils/api";
+import GuestInfo from "../../components/Confirmation/GuestInfo";
+import PaymentMethod from "../../components/Confirmation/PaymentMethod";
+import BookingSummary from "../../components/Confirmation/BookingSummary";
+import ConfirmButton from "../../components/Confirmation/ConfirmButton";
 
 interface Booking {
     from: string;
@@ -15,7 +19,7 @@ export const getServerSideProps = ({ query }: { query: Booking }) => {
 };
 
 export default function Confirmation({ from, to }: Booking) {
-    const { mutate } = api.example.testCharge.useMutation();
+    const { mutate } = api.payment.testCharge.useMutation();
 
     return (
         <>
@@ -25,4 +29,18 @@ export default function Confirmation({ from, to }: Booking) {
             </button>
         </>
     );
+    // return (
+    //     <div className="App">
+    //         <div className="flex">
+    //             <div className="w-3/5 p-10">
+    //                 <GuestInfo />
+    //                 <PaymentMethod />
+    //             </div>
+    //             <div className="w-2/5 bg-gray-100 p-10">
+    //                 <BookingSummary />
+    //                 <ConfirmButton />
+    //             </div>
+    //         </div>
+    //     </div>
+    // );
 }

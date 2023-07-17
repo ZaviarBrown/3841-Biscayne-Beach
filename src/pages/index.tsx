@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { api } from "~/utils/api";
 
-import Carousel from "./components/Carousel";
-import Navbar from "./components/NavBar";
-import Booking from "./components/Booking";
-import HomeDetails from "./components/HomeDetails";
+import Carousel from "../components/Carousel";
+import Navbar from "../components/NavBar";
+import Booking from "../components/Booking";
+import HomeDetails from "../components/HomeDetails";
 
 const Home: NextPage = () => {
     const dummyData = [
