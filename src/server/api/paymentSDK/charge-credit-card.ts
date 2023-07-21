@@ -7,10 +7,11 @@ interface BookingInfo {
     cardCode: string;
     transactionId: string;
     dates: string;
+    price: number;
 }
 
 export default function chargeCreditCard(info: BookingInfo) {
-    const { cardNumber, expDate, cardCode, transactionId, dates } = info;
+    const { cardNumber, expDate, cardCode, transactionId, dates, price } = info;
 
     const merchantAuthenticationType =
         new APIContracts.MerchantAuthenticationType();
@@ -34,7 +35,7 @@ export default function chargeCreditCard(info: BookingInfo) {
         APIContracts.TransactionTypeEnum.AUTHCAPTURETRANSACTION
     );
     transactionRequestType.setPayment(paymentType);
-    transactionRequestType.setAmount(58.0);
+    transactionRequestType.setAmount(price);
     transactionRequestType.setOrder(orderDetails);
 
     const createRequest = new APIContracts.CreateTransactionRequest();
@@ -145,8 +146,6 @@ export default function chargeCreditCard(info: BookingInfo) {
         } else {
             console.log("Null Response.");
         }
-
-        console.log("Wtf I guess that worked");
     });
 }
 
