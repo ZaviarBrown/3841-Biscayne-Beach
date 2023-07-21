@@ -10,7 +10,7 @@ const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
         selected ? { ...selected } : { from: undefined, to: undefined }
     );
     const [disabled, setDisabled] = useState(true);
-
+    console.log(dates);
     useEffect(
         () =>
             setDates(
@@ -82,9 +82,7 @@ const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
 
             <div className="mt-4">
                 <div>Service Fee: etc...</div>
-                <p>
-                    Total: {getTotalCost() ? `$${getTotalCost() ?? 0}` : "N/A"}
-                </p>
+                <p>Total: {`$${getTotalCost() ?? "..."}`}</p>
             </div>
 
             <div className="mt-4 flex justify-center">
@@ -92,8 +90,9 @@ const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
                     href={{
                         pathname: "/confirmation",
                         query: {
-                            from: dates.from?.toLocaleDateString(),
-                            to: dates.to?.toLocaleDateString(),
+                            from: dates.from?.getTime(),
+                            to: dates.to?.getTime(),
+                            total: `${getTotalCost() ?? 0}`,
                         },
                     }}
                 >

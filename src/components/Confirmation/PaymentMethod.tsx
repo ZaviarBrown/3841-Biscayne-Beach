@@ -1,15 +1,39 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
-const PaymentMethod = () => {
-    const [cardName, setCardName] = useState("");
-    const [firstCCNums, setFirstCCNums] = useState("");
-    const [secondCCNums, setSecondCCNums] = useState("");
-    const [thirdCCNums, setThirdCCNums] = useState("");
-    const [fourthCCNums, setFourthCCNums] = useState("");
-    const [expMonth, setExpMonth] = useState("");
-    const [expYear, setExpYear] = useState("");
-    const [code, setCode] = useState("");
+interface PayMethodType {
 
+    firstCCNums: string;
+    setFirstCCNums: React.Dispatch<React.SetStateAction<string>>;
+    secondCCNums: string;
+    setSecondCCNums: React.Dispatch<React.SetStateAction<string>>;
+    thirdCCNums: string;
+    setThirdCCNums: React.Dispatch<React.SetStateAction<string>>;
+    fourthCCNums: string;
+    setFourthCCNums: React.Dispatch<React.SetStateAction<string>>;
+    expMonth: string;
+    setExpMonth: React.Dispatch<React.SetStateAction<string>>;
+    expYear: string;
+    setExpYear: React.Dispatch<React.SetStateAction<string>>;
+    cardCode: string;
+    setCardCode: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PaymentMethod = ({
+    firstCCNums,
+    setFirstCCNums,
+    secondCCNums,
+    setSecondCCNums,
+    thirdCCNums,
+    setThirdCCNums,
+    fourthCCNums,
+    setFourthCCNums,
+    expMonth,
+    setExpMonth,
+    expYear,
+    setExpYear,
+    cardCode,
+    setCardCode,
+}: PayMethodType) => {
     const firstCCRef = useRef<HTMLInputElement>(null);
     const secondCCRef = useRef<HTMLInputElement>(null);
     const thirdCCRef = useRef<HTMLInputElement>(null);
@@ -38,19 +62,6 @@ const PaymentMethod = () => {
         <div className="mb-6">
             <h2 className="mb-4 text-2xl font-bold">Payment Method</h2>
             <form>
-                <div className="mb-4">
-                    <label className="mb-2 block text-sm font-bold text-gray-700">
-                        Name On Card
-                    </label>
-                    <input
-                        value={cardName}
-                        onChange={(e) => setCardName(e.target.value)}
-                        className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 text-gray-700 shadow focus:outline-none"
-                        type="text"
-                        placeholder="John Doe"
-                    />
-                </div>
-
                 <div className="mb-4">
                     <label
                         htmlFor="cardNumber"
@@ -130,7 +141,7 @@ const PaymentMethod = () => {
                             onChange={(e) =>
                                 handleInputChange(e, 2, setExpMonth, expYearRef)
                             }
-                            className="focus:shadow-outline w-11 appearance-none rounded border py-2 text-center text-sm text-gray-700 shadow focus:outline-none"
+                            className="focus:shadow-outline w-11 rounded border py-2 text-center text-sm text-gray-700 shadow focus:outline-none"
                             type="text"
                             placeholder="MM"
                         />
@@ -141,7 +152,7 @@ const PaymentMethod = () => {
                             onChange={(e) =>
                                 handleInputChange(e, 2, setExpYear, codeRef)
                             }
-                            className="focus:shadow-outline w-11 appearance-none rounded border py-2 text-center text-sm text-gray-700 shadow focus:outline-none"
+                            className="focus:shadow-outline w-11 rounded border py-2 text-center text-sm text-gray-700 shadow focus:outline-none"
                             type="text"
                             placeholder="YY"
                         />
@@ -152,11 +163,11 @@ const PaymentMethod = () => {
                         </label>
                         <input
                             ref={codeRef}
-                            value={code}
+                            value={cardCode}
                             onChange={(e) =>
-                                handleInputChange(e, 4, setCode, codeRef)
+                                handleInputChange(e, 4, setCardCode, codeRef)
                             }
-                            className="focus:shadow-outline w-14 appearance-none rounded border py-2 text-center text-sm text-gray-700 shadow focus:outline-none"
+                            className="focus:shadow-outline w-14 rounded border py-2 text-center text-sm text-gray-700 shadow focus:outline-none"
                             type="text"
                             placeholder="XXX"
                         />
