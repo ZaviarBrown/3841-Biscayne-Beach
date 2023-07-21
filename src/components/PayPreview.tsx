@@ -87,11 +87,7 @@ const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
                 </p>
             </div>
 
-            <button
-                onClick={createBooking}
-                disabled={disabled}
-                className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
-            >
+            <div className="mt-4 flex justify-center">
                 <Link
                     href={{
                         pathname: "/confirmation",
@@ -101,9 +97,15 @@ const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
                         },
                     }}
                 >
-                    Book now
+                    <button
+                        onClick={createBooking}
+                        disabled={disabled}
+                        className=" rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
+                    >
+                        Book now
+                    </button>
                 </Link>
-            </button>
+            </div>
         </div>
     );
 };
