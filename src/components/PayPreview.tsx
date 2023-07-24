@@ -90,9 +90,9 @@ const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
                     href={{
                         pathname: "/confirmation",
                         query: {
-                            from: dates.from?.getTime(),
-                            to: dates.to?.getTime(),
-                            total: `${getTotalCost() ?? 0}`,
+                            startDate: dates.from?.getTime(),
+                            endDate: dates.to?.getTime(),
+                            totalPrice: `${getTotalCost() ?? 0}`,
                         },
                     }}
                 >

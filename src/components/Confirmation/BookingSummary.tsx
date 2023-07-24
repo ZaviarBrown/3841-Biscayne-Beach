@@ -9,19 +9,26 @@ const BookingSummary = ({
     endDate: string;
     totalPrice: string;
 }) => {
+    console.log(startDate, endDate, totalPrice);
+    console.log(typeof startDate);
+
     return (
         <div className="mb-6">
             <h2 className="mb-4 text-2xl font-bold">Booking Summary</h2>
             <div className="mb-4">
                 <p className="mb-2 text-sm">Check-in</p>
                 <p className="font-bold">
-                    {format(new Date(Number(startDate)), "PPPP")}
+                    {startDate
+                        ? format(new Date(Number(startDate)), "PPPP")
+                        : "..."}
                 </p>
             </div>
             <div className="mb-4">
                 <p className="mb-2 text-sm">Check-out</p>
                 <p className="font-bold">
-                    {format(new Date(Number(endDate)), "PPPP")}
+                    {endDate
+                        ? format(new Date(Number(endDate)), "PPPP")
+                        : "..."}
                 </p>
             </div>
             <div className="mb-4">
