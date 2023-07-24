@@ -5,7 +5,7 @@ import {
     publicProcedure,
     protectedProcedure,
 } from "~/server/api/trpc";
-import chargeCreditCard from "../paymentSDK/charge-credit-card";
+import chargeCreditCard from "../utils/charge-credit-card";
 
 export const paymentRouter = createTRPCRouter({
     testCharge: publicProcedure.mutation(() => {
