@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <nav
             className="fixed left-0 right-0 top-0 z-20 flex items-center 
-            justify-between px-6 py-4"
+            justify-between bg-black/50 px-6 py-4 backdrop-blur"
         >
             <div className="text-2xl font-semibold text-white">
                 3841 Biscayne Beach

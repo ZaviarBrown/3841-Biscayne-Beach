@@ -39,14 +39,14 @@ const Carousel = () => {
             <div className="absolute bottom-10 left-10 right-10 flex justify-between p-4">
                 <button
                     onClick={previousImage}
-                    className="h-14 w-14 rounded-lg border border-slate-300 bg-slate-900 px-4 py-2 text-white opacity-70 transition-all duration-200 hover:scale-110 hover:opacity-90"
+                    className="h-14 w-14 rounded-lg border border-slate-300 bg-slate-900 px-4 py-2 text-white opacity-50 transition-all duration-200 hover:scale-110 hover:opacity-90"
                 >
                     {"<"}
                 </button>
 
                 <button
                     onClick={nextImage}
-                    className="h-14 w-14 rounded-lg border border-slate-300 bg-slate-900 px-4 py-2 text-white opacity-70 transition-all duration-200 hover:scale-110 hover:opacity-90"
+                    className="h-14 w-14 rounded-lg border border-slate-300 bg-slate-900 px-4 py-2 text-white opacity-50 transition-all duration-200 hover:scale-110 hover:opacity-90"
                 >
                     {">"}
                 </button>
