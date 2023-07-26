@@ -3,21 +3,21 @@ import { useEffect } from "react";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 
+// TODO: Pretty sure I could do away with "dates" state, just use selected
+
 const pricePerNight = 50;
 
 const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
-    const [dates, setDates] = useState<DateRange>(
-        selected ? { ...selected } : { from: undefined, to: undefined }
-    );
+    const [dates, setDates] = useState<DateRange>({
+        from: undefined,
+        to: undefined,
+    });
     const [disabled, setDisabled] = useState(true);
-    console.log(dates);
-    useEffect(
-        () =>
-            setDates(
-                selected ? { ...selected } : { from: undefined, to: undefined }
-            ),
-        [selected]
-    );
+
+    useEffect(() => {
+        if (selected && selected.from) setDates({ ...selected });
+        else setDates({ from: undefined, to: undefined });
+    }, [selected]);
 
     useEffect(
         () => setDisabled(dates.from === undefined || dates.to === undefined),
