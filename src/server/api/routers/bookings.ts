@@ -16,8 +16,8 @@ export const bookingRouter = createTRPCRouter({
         const bookedArr = await ctx.prisma.booking.findMany();
 
         return bookedArr.map((el) => ({
-            startDate: el.startDate,
-            endDate: el.endDate,
+            from: el.startDate,
+            to: el.endDate,
         }));
     }),
 
@@ -104,7 +104,7 @@ export const bookingRouter = createTRPCRouter({
                         },
                     });
 
-                    return updatedBooking;
+                    return {updatedBooking};
                 } else {
                     await ctx.prisma.booking.delete({
                         where: { id: newBooking.id },
