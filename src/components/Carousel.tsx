@@ -18,7 +18,7 @@ const Carousel = () => {
 
     return (
         <div className="relative z-10 flex h-[80vh] items-center justify-center bg-black">
-            <div className="absolute z-20 text-center text-[150px] font-thin italic text-white opacity-60">
+            <div className="absolute z-20 text-center text-[150px] font-thin italic text-white opacity-90">
                 {
                     ["Vacation", "Luxury", "Adventure", "Perfection"][
                         currentImage

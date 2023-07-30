@@ -5,7 +5,7 @@ import type { DateRange } from "react-day-picker";
 
 // TODO: Pretty sure I could do away with "dates" state, just use selected
 
-const pricePerNight = 50;
+const pricePerNight = 300;
 
 const PayPreview = ({ selected }: { selected: DateRange | undefined }) => {
     const [dates, setDates] = useState<DateRange>({
