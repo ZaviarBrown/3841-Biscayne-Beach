@@ -1,10 +1,7 @@
-import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
-import type { DateRange } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import PayPreview from "./PayPreview";
 import { api } from "~/utils/api";
 import { isBefore, isAfter } from "date-fns";
+import type { DateRange } from "react-day-picker";
 
 type StartEndDates = {
     from: Date;
@@ -60,35 +57,38 @@ const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
     return options;
 };
 
-const Calendar = () => {
-    const [dates, setDates] = useState<DateRange>();
-
+const Calendar = ({
+    dates,
+    setDates,
+}: {
+    dates: DateRange;
+    setDates: React.Dispatch<React.SetStateAction<DateRange>>;
+}) => {
     // TODO: SSR
-    let { data: booked } = api.bookings.getAllBookedDates.useQuery();
+    let { data: booked } = api.booking.getAllBookedDates.useQuery();
     if (!booked) booked = [];
 
     return (
-        <div className="sticky top-32 z-50 flex flex-col items-center">
-            <DayPicker
-                mode="range"
-                selected={dates}
-                onSelect={(range, justSelected) => {
-                    if (booked && range?.from && range.to) {
-                        for (const { from } of booked) {
-                            if (isBefore(range.from, from)) {
-                                if (isAfter(range.to, from)) {
-                                    return setDates({ from: justSelected });
-                                } else return setDates(range);
-                            }
+        <DayPicker
+            mode="range"
+            selected={dates}
+            onSelect={(range, justSelected) => {
+                if (!range) return setDates({ from: undefined });
+
+                if (booked && range?.from && range.to) {
+                    for (const { from } of booked) {
+                        if (isBefore(range.from, from)) {
+                            if (isAfter(range.to, from)) {
+                                return setDates({ from: justSelected });
+                            } else return setDates(range);
                         }
                     }
-                    setDates(range);
-                }}
-                className="rounded-lg bg-white p-1 shadow-3xl"
-                {...createCalendarOptions(booked)}
-            />
-            <PayPreview selected={dates} />
-        </div>
+                }
+                setDates(range);
+            }}
+            className="scale-150 transform rounded-lg bg-white p-1 shadow-3xl"
+            {...createCalendarOptions(booked)}
+        />
     );
 };
 
