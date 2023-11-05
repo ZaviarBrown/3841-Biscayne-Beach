@@ -17,7 +17,9 @@ const Navbar = () => {
             </p>
 
             <button
-                onClick={() => (session ? void signOut() : void signIn())}
+                onClick={() =>
+                    session ? void signOut() : void signIn("google")
+                }
                 className="flex rounded-3xl border px-3 py-1 text-xl 
                     text-white transition-all duration-200 hover:scale-105"
             >
