@@ -1,3 +1,5 @@
+// TODO: New repo, hashing algos
+
 function decimalToBase64(decimalNumber: number): string {
     if (typeof decimalNumber !== "number" || !Number.isInteger(decimalNumber)) {
         throw new Error("Input must be an integer.");
