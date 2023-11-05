@@ -28,9 +28,9 @@ const dummyData = [
 function HomeDetails() {
     return (
         <div>
-            {dummyData.map((el, i) => (
+            {/* {dummyData.map((el, i) => (
                 <ImageRow key={i} {...el} order={i} />
-            ))}
+            ))} */}
         </div>
     );
 }

@@ -29,6 +29,7 @@ export interface CalendarOptions {
     showOutsideDays: boolean;
 }
 
+// TODO: SSR
 const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
     const today = new Date();
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -59,9 +60,10 @@ const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
     return options;
 };
 
-const Booking = () => {
+const Calendar = () => {
     const [dates, setDates] = useState<DateRange>();
 
+    // TODO: SSR
     let { data: booked } = api.bookings.getAllBookedDates.useQuery();
     if (!booked) booked = [];
 
@@ -90,4 +92,4 @@ const Booking = () => {
     );
 };
 
-export default Booking;
+export default Calendar;
