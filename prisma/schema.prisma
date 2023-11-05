@@ -34,6 +34,20 @@ model Review {
     booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
+model Message {
+    id String @id @default(cuid())
+    // message
+    // userId
+}
+
+model Transaction {
+    id String @id @default(cuid())
+    // type: charge, refund
+    // amount: in cents
+    // bookingId
+    // stripeId 
+}
+
 // NextAuth Account
 model Account {
     id                String  @id @default(cuid())
