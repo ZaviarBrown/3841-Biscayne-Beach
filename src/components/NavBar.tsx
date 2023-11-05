@@ -2,12 +2,12 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-const Navbar = () => {
+const NavBar = () => {
     const { data: session } = useSession();
 
     return (
         <nav
-            className="fixed left-0 right-0 top-0 z-20 bg-black/50 px-6 py-4 backdrop-blur"
+            className="z-20 bg-black/50 px-6 py-4 backdrop-blur"
             aria-label="Main Navigation"
         >
             <ul className="flex items-center justify-between text-xl text-white">
@@ -60,4 +60,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default NavBar;
