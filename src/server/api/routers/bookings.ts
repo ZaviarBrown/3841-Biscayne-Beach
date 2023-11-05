@@ -104,7 +104,7 @@ export const bookingRouter = createTRPCRouter({
                         },
                     });
 
-                    return {updatedBooking};
+                    return { updatedBooking };
                 } else {
                     await ctx.prisma.booking.delete({
                         where: { id: newBooking.id },
