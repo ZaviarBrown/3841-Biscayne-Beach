@@ -1,9 +1,9 @@
 import { createTRPCRouter } from "./trpc";
 
 import { adminRouter } from "./routers/admin";
-import { bookingRouter } from "./routers/bookings";
+import { bookingRouter } from "./routers/booking";
 import { contactRouter } from "./routers/contact";
-import { reviewRouter } from "./routers/reviews";
+import { reviewRouter } from "./routers/review";
 import { stripeRouter } from "./routers/stripe";
 import { transactionRouter } from "./routers/transaction";
 
@@ -14,9 +14,9 @@ import { transactionRouter } from "./routers/transaction";
  */
 export const appRouter = createTRPCRouter({
     admin: adminRouter,
-    bookings: bookingRouter,
+    booking: bookingRouter,
     contact: contactRouter,
-    reviews: reviewRouter,
+    review: reviewRouter,
     stripe: stripeRouter,
     transaction: transactionRouter,
 });

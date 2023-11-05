@@ -57,7 +57,7 @@ export default function Confirmation() {
         email,
     ]);
 
-    const { mutate: createBooking } = api.bookings.create.useMutation({
+    const { mutate: createBooking } = api.booking.create.useMutation({
         onSuccess: () => router.push("/"),
     });
 
@@ -83,7 +83,12 @@ export default function Confirmation() {
         }
     };
 
-    if (processing) return <div className='flex justify-center items-center'>Secure Transaction Screen</div>;
+    if (processing)
+        return (
+            <div className="flex items-center justify-center">
+                Secure Transaction Screen
+            </div>
+        );
 
     return (
         <>
