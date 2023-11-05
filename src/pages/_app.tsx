@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import "react-day-picker/dist/style.css";
 import Layout from "~/components/layout";
 
 const MyApp: AppType<{ session: Session | null }> = ({
