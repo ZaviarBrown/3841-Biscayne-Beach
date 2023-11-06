@@ -4,11 +4,11 @@ import {
     createTRPCRouter,
     publicProcedure,
     protectedProcedure,
+    adminProcedure,
 } from "~/server/api/trpc";
 
-export const adminRouter = createTRPCRouter({
-    // TODO: protectedProcedure
-    createNewAdmin: publicProcedure
+export const userRouter = createTRPCRouter({
+    createNewAdmin: adminProcedure
         .input(z.string())
         .mutation(async ({ input: email, ctx }) => {
             const newAdmin = await ctx.prisma.user.create({
@@ -21,9 +21,20 @@ export const adminRouter = createTRPCRouter({
             return newAdmin;
         }),
 
-    // TODO: changeRole
+    changeRole: adminProcedure
+        .input(z.string())
+        .mutation(async ({ input: id, ctx }) => {
+            const updatedToAdmin = await ctx.prisma.user.update({
+                where: { id },
+                data: {
+                    role: "admin",
+                },
+            });
 
-    // TODO: find one
+            return updatedToAdmin;
+        }),
+
+    
 
     getAll: publicProcedure.query(async ({ ctx }) => {
         const allUsers = await ctx.prisma.user.findMany();
