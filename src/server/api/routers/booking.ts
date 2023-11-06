@@ -1,5 +1,3 @@
-// TODO: Ensure all db calls are async/await
-
 import { z } from "zod";
 
 import {
@@ -8,11 +6,8 @@ import {
     protectedProcedure,
 } from "~/server/api/trpc";
 
-import chargeCreditCard from "../utils/charge-credit-card";
-import generateInvoiceId from "../utils/invoiceId";
-
 export const bookingRouter = createTRPCRouter({
-    getAllBookedDates: publicProcedure.query(async ({ ctx }) => {
+    getAll: publicProcedure.query(async ({ ctx }) => {
         const bookedArr = await ctx.prisma.booking.findMany();
 
         return bookedArr.map((el) => ({
@@ -21,38 +16,34 @@ export const bookingRouter = createTRPCRouter({
         }));
     }),
 
-    getByStartDate: publicProcedure.input(z.date()).query(({ input, ctx }) => {
-        return ctx.prisma.booking.findFirst({
-            where: { startDate: input },
-        });
-    }),
+    getById: publicProcedure
+        .input(z.string())
+        .query(async ({ input: id, ctx }) => {
+            return await ctx.prisma.booking.findUnique({ where: { id } });
+        }),
 
-    getByEndDate: publicProcedure.input(z.date()).query(({ input, ctx }) => {
-        return ctx.prisma.booking.findFirst({
-            where: { endDate: input },
-        });
-    }),
+    getByStartDate: publicProcedure
+        .input(z.date())
+        .query(async ({ input, ctx }) => {
+            return await ctx.prisma.booking.findFirst({
+                where: { startDate: input },
+            });
+        }),
+
+    getByEndDate: publicProcedure
+        .input(z.date())
+        .query(async ({ input, ctx }) => {
+            return await ctx.prisma.booking.findFirst({
+                where: { endDate: input },
+            });
+        }),
 
     getByUserId: protectedProcedure
         .input(z.string())
-        .query(({ input, ctx }) => {
-            return ctx.prisma.booking.findMany({ where: { userId: input } });
-        }),
-
-    getByInvoiceId: publicProcedure
-        .input(z.string())
         .query(async ({ input, ctx }) => {
-            let data = await ctx.prisma.booking.findFirst({
-                where: { invoiceId: input },
+            return await ctx.prisma.booking.findMany({
+                where: { userId: input },
             });
-
-            if (!data) {
-                data = await ctx.prisma.booking.findFirst({
-                    where: { id: { startsWith: input.slice(0, 10) } },
-                });
-            }
-
-            return data;
         }),
 
     create: protectedProcedure
@@ -63,11 +54,13 @@ export const bookingRouter = createTRPCRouter({
                 email: z.string(),
                 startDate: z.date(),
                 endDate: z.date(),
+                priceId: z.string(),
+                numberOfNights: z.number(),
             })
         )
         .mutation(async ({ input: bookingInfo, ctx }) => {
             const newBooking = await ctx.prisma.booking.create({
-                data: bookingInfo,
+                data: { ...bookingInfo, status: "pending" },
             });
 
             return newBooking;

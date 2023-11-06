@@ -65,7 +65,7 @@ const Calendar = ({
     setDates: React.Dispatch<React.SetStateAction<DateRange>>;
 }) => {
     // TODO: SSR
-    let { data: booked } = api.booking.getAllBookedDates.useQuery();
+    let { data: booked } = api.booking.getAll.useQuery();
     if (!booked) booked = [];
 
     return (
