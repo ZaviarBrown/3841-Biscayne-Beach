@@ -6,14 +6,59 @@ import {
     protectedProcedure,
 } from "~/server/api/trpc";
 
-export const reviewRouter = createTRPCRouter({});
+export const reviewRouter = createTRPCRouter({
+    getAll: publicProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.review.findMany();
+    }),
 
-// TODO: create
+    getOne: publicProcedure
+        .input(z.string())
+        .query(async ({ input: id, ctx }) => {
+            return await ctx.prisma.review.findUnique({ where: { id } });
+        }),
 
-// getAll
+    getByUserId: protectedProcedure
+        .input(z.string())
+        .query(async ({ input: userId, ctx }) => {
+            return await ctx.prisma.review.findMany({ where: { userId } });
+        }),
 
-// getOne
+    create: protectedProcedure
+        .input(
+            z.object({
+                text: z.string(),
+                rating: z.number(),
+                userId: z.string(),
+                bookingId: z.string(),
+            })
+        )
+        .mutation(async ({ input, ctx }) => {
+            const duplicateReview = await ctx.prisma.review.findFirst({
+                where: { bookingId: input.bookingId },
+            });
 
-// getByUser
+            if (duplicateReview)
+                throw new Error("Can't have more than 1 review per booking");
 
-// update
+            const newReview = await ctx.prisma.review.create({ data: input });
+
+            return newReview;
+        }),
+
+    update: protectedProcedure
+        .input(
+            z.object({
+                id: z.string(),
+                text: z.string().optional(),
+                rating: z.number().optional(),
+            })
+        )
+        .mutation(async ({ input, ctx }) => {
+            const updatedReview = await ctx.prisma.review.update({
+                where: { id: input.id },
+                data: input,
+            });
+
+            return updatedReview;
+        }),
+});

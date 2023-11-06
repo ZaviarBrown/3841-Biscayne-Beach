@@ -26,6 +26,8 @@ model Booking {
 
 model Review {
     id        String   @id @default(cuid())
+    text      String
+    rating    Int
     userId    String
     bookingId String
     createdAt DateTime @default(now())
