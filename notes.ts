@@ -18,4 +18,21 @@
  * Admin page
  *
  * Google maps
+ * - Different design
+	- NavBar
+	- Auto Image Scroll
+- Contact us
+- House details
+- Reviews
+- Pricing details
+- Admin details
+- Google maps api
+- Privacy Policy
+- Terms of Service
+
+Custom Classes for tRPC
+User
+	- getReviews
+	- 
+
  */
