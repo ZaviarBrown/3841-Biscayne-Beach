@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import BookingCard from "~/components/Booking/Card";
-import DisplayBookings from "~/components/Booking/Display";
 import {
     EmbeddedCheckoutProvider,
     EmbeddedCheckout,
@@ -38,9 +37,12 @@ export default function ConfirmAndPay() {
 
     if (isLoading) return <div>Loading...</div>;
 
-    if (!clientSecret) return <div>Loading...</div>;
+    if (!booking) {
+        void router.push("/");
+        return null;
+    }
 
-    if (!booking) return router.push("/");
+    if (!clientSecret) return <div>Loading...</div>;
 
     return (
         <div className="flex">
