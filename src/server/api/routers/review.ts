@@ -28,7 +28,6 @@ export const reviewRouter = createTRPCRouter({
             z.object({
                 text: z.string(),
                 rating: z.number(),
-                userId: z.string(),
                 bookingId: z.string(),
             })
         )
@@ -40,7 +39,9 @@ export const reviewRouter = createTRPCRouter({
             if (duplicateReview)
                 throw new Error("Can't have more than 1 review per booking");
 
-            const newReview = await ctx.prisma.review.create({ data: input });
+            const newReview = await ctx.prisma.review.create({
+                data: { ...input, userId: ctx.session.user.id },
+            });
 
             return newReview;
         }),
