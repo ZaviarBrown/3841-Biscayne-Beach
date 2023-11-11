@@ -1,5 +1,6 @@
 import Head from "next/head";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -29,11 +30,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 />
                 <link rel="manifest" href="/favicon/site.webmanifest" />
             </Head>
-            <div className="flex min-h-screen flex-col">
+            <div className="flex flex-col">
                 <NavBar />
-                <main className="flex flex-col items-center justify-center">
+                <main className="flex h-screen w-full flex-col items-center justify-center">
                     {children}
                 </main>
+                <Footer />
             </div>
         </>
     );

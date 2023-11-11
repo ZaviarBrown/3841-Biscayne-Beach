@@ -1,13 +1,17 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const NavBar = () => {
     const { data: session } = useSession();
+    const { pathname } = useRouter();
 
     return (
         <nav
-            className="z-20 bg-black/50 px-6 py-4 backdrop-blur"
+            className={`fixed z-10 w-full px-6 py-4 backdrop-blur ${
+                pathname === "/" ? "" : "bg-black/50"
+            }`}
             aria-label="Main Navigation"
         >
             <ul className="flex items-center justify-between text-xl text-white">
