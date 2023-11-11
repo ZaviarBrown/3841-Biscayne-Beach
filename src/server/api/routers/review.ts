@@ -8,7 +8,12 @@ import {
 
 export const reviewRouter = createTRPCRouter({
     getAll: publicProcedure.query(async ({ ctx }) => {
-        return await ctx.prisma.review.findMany();
+        return await ctx.prisma.review.findMany({
+            include: {
+                user: true,
+                booking: true,
+            },
+        });
     }),
 
     getOne: publicProcedure
