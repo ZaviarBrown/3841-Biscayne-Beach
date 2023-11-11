@@ -1,9 +1,6 @@
 /**
- * Price per night - Minimum 5 nights
  *
- * Service fees 
  *
- * Cleaning fees
  *
  * Cancellation policy
  * - 72 hours full refund
@@ -20,7 +17,6 @@
  * Google maps
  * - Different design
 	- NavBar
-	- Auto Image Scroll
 - Contact us
 - House details
 - Reviews
