@@ -1,8 +1,10 @@
 import Head from "next/head";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+    const { pathname } = useRouter();
     return (
         <>
             <Head>
@@ -31,8 +33,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <link rel="manifest" href="/favicon/site.webmanifest" />
             </Head>
             <div className="flex flex-col">
-                <NavBar />
-                <main className="flex h-screen w-full flex-col items-center justify-center">
+                <nav
+                    className={`fixed z-10 w-full px-6 py-4 backdrop-blur ${
+                        pathname === "/" ? "" : "bg-black/50"
+                    }`}
+                    aria-label="Main Navigation"
+                >
+                    <NavBar />
+                </nav>
+                <main
+                    className={`flex w-full flex-col items-center justify-center ${
+                        pathname === "/" ? "h-screen" : "pt-24"
+                    }`}
+                >
                     {children}
                 </main>
                 <Footer />

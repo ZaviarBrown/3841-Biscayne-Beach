@@ -30,7 +30,7 @@ const Carousel = () => {
                 <div
                     key={url}
                     className={`absolute inset-0 transition-opacity duration-1000 ${
-                        index === currentImage ? "opacity-50" : "opacity-0"
+                        index === currentImage ? "opacity-60" : "opacity-0"
                     }`}
                 >
                     <Image
@@ -64,11 +64,16 @@ const Carousel = () => {
             <div className="absolute bottom-[10%] right-[10%] flex space-x-2">
                 {images.map((_, index) => (
                     <div
+                        className="py-2 hover:cursor-pointer"
+                        onClick={() => setCurrentImage(index)}
                         key={index}
-                        className={`h-0.5 w-10 rounded-full bg-white ${
-                            index === currentImage ? "animate-pulse" : ""
-                        }`}
-                    />
+                    >
+                        <div
+                            className={`h-0.5 w-10 rounded-full bg-white ${
+                                index === currentImage ? "animate-pulse" : ""
+                            }`}
+                        ></div>
+                    </div>
                 ))}
             </div>
         </div>

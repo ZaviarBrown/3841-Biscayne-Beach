@@ -38,21 +38,26 @@ export default function ConfirmAndPay() {
 
     if (isLoading) return <div>Loading...</div>;
 
+    if (!clientSecret) return <div>Loading...</div>;
+
     if (!booking) return router.push("/");
 
     return (
-        <>
-            <h1 className="text-3xl">Confirm and pay</h1>
-            <BookingCard {...booking} />
-
-            {clientSecret && (
-                <EmbeddedCheckoutProvider
-                    stripe={stripePromise}
-                    options={{ clientSecret }}
-                >
-                    <EmbeddedCheckout />
-                </EmbeddedCheckoutProvider>
-            )}
-        </>
+        <div className="flex">
+            <div className="text-center">
+                <h1 className="text-3xl">Confirm and pay</h1>
+                <BookingCard {...booking} />
+            </div>
+            <div>
+                {clientSecret && (
+                    <EmbeddedCheckoutProvider
+                        stripe={stripePromise}
+                        options={{ clientSecret }}
+                    >
+                        <EmbeddedCheckout />
+                    </EmbeddedCheckoutProvider>
+                )}
+            </div>
+        </div>
     );
 }
