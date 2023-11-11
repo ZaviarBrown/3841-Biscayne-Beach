@@ -43,6 +43,7 @@ export const bookingRouter = createTRPCRouter({
         .query(async ({ input, ctx }) => {
             return await ctx.prisma.booking.findMany({
                 where: { userId: input },
+                include: { Review: true },
             });
         }),
 
