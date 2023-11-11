@@ -12,10 +12,10 @@ export default function DisplayBookings({ userId }: { userId: string }) {
             {userBookings &&
                 userBookings.map((booking) => {
                     return (
-                        <>
-                            <BookingCard key={booking.id} {...booking} />
+                        <div key={booking.id}>
+                            <BookingCard {...booking} />
                             <DeleteBooking id={booking.id} />
-                        </>
+                        </div>
                     );
                 })}
         </div>
