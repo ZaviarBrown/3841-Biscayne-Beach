@@ -21,8 +21,8 @@ model Booking {
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
 
-    user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    Review Review[]
+    user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    Review Review?
 }
 
 model Review {
@@ -30,7 +30,7 @@ model Review {
     text      String
     rating    Int
     userId    String
-    bookingId String
+    bookingId String   @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
