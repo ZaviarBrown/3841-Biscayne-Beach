@@ -54,6 +54,20 @@ const NavBar = () => {
                     ></span>
                 </Link>
             </li>
+            {session && session.user.role === "admin" && (
+                <li>
+                    <Link className="group relative" href="/your-bookings">
+                        Admin
+                        <span
+                            className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
+                                pathname === "/admin"
+                                    ? "w-full"
+                                    : "w-0 transition-all duration-200 group-hover:w-full"
+                            }`}
+                        ></span>
+                    </Link>
+                </li>
+            )}
             <li>
                 <button
                     onClick={() =>
