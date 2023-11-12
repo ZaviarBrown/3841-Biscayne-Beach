@@ -15,15 +15,23 @@ export default function CreateReview() {
     });
 
     return (
-        <form>
-            <textarea value={text} onChange={(e) => setText(e.target.value)} />
+        <form className="m-5 flex w-96 flex-col items-center gap-10 rounded-lg bg-white px-10 py-5 text-slate-800 shadow-3xl">
+            <textarea
+                className="h-28 w-full rounded-lg p-4 outline outline-1 outline-black"
+                placeholder="How was your stay?"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            />
             <input
+                className="w-1/4 rounded-lg p-1 text-center outline outline-1 outline-black"
                 type="number"
                 value={rating}
                 onChange={(e) => setRating(Number(e.target.value))}
             />
             <button
-                onClick={() => {
+                className="rounded-lg bg-white px-5 py-2 text-slate-800 shadow-3xl"
+                onClick={(e) => {
+                    e.preventDefault();
                     mutate({
                         text,
                         rating,
