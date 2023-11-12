@@ -67,4 +67,12 @@ export const reviewRouter = createTRPCRouter({
 
             return updatedReview;
         }),
+
+    delete: protectedProcedure
+        .input(z.string())
+        .mutation(async ({ input: id, ctx }) => {
+            await ctx.prisma.review.delete({ where: { id } });
+
+            return "Success";
+        }),
 });
