@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-const images = ["1_front.jpg", "3_kitchen.jpg", "5_beach.jpg", "6_sunset.jpg"];
+const images = [
+    "1_front.jpg",
+    "3_kitchen.jpg",
+    "4_deck.jpg",
+    "5_room.jpg",
+    "6_bath.jpg",
+    "9_sunset.jpg",
+];
 
 const Carousel = () => {
     const [currentImage, setCurrentImage] = useState(0);
