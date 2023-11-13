@@ -11,6 +11,7 @@ export const bookingRouter = createTRPCRouter({
         const bookedArr = await ctx.prisma.booking.findMany();
 
         return bookedArr.map((el) => ({
+            id: el.id,
             from: el.startDate,
             to: el.endDate,
         }));

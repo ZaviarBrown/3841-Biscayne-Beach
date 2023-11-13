@@ -34,8 +34,6 @@ export const userRouter = createTRPCRouter({
             return updatedToAdmin;
         }),
 
-    
-
     getAll: publicProcedure.query(async ({ ctx }) => {
         const allUsers = await ctx.prisma.user.findMany();
 
