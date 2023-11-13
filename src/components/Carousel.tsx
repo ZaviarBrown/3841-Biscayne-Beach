@@ -2,8 +2,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const images = [
-    "1_front.jpg",
-    "3_kitchen.jpg",
+    "2_new-side.jpg",
+    "3_new-kitchen.jpg",
     "4_deck.jpg",
     "5_room.jpg",
     "6_bath.jpg",
