@@ -25,6 +25,10 @@ declare module "next-auth" {
     interface Profile {
         email_verified?: boolean;
     }
+
+    interface User {
+        role: string;
+    }
 }
 
 /**
@@ -44,10 +48,7 @@ export const authOptions: NextAuthOptions = {
                 },
             });
 
-           
-
             if (!userCheck) {
-
                 await prisma.user.create({
                     data: {
                         name: user.name,
@@ -99,13 +100,17 @@ export const authOptions: NextAuthOptions = {
 
             return true;
         },
-        session: ({ session, user }) => ({
-            ...session,
-            user: {
-                ...session.user,
-                id: user.id,
-            },
-        }),
+        session: ({ session, user }) => {
+            return {
+                ...session,
+
+                user: {
+                    ...session.user,
+                    id: user.id,
+                    role: user.role,
+                },
+            };
+        },
     },
     adapter: PrismaAdapter(prisma),
     providers: [
