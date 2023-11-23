@@ -30,7 +30,7 @@
     - We reserve the right
 - No refunds if you get kicked off the property
 
-Show 6% tax
+Show 6% tax (8.5%?)
 
 Contact open to anyone
     - Lynn & Steve & Kristen

@@ -38,6 +38,14 @@ model Review {
     booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
+model Pricing {
+    id        String   @id @default(cuid())
+    date      DateTime
+    price     Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
 model Message {
     id String @id @default(cuid())
     // message

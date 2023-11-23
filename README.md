@@ -1,20 +1,19 @@
-# Next tasks
+# Pricing plan
 
-### - tRPC route for bookings
+DB table 'Pricing' w/ special dates
 
--   Don't allow conflicting bookings + styling
+- date
+- price
 
-### - User accounts
+First date is new Date(0), $300
 
--   See all bookings
--   Manage bookings
+When creating a booking:
 
-### Pay API
-
--   Cancellations
--   Refunds
--   Auth.net User accounts
-
-### - Nav Bar Styling
-
-### - Media Queries
+- get all after today, ordered by date
+- get default
+- iterate through pricing dates
+  - If date found, add custom price
+  - If not, add default price
+- For final price add 8.5% tax
+- Create a new price in Stripe with that amount
+- Charge that price for this booking
