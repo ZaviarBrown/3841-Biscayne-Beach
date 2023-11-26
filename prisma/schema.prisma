@@ -39,11 +39,13 @@ model Review {
 }
 
 model Pricing {
-    id        String   @id @default(cuid())
-    date      DateTime
+    id        String    @id @default(cuid())
+    startDate DateTime?
+    endDate   DateTime?
     price     Int
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    note      String
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
 }
 
 model Message {
