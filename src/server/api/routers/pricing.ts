@@ -7,12 +7,13 @@ import {
 } from "~/server/api/trpc";
 
 export const pricingRouter = createTRPCRouter({
-    getAll: publicProcedure.query(async ({ ctx }) => {
-        const [defaultPrice, weekendPrice] = await ctx.prisma.pricingWindows.findMany({
-            where: {
-                startDate: null,
-            },
-        });
+    getAllValidWindows: publicProcedure.query(async ({ ctx }) => {
+        const [defaultPrice, weekendPrice] =
+            await ctx.prisma.pricingWindows.findMany({
+                where: {
+                    startDate: null,
+                },
+            });
 
         const customPrices = await ctx.prisma.pricingWindows.findMany({
             where: {
@@ -25,7 +26,11 @@ export const pricingRouter = createTRPCRouter({
             },
         });
 
-        return { defaultPrice, weekendPrice, customPrices };
+        return {
+            defaultPrice: defaultPrice?.price ?? 30000,
+            weekendPrice: weekendPrice?.price ?? 45000,
+            customPrices,
+        };
     }),
 
     // TODO: Create custom priced days

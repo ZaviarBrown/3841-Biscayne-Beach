@@ -3,7 +3,6 @@ import type { DateRange } from "react-day-picker";
 import Calendar from "./Calendar";
 import PayPreview from "./PayPreview";
 
-
 export default function CreateBooking() {
     const [dates, setDates] = useState<DateRange>({ from: undefined });
     return (
