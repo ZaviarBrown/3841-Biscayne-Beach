@@ -5,8 +5,18 @@ const prisma = new PrismaClient();
 async function main() {
     await prisma.pricing.create({
         data: {
-            date: new Date(0),
+            startDate: null,
+            endDate: null,
             price: 30000,
+            note: "Default price",
+        },
+    });
+    await prisma.pricing.create({
+        data: {
+            startDate: null,
+            endDate: null,
+            price: 45000,
+            note: "Weekend price",
         },
     });
 }

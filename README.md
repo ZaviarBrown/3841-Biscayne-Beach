@@ -35,14 +35,19 @@ selectedDate gte pricingWindow.startDate && lte pricingWindow.endDate
 
 When creating a booking:
 
-- get all after today, ordered by date
-- get default & weekend
-- Set currPrice to defaultPrice
-- iterate through booking dates:
-  - If Fri || Sat, currPrice = 450
-  - iterate through custom prices
-    - If date found, add custom price
-    - If not, add default price
-- For final price add 8.5% tax
+- Use calcTotalPrice to get total price
+  - Default taxRate is 1.085 (8.5%)
 - Create a new price in Stripe with that amount
 - Charge that price for this booking
+
+## Time zone issue - let's come back to this
+
+User's time zone is used for calendar
+
+CST dates are what the booking goes off of
+
+User should see booked dates, but local dates could differ from CST dates
+
+Set dates as 12am CST, store dates as UTC
+
+DB UTC dates => Local dates
