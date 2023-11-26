@@ -38,7 +38,7 @@ model Review {
     booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
-model Pricing {
+model PricingWindows {
     id        String    @id @default(cuid())
     startDate DateTime?
     endDate   DateTime?
