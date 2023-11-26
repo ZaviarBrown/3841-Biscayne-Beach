@@ -1,75 +1,26 @@
-import {
-    differenceInCalendarDays,
-    isWithinInterval,
-    isBefore,
-    isAfter,
-} from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useState } from "react";
-import type { DateRange } from "react-day-picker";
+import { useState, useEffect } from "react";
+import { calculateTotalPrice, convertCentsIntoDollars } from "~/utils/booking";
 import { api } from "~/utils/api";
-import type { RouterOutputs } from "~/utils/api";
-
-type PricesType = RouterOutputs["stripe"]["getAllPrices"];
-
-const findPricingWindow = (start: Date, end: Date, prices: PricesType) => {
-    let finalPrice = { id: "...", price: 0 };
-
-    for (const { id, defaultPrice, startDate, endDate, price } of prices) {
-        if (defaultPrice) finalPrice = { id, price };
-        else if (startDate && endDate) {
-            // Check if selected start is within existing pricing window
-            if (isWithinInterval(startDate, { start, end }))
-                return { id, price };
-
-            // Check if selected end is within existing pricing window
-            if (isWithinInterval(endDate, { start, end })) return { id, price };
-
-            // Check if selected times surround existing pricing window
-            if (isBefore(start, startDate) && isAfter(end, endDate))
-                return { id, price };
-        }
-    }
-
-    return finalPrice;
-};
+import type { DateRange } from "react-day-picker";
 
 const PayPreview = ({ selected }: { selected: DateRange }) => {
     const router = useRouter();
     const { data: session } = useSession();
 
     const [disabled, setDisabled] = useState(true);
-    const [pricePerNight, setPricePerNight] = useState({ id: "...", price: 0 });
+    const [totalPrice, setTotalPrice] = useState("...");
+    const [numberOfNights, setNumberOfNights] = useState(0);
 
-    const { data: prices } = api.stripe.getAllPrices.useQuery();
+    const { data: prices } = api.pricing.getAllValidWindows.useQuery();
 
     const { mutate } = api.booking.create.useMutation({
         onSuccess: (data) => {
             void router.push(`/confirm-and-pay/${data.id}`);
         },
     });
-
-    const getNumberOfNights = (): number | null => {
-        if (selected.from && selected.to) {
-            const timeDiff = Math.abs(
-                selected.to.getTime() - selected.from.getTime()
-            );
-            const numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            return numberOfNights;
-        }
-        return null;
-    };
-
-    const getTotalCost = (): number | null => {
-        const numberOfNights = getNumberOfNights();
-        if (numberOfNights) {
-            return numberOfNights * pricePerNight.price;
-        }
-        return null;
-    };
 
     const createBooking = (): void => {
         const { from, to } = selected;
@@ -81,8 +32,8 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
                 email: session.user.email ?? "",
                 startDate: from,
                 endDate: to,
-                priceId: pricePerNight.id,
-                numberOfNights: differenceInCalendarDays(to, from),
+                priceId: "We'll be right back!",
+                numberOfNights,
             });
         }
     };
@@ -90,19 +41,27 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
     useEffect(() => {
         const { from, to } = selected;
 
-        if (!(from && to)) return setDisabled(true);
-        else {
-            if (differenceInCalendarDays(to, from) < 5) setDisabled(true);
-            else {
+        if (!(from && to)) {
+            setDisabled(true);
+            setTotalPrice("...");
+        } else {
+            if (numberOfNights < 5) {
+                setDisabled(true);
+                setTotalPrice("...");
+            } else if (prices) {
+                const cents = calculateTotalPrice(prices, { from, to });
+
                 setDisabled(false);
-                if (prices) {
-                    setPricePerNight({
-                        ...findPricingWindow(from, to, prices),
-                    });
-                }
+                setTotalPrice(convertCentsIntoDollars(cents));
             }
         }
-    }, [selected, prices]);
+    }, [selected, prices, numberOfNights]);
+
+    useEffect(() => {
+        const { from, to } = selected;
+        if (from && to) setNumberOfNights(differenceInCalendarDays(to, from));
+        else setNumberOfNights(0);
+    }, [selected]);
 
     return (
         <div className="flex w-1/6 scale-125 transform flex-col justify-between rounded-lg bg-white p-4 text-slate-800 shadow-3xl">
@@ -114,7 +73,14 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
 
             <p>Depart on: {selected.to?.toLocaleDateString()}</p>
 
-            <p>Total: {`$${getTotalCost() ?? "..."}`}</p>
+            {numberOfNights ? (
+                <p>
+                    {numberOfNights + 1} days, {numberOfNights} night
+                    {numberOfNights > 1 ? "s" : ""}
+                </p>
+            ) : null}
+
+            <p>Total: {totalPrice}</p>
 
             <div className="mt-4 flex justify-center">
                 <button
