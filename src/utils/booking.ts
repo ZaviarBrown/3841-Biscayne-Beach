@@ -6,6 +6,9 @@ import {
     isBefore,
     isAfter,
 } from "date-fns";
+import type { RouterOutputs } from "~/utils/api";
+
+type GetAllPricesType = RouterOutputs["pricing"]["getAllValidWindows"];
 
 // TODO: Get timezones working
 // import { utcToZonedTime } from "date-fns-tz";
@@ -36,12 +39,6 @@ interface PricingWindowType {
     endDate: Date;
     price: number;
     note: string;
-}
-
-interface GetAllPricesType {
-    defaultPrice: number;
-    weekendPrice: number;
-    customPrices: PricingWindowType[];
 }
 
 interface UserSelectedDatesType {
@@ -88,8 +85,26 @@ export const calculateTotalPrice = (
             }
         }
 
+        console.log({ priceForTheDay });
+        console.log({ window: customPrices[currentPricingWindow] });
+
         totalPrice += priceForTheDay;
     });
 
     return totalPrice * taxRate;
+};
+
+export const convertCentsIntoDollars = (price: number) => {
+    const centString = price.toString();
+
+    const dollars = centString.slice(0, -2);
+    const cents = centString.slice(-2);
+
+    return `$${dollars}.${cents}`;
+};
+
+export const convertDollarsIntoCents = (price: string) => {
+    if (price.at(0) === "$") price = price.slice(1);
+
+    return Number(price.split(".").join());
 };
