@@ -8,13 +8,13 @@ import {
 
 export const pricingRouter = createTRPCRouter({
     getAll: publicProcedure.query(async ({ ctx }) => {
-        const [defaultPrice, weekendPrice] = await ctx.prisma.pricing.findMany({
+        const [defaultPrice, weekendPrice] = await ctx.prisma.pricingWindows.findMany({
             where: {
                 startDate: null,
             },
         });
 
-        const customPrices = await ctx.prisma.pricing.findMany({
+        const customPrices = await ctx.prisma.pricingWindows.findMany({
             where: {
                 endDate: {
                     gte: new Date(),
