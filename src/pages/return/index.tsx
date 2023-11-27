@@ -8,9 +8,8 @@ export default function StripeReturn() {
     const router = useRouter();
 
     const { data: checkoutSession } = api.stripe.getCheckoutSession.useQuery(
-        typeof router.query.session_id === "string"
-            ? router.query.session_id
-            : ""
+        router.query.session_id as string,
+        { enabled: !!router.query.session_id }
     );
 
     useEffect(() => {
