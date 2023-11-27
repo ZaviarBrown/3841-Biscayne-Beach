@@ -8,6 +8,7 @@ import {
     adminProcedure,
 } from "~/server/api/trpc";
 import { getBaseUrl } from "~/utils/api";
+import { convertDollarsIntoCents } from "~/utils/booking";
 
 export const stripeRouter = createTRPCRouter({
     getAllPrices: publicProcedure.query(async ({ ctx }) => {
@@ -39,72 +40,28 @@ export const stripeRouter = createTRPCRouter({
         });
     }),
 
-    createPrice: adminProcedure
+    createPriceForBooking: publicProcedure
         .input(
-            z
-                .object({
-                    priceInUSD: z.number(),
-                    startDate: z.date().optional(),
-                    endDate: z.date().optional(),
-                    newDefault: z.boolean(),
-                })
-                .superRefine((input, ctx) => {
-                    if (!input.newDefault) {
-                        if (!input.startDate) {
-                            ctx.addIssue({
-                                code: z.ZodIssueCode.custom,
-                                path: ["startDate"],
-                                message:
-                                    "startDate is required when newDefault is false",
-                            });
-                        }
-                        if (!input.endDate) {
-                            ctx.addIssue({
-                                code: z.ZodIssueCode.custom,
-                                path: ["endDate"],
-                                message:
-                                    "endDate is required when newDefault is false",
-                            });
-                        }
-                    }
-                })
+            z.object({
+                priceInUSD: z.string(),
+                startDate: z.date(),
+                endDate: z.date(),
+            })
         )
         .mutation(async ({ input, ctx }) => {
-            const { priceInUSD, startDate, endDate, newDefault } = input;
+            const { priceInUSD, startDate, endDate } = input;
 
-            let newPrice;
+            console.log(convertDollarsIntoCents(priceInUSD));
 
-            if (!newDefault && startDate && endDate) {
-                newPrice = await ctx.stripe.prices.create({
-                    currency: "usd",
-                    product: env.STRIPE_PRODUCT_ID,
-                    unit_amount: Math.floor(priceInUSD * 100),
-                    metadata: {
-                        startDate: startDate.toUTCString(),
-                        endDate: endDate.toUTCString(),
-                    },
-                });
-            } else {
-                const { default_price } = await ctx.stripe.products.retrieve(
-                    env.STRIPE_PRODUCT_ID
-                );
-
-                newPrice = await ctx.stripe.prices.create({
-                    currency: "usd",
-                    product: env.STRIPE_PRODUCT_ID,
-                    unit_amount: Math.floor(priceInUSD * 100),
-                });
-
-                await ctx.stripe.products.update(env.STRIPE_PRODUCT_ID, {
-                    default_price: newPrice.id,
-                });
-
-                if (typeof default_price === "string") {
-                    await ctx.stripe.prices.update(default_price, {
-                        active: false,
-                    });
-                }
-            }
+            const newPrice = await ctx.stripe.prices.create({
+                currency: "usd",
+                product: env.STRIPE_PRODUCT_ID,
+                unit_amount: convertDollarsIntoCents(priceInUSD),
+                metadata: {
+                    startDate: startDate.toUTCString(),
+                    endDate: endDate.toUTCString(),
+                },
+            });
 
             return newPrice;
         }),
@@ -121,14 +78,14 @@ export const stripeRouter = createTRPCRouter({
         }),
 
     createCheckoutSession: protectedProcedure
-        .input(z.object({ priceId: z.string(), numberOfNights: z.number() }))
-        .mutation(async ({ input: { priceId, numberOfNights }, ctx }) => {
+        .input(z.object({ priceId: z.string() }))
+        .mutation(async ({ input: { priceId }, ctx }) => {
             const session = await ctx.stripe.checkout.sessions.create({
                 ui_mode: "embedded",
                 line_items: [
                     {
                         price: priceId,
-                        quantity: numberOfNights,
+                        quantity: 1,
                     },
                 ],
                 mode: "payment",
