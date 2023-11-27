@@ -2,6 +2,7 @@ import { api } from "~/utils/api";
 import DeleteBooking from "./Delete";
 import BookingCard from "./Card";
 import HasReviewed from "./HasReviewed";
+import Link from "next/link";
 
 // TODO: Order
 
@@ -14,7 +15,9 @@ export default function DisplayBookings({ userId }: { userId: string }) {
                 userBookings.map((booking) => {
                     return (
                         <div key={booking.id}>
-                            <BookingCard {...booking} />
+                            <Link href={`/confirm-and-pay/${booking.id}`}>
+                                <BookingCard {...booking} />
+                            </Link>
                             <DeleteBooking id={booking.id} />
                             <HasReviewed
                                 bookingId={booking.id}
