@@ -106,5 +106,5 @@ export const convertCentsIntoDollars = (price: number) => {
 export const convertDollarsIntoCents = (price: string) => {
     if (price.at(0) === "$") price = price.slice(1);
 
-    return Number(price.split(".").join());
+    return Number(price.split(".").join(""));
 };
