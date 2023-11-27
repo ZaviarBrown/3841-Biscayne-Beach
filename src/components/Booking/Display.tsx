@@ -15,6 +15,9 @@ export default function DisplayBookings({ userId }: { userId: string }) {
                 userBookings.map((booking) => {
                     return (
                         <div key={booking.id}>
+                            {/* 
+                            // TODO: Different links depending on booking status
+                            */}
                             <Link href={`/confirm-and-pay/${booking.id}`}>
                                 <BookingCard {...booking} />
                             </Link>
