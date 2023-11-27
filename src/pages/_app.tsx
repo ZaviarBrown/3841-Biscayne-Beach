@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import "react-day-picker/dist/style.css";
 import Layout from "~/components/layout";
+import { BookingContextProvider } from "~/context/BookingContext";
 
 const MyApp: AppType<{ session: Session | null }> = ({
     Component,
@@ -14,9 +15,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
     return (
         <SessionProvider session={session}>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <BookingContextProvider>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </BookingContextProvider>
         </SessionProvider>
     );
 };
