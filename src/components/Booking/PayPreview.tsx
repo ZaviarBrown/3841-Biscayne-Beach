@@ -4,39 +4,67 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { calculateTotalPrice, convertCentsIntoDollars } from "~/utils/booking";
 import { api } from "~/utils/api";
+import { useBookingContext } from "~/context/BookingContext";
+
 import type { DateRange } from "react-day-picker";
+import type { RouterOutputs } from "~/utils/api";
+import type { BookingContextType } from "~/context/BookingContext";
+
+type StripePriceType = RouterOutputs["stripe"]["createPriceForBooking"];
 
 const PayPreview = ({ selected }: { selected: DateRange }) => {
     const router = useRouter();
     const { data: session } = useSession();
+    const { setBooking } = useBookingContext() as BookingContextType;
 
     const [disabled, setDisabled] = useState(true);
     const [totalPrice, setTotalPrice] = useState("...");
     const [numberOfNights, setNumberOfNights] = useState(0);
+    const [stripePrice, setStripePrice] = useState<StripePriceType>();
 
     const { data: prices } = api.pricing.getAllValidWindows.useQuery();
 
-    const { mutate } = api.booking.create.useMutation({
+    const { mutate: createStripePrice } =
+        api.stripe.createPriceForBooking.useMutation({
+            onSuccess: (data) => {
+                setStripePrice(data);
+            },
+        });
+
+    const { mutate: createPendingBooking } = api.booking.create.useMutation({
         onSuccess: (data) => {
+            setBooking(data);
             void router.push(`/confirm-and-pay/${data.id}`);
         },
     });
 
-    const createBooking = (): void => {
+    const startBookingCreation = (): void => {
         const { from, to } = selected;
 
-        if (session && session.user && from && to) {
-            mutate({
+        if (from && to) {
+            createStripePrice({
+                startDate: from,
+                endDate: to,
+                priceInUSD: totalPrice,
+            });
+        }
+    };
+
+    useEffect(() => {
+        const { from, to } = selected;
+
+        if (stripePrice && session && session.user && from && to) {
+            createPendingBooking({
                 userId: session.user.id,
                 name: session.user.name ?? "",
                 email: session.user.email ?? "",
                 startDate: from,
                 endDate: to,
-                priceId: "We'll be right back!",
+                priceId: stripePrice.id,
                 numberOfNights,
             });
         }
-    };
+    }, [stripePrice, session, numberOfNights, selected, createPendingBooking]);
 
     useEffect(() => {
         const { from, to } = selected;
@@ -84,7 +112,7 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
 
             <div className="mt-4 flex justify-center">
                 <button
-                    onClick={createBooking}
+                    onClick={startBookingCreation}
                     disabled={disabled}
                     className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
                 >
