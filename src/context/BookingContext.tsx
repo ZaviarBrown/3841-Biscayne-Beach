@@ -21,7 +21,7 @@ export const BookingContextProvider = ({
 }) => {
     const router = useRouter();
 
-    const [timeLeft, setTimeLeft] = useState(9);
+    const [timeLeft, setTimeLeft] = useState(900);
     const [booking, setBooking] = useState<Booking | null>(null);
 
     const timerId = useRef<NodeJS.Timeout | null>(null);
@@ -35,7 +35,7 @@ export const BookingContextProvider = ({
     // Start timer when a booking is set
     useEffect(() => {
         if (booking) {
-            setTimeLeft(9);
+            setTimeLeft(900);
             timerId.current = setInterval(() => {
                 setTimeLeft((prevTime) => prevTime - 1);
             }, 1000);
@@ -56,7 +56,7 @@ export const BookingContextProvider = ({
 
     const checkoutComplete = () => {
         clearInterval(timerId.current as NodeJS.Timeout);
-        setTimeLeft(9);
+        setTimeLeft(900);
     };
 
     return (
