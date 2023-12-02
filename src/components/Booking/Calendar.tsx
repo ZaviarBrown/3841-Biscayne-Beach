@@ -3,6 +3,8 @@ import { api } from "~/utils/api";
 import { isBefore, isAfter } from "date-fns";
 import type { DateRange } from "react-day-picker";
 
+// TODO: Refactor to be reusable across all calendar instances
+
 type StartEndDates = {
     from: Date;
     to: Date;
