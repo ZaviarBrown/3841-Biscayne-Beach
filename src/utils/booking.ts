@@ -6,9 +6,10 @@ import {
     isBefore,
     isAfter,
 } from "date-fns";
+import type { PricingWindowType } from "~/server/api/routers/pricing";
 import type { RouterOutputs } from "~/utils/api";
 
-type GetAllPricesType = RouterOutputs["pricing"]["getAllValidWindows"];
+export type GetAllPricesType = RouterOutputs["pricing"]["getAllValidWindows"];
 
 // TODO: Get timezones working
 // import { utcToZonedTime } from "date-fns-tz";
@@ -32,14 +33,6 @@ type GetAllPricesType = RouterOutputs["pricing"]["getAllValidWindows"];
 
 //     return new Date(year, month, day);
 // };
-
-interface PricingWindowType {
-    id: string;
-    startDate: Date;
-    endDate: Date;
-    price: number;
-    note: string;
-}
 
 interface UserSelectedDatesType {
     from: Date;
@@ -95,7 +88,7 @@ export const calculateTotalPrice = (
 };
 
 export const convertCentsIntoDollars = (price: number) => {
-    const centString = price.toString();
+    const centString = Math.ceil(price).toString();
 
     const dollars = centString.slice(0, -2);
     const cents = centString.slice(-2);

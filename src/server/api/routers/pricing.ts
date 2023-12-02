@@ -6,6 +6,14 @@ import {
 } from "~/server/api/trpc";
 import { convertDollarsIntoCents } from "~/utils/booking";
 
+export interface PricingWindowType {
+    id: string;
+    startDate: Date;
+    endDate: Date;
+    price: number;
+    note: string;
+}
+
 export const pricingRouter = createTRPCRouter({
     getAllValidWindows: publicProcedure.query(async ({ ctx }) => {
         const [defaultPrice, weekendPrice] =
@@ -15,16 +23,20 @@ export const pricingRouter = createTRPCRouter({
                 },
             });
 
-        const customPrices = await ctx.prisma.pricingWindows.findMany({
+        const customPrices = (await ctx.prisma.pricingWindows.findMany({
             where: {
+                startDate: {
+                    not: null,
+                },
                 endDate: {
+                    not: null,
                     gte: new Date(),
                 },
             },
             orderBy: {
                 startDate: "asc",
             },
-        });
+        })) as PricingWindowType[];
 
         return {
             defaultPrice: defaultPrice?.price ?? 30000,
