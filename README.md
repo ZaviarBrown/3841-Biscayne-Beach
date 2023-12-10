@@ -1,4 +1,85 @@
-# Custom pricing whiteboard
+# Whiteboard
+
+## User stories
+
+### As a logged out user, I want to
+
+- See NavBar with "Book Now", "House Rules", and "Reviews"
+- See Login Button
+- See home page with house photos
+  - Scroll down to see
+    - Google Maps
+    - Nearby attractions
+    - "Book Now" button
+      - Should trigger login function
+- See footer with "Privacy Policy", "Terms of Service", and "Contact Us"
+
+### As a standard logged in user, I want to
+
+- See same as logged out user
+- See profile icon, when clicked can see
+  - "Hi Zaviar!"
+  - My Bookings
+  - Log out
+- When clicking "Book Now"
+  - Taken to page with Calendar
+    - Choose dates
+    - How many people are staying
+    - Extra contact info
+    - Submit
+  - Policy agreement popup
+    - Have you read the house rules?
+    - By clicking this box, you agree to our Terms and Conditions
+    - Submit
+  - Taken to stripe checkout page
+    - 15 minutes to make it official
+    - Submit
+  - Taken to confirmation page
+    - Thanks for booking
+    - You should receive an email
+    - Looking forward to you staying with us
+  - Should receive an email from their linked google account
+- When clicking "My Bookings"
+  - Taken to page with bookings and reviews
+    - Upcoming bookings | Update/Cancel this booking
+    - Past bookings | Review Data / Create Review
+
+### As an admin logged in user, I want to
+
+- See same as logged in/out user
+- Profile icon, when clicked can see
+  - "Hi Zaviar!"
+  - _`-- Admin --`_
+    - Manage bookings
+    - Manage pricing
+    - Manage reviews
+    - Manage messages
+  - Personal Bookings
+  - Log out
+- When clicking "Manage bookings"
+  - Taken to page with all bookings
+    - Upcoming bookings | Update/Cancel this booking
+    - Past bookings
+- When clicking "Manage pricing"
+  - Taken to a page with Calendar & pricing windows
+    |-pricing-| Calendar
+    |----X----| ----------
+    |-windows-| Price Input
+  - Calendar / Price Input
+    - Create price window
+      - No conflicting windows / existing bookings
+  - Pricing windows
+    - Update & Delete
+      - No conflicting windows / existing bookings
+- When clicking "Manage reviews"
+  - Taken to page with all reviews
+    - Approve | Hide | Delete
+- When clicking "Manage messages"
+  - Taken to page with all messages
+    - Unresolved
+    - Resolved
+
+## Custom pricing
 
 DB table 'Pricing' w/ special dates
 
