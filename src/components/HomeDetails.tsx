@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import ImageRow from "./ImageRow";
+import GoogleMapsEmbed from "./GoogleMapsEmbed";
 
 const dummyData = [
     {
@@ -31,6 +32,7 @@ function HomeDetails() {
             {/* {dummyData.map((el, i) => (
                 <ImageRow key={i} {...el} order={i} />
             ))} */}
+            <GoogleMapsEmbed />
         </div>
     );
 }
