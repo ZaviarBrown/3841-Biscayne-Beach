@@ -1,3 +1,20 @@
+/** Next
+ * 
+ * Book now opens a modal, you must agree to these terms
+ * 
+ * Take out reviews from the site for now
+ * 
+ * 
+ * ! New NavBar
+ * Gallery | House Rules | Book Now | Sign In / Menu Icon
+ * 
+ * ! Menu Icon
+ * "Hi Zaviar!"
+ * Your Bookings 
+ * 
+ *
+ */
+
 /**
  *
  *
