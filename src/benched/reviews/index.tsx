@@ -1,4 +1,4 @@
-import DisplayReview from "~/components/Review/Display";
+import DisplayReview from "~/benched/Review/Display";
 
 export default function ReviewPage() {
     return <DisplayReview />;

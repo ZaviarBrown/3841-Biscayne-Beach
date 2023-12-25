@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import DeleteReview from "~/components/Review/Delete";
-import UpdateReview from "~/components/Review/Update";
+import DeleteReview from "~/benched/Review/Delete";
+import UpdateReview from "~/benched/Review/Update";
 import { api } from "~/utils/api";
 
 export default function YourReview() {
