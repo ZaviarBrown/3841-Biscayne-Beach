@@ -8,6 +8,8 @@ import "~/styles/globals.css";
 import "react-day-picker/dist/style.css";
 import Layout from "~/components/layout";
 import { BookingContextProvider } from "~/context/BookingContext";
+import { ScrollContextProvider } from "~/context/ScrollContext";
+import { Modal, ModalContextProvider } from "~/context/ModalContext";
 
 const MyApp: AppType<{ session: Session | null }> = ({
     Component,
@@ -15,11 +17,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
     return (
         <SessionProvider session={session}>
-            <BookingContextProvider>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </BookingContextProvider>
+            <ScrollContextProvider>
+                <ModalContextProvider>
+                    <BookingContextProvider>
+                        <Modal />
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
+                    </BookingContextProvider>
+                </ModalContextProvider>
+            </ScrollContextProvider>
         </SessionProvider>
     );
 };
