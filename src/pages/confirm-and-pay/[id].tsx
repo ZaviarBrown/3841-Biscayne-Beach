@@ -4,13 +4,13 @@ import {
     EmbeddedCheckoutProvider,
     EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import { api, getBaseUrl } from "~/utils/api";
+import { api } from "~/utils/api";
 import { loadStripe } from "@stripe/stripe-js";
 import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { useBookingContext } from "~/context/BookingContext";
 
-import NavBarSpacer from '~/components/NavBarSpacer';
+import NavBarSpacer from "~/components/NavBarSpacer";
 
 // TODO: getServerSideProps
 
@@ -44,7 +44,7 @@ export default function ConfirmAndPay() {
 
     useEffect(() => {
         if (booking && !clientSecret) {
-            createCheckout({...booking, url: getBaseUrl()});
+            createCheckout(booking);
         }
     }, [booking, clientSecret, createCheckout]);
 
