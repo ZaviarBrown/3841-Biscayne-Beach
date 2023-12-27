@@ -10,7 +10,7 @@ import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { useBookingContext } from "~/context/BookingContext";
 
-import type { BookingContextType } from "~/context/BookingContext";
+import NavBarSpacer from '~/components/NavBarSpacer';
 
 // TODO: getServerSideProps
 
@@ -28,8 +28,7 @@ export default function ConfirmAndPay() {
     const router = useRouter();
     const [clientSecret, setClientSecret] = useState("");
 
-    const { booking, setBooking, timeLeft } =
-        useBookingContext() as BookingContextType;
+    const { booking, setBooking, timeLeft } = useBookingContext();
 
     const { data: restoreBooking, isLoading } = api.booking.getById.useQuery(
         router.query.id as string,
@@ -67,23 +66,28 @@ export default function ConfirmAndPay() {
     if (!clientSecret) return <div>Loading...</div>;
 
     return (
-        <div className="flex">
-            <h1 className="text-4xl">{formatTimeLeft(timeLeft)}</h1>
+        <>
+            <NavBarSpacer />
+            <div className="relative m-10 flex justify-evenly">
+                <div className="sticky top-[80px] flex h-1/2 flex-col items-center justify-start rounded-2xl bg-white p-10 shadow-3xl">
+                    <h1 className="text-4xl">{formatTimeLeft(timeLeft)}</h1>
 
-            <div className="text-center">
-                <h1 className="text-3xl">Confirm and pay</h1>
-                <BookingCard {...booking} />
+                    <div className="text-center">
+                        <h1 className="text-3xl">Confirm and pay</h1>
+                        <BookingCard {...booking} />
+                    </div>
+                </div>
+                <div className="w-1/3 rounded-2xl bg-white p-10 shadow-3xl">
+                    {clientSecret && (
+                        <EmbeddedCheckoutProvider
+                            stripe={stripePromise}
+                            options={{ clientSecret }}
+                        >
+                            <EmbeddedCheckout />
+                        </EmbeddedCheckoutProvider>
+                    )}
+                </div>
             </div>
-            <div>
-                {clientSecret && (
-                    <EmbeddedCheckoutProvider
-                        stripe={stripePromise}
-                        options={{ clientSecret }}
-                    >
-                        <EmbeddedCheckout />
-                    </EmbeddedCheckoutProvider>
-                )}
-            </div>
-        </div>
+        </>
     );
 }
