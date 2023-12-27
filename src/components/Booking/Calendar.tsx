@@ -71,26 +71,28 @@ const Calendar = ({
     if (!booked) booked = [];
 
     return (
-        <DayPicker
-            mode="range"
-            selected={dates}
-            onSelect={(range, justSelected) => {
-                if (!range) return setDates({ from: undefined });
+        <div className="m-12">
+            <DayPicker
+                mode="range"
+                selected={dates}
+                onSelect={(range, justSelected) => {
+                    if (!range) return setDates({ from: undefined });
 
-                if (booked && range?.from && range.to) {
-                    for (const { from } of booked) {
-                        if (isBefore(range.from, from)) {
-                            if (isAfter(range.to, from)) {
-                                return setDates({ from: justSelected });
-                            } else return setDates(range);
+                    if (booked && range?.from && range.to) {
+                        for (const { from } of booked) {
+                            if (isBefore(range.from, from)) {
+                                if (isAfter(range.to, from)) {
+                                    return setDates({ from: justSelected });
+                                }
+                            }
                         }
                     }
-                }
-                setDates(range);
-            }}
-            className="scale-150 transform rounded-lg bg-white p-1 shadow-3xl"
-            {...createCalendarOptions(booked)}
-        />
+                    setDates(range);
+                }}
+                className="scale-125 bg-white text-xl"
+                {...createCalendarOptions(booked)}
+            />
+        </div>
     );
 };
 

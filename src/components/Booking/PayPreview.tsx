@@ -8,14 +8,15 @@ import { useBookingContext } from "~/context/BookingContext";
 
 import type { DateRange } from "react-day-picker";
 import type { RouterOutputs } from "~/utils/api";
-import type { BookingContextType } from "~/context/BookingContext";
+import OpenModalButton from "../Modal/OpenModalButton";
+import ConfirmRulesModal from "../Modal/ConfirmRulesModal";
 
 type StripePriceType = RouterOutputs["stripe"]["createPriceForBooking"];
 
 const PayPreview = ({ selected }: { selected: DateRange }) => {
     const router = useRouter();
     const { data: session } = useSession();
-    const { setBooking } = useBookingContext() as BookingContextType;
+    const { setBooking } = useBookingContext();
 
     const [disabled, setDisabled] = useState(true);
     const [totalPrice, setTotalPrice] = useState("...");
@@ -92,32 +93,45 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
     }, [selected]);
 
     return (
-        <div className="flex w-1/6 scale-125 transform flex-col justify-between rounded-lg bg-white p-4 text-slate-800 shadow-3xl">
-            <h2 className="text-center text-lg font-semibold">
+        <div className="flex w-full flex-col justify-between border-l-2 border-slate-200 bg-white p-5 pl-14 text-xl text-black">
+            <h2 className="text-center text-3xl font-semibold">
                 Booking Preview
             </h2>
 
-            <p>Arrive on: {selected.from?.toLocaleDateString()}</p>
+            <div className="w-3/4 self-center border border-slate-200" />
 
-            <p>Depart on: {selected.to?.toLocaleDateString()}</p>
+            <span className="flex justify-between">
+                <p>Check-in: </p> <p>{selected.from?.toLocaleDateString()}</p>
+            </span>
 
-            {numberOfNights ? (
-                <p>
-                    {numberOfNights + 1} days, {numberOfNights} night
-                    {numberOfNights > 1 ? "s" : ""}
-                </p>
-            ) : null}
+            <span className="flex justify-between">
+                <p>Check-out: </p> <p>{selected.to?.toLocaleDateString()}</p>
+            </span>
 
-            <p>Total: {totalPrice}</p>
+            <div className="w-3/4 self-center border border-slate-200" />
 
-            <div className="mt-4 flex justify-center">
-                <button
+            <span className="flex justify-between">
+                <p>Total: </p> <p>{totalPrice}</p>
+            </span>
+
+            <div className="flex justify-center">
+                {/* <button
                     onClick={startBookingCreation}
                     disabled={disabled}
                     className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
                 >
                     Continue
-                </button>
+                </button> */}
+                <OpenModalButton
+                    modalComponent={<ConfirmRulesModal />}
+                    buttonText="Continue"
+                    className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
+                    disabled={disabled}
+                    onModalSubmit={startBookingCreation}
+                    onModalClose={() => {
+                        return "Hey";
+                    }}
+                />
             </div>
         </div>
     );
