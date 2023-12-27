@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useScrollContext } from "~/context/ScrollContext";
 
 const images = [
     "2_new-side.jpg",
@@ -11,6 +12,7 @@ const images = [
 ];
 
 const Carousel = () => {
+    const { showCarousel } = useScrollContext();
     const [currentImage, setCurrentImage] = useState(0);
 
     const nextImage = () => {
@@ -32,16 +34,16 @@ const Carousel = () => {
     }, [currentImage]);
 
     return (
-        <div className="relative flex h-full w-full items-center justify-between bg-black px-5">
+        <div className="flex h-screen w-full items-center justify-between bg-black bg-opacity-40">
             {images.map((url, index) => (
                 <div
                     key={url}
-                    className={`absolute inset-0 transition-opacity duration-1000 ${
-                        index === currentImage ? "opacity-60" : "opacity-0"
-                    }`}
+                    className={`${showCarousel ? "" : "hidden"} ${
+                        index === currentImage ? "opacity-100" : "opacity-0"
+                    } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
                 >
                     <Image
-                        src={`/tempPhotos/${url ?? "1_front.jpg"}`}
+                        src={`/allPhotos/${url ?? "1_front.jpg"}`}
                         alt={`Image #${index + 1}`}
                         className="object-cover"
                         fill
@@ -51,14 +53,14 @@ const Carousel = () => {
 
             <button
                 onClick={previousImage}
-                className="h-11 w-11 rounded-lg border border-slate-300 bg-slate-900 px-4 py-2 text-white opacity-50 transition-all duration-200 hover:scale-110 hover:opacity-90"
+                className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
             >
                 {"<"}
             </button>
 
             <button
                 onClick={nextImage}
-                className="h-11 w-11 rounded-lg border border-slate-300 bg-slate-900 px-4 py-2 text-white opacity-50 transition-all duration-200 hover:scale-110 hover:opacity-90"
+                className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
             >
                 {">"}
             </button>
