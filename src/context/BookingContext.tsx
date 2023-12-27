@@ -68,4 +68,5 @@ export const BookingContextProvider = ({
     );
 };
 
-export const useBookingContext = () => useContext(BookingContext);
+export const useBookingContext = () =>
+    useContext(BookingContext) as BookingContextType;
