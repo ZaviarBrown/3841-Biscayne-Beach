@@ -9,7 +9,7 @@ import {
 
 export const imagesRouter = createTRPCRouter({
     getAll: publicProcedure.query(() => {
-        console.log(readdirSync("."));
+        console.log(readdirSync("./src"));
 
         const images: string[] = readdirSync("./public/allPhotos");
 
