@@ -43,7 +43,7 @@ const Carousel = () => {
                     } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
                 >
                     <Image
-                        src={`/allPhotos/${url ?? "1_front.jpg"}`}
+                        src={`/allPhotos/${url ?? "2_new-side.jpg"}`}
                         alt={`Image #${index + 1}`}
                         className="object-cover"
                         fill
