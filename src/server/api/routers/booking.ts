@@ -17,6 +17,12 @@ export const bookingRouter = createTRPCRouter({
         }));
     }),
 
+    getAllDetailed: publicProcedure.query(async ({ ctx }) => {
+        const bookedArr = await ctx.prisma.booking.findMany();
+
+        return bookedArr;
+    }),
+
     getById: publicProcedure
         .input(z.string())
         .query(async ({ input: id, ctx }) => {

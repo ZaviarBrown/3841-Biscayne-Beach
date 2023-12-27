@@ -73,7 +73,7 @@ export default function CreatePricingWindow({
     };
 
     return (
-        <div className="mt-32 flex w-full justify-around bg-white px-10 py-5 text-slate-800 shadow-3xl">
+        <div className="m-5 flex h-full rounded-lg bg-white p-5 text-slate-800 shadow-3xl">
             <DayPicker
                 mode="range"
                 selected={dates}
@@ -91,22 +91,50 @@ export default function CreatePricingWindow({
                     }
                     setDates(range);
                 }}
-                className="rounded-lg bg-white p-1 shadow-3xl"
+                className="h-fit scale-110 rounded-lg bg-white p-1 shadow-3xl"
                 {...createCalendarOptions(customPrices)}
             />
 
-            <input
-                placeholder="0.00"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-            />
-            <input
-                placeholder="Reason for price"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-            />
+            <div className="ml-5 flex flex-col justify-between p-5 text-xl">
+                <div>
+                    <p>
+                        Start date:{" "}
+                        {dates.from ? dates.from.toLocaleDateString() : "..."}
+                    </p>
+                    <p>
+                        End date:{" "}
+                        {dates.to ? dates.to.toLocaleDateString() : "..."}
+                    </p>
+                </div>
 
-            <button onClick={handleSubmit}>Create New Pricing Window</button>
+                <label>
+                    Price in USD: $
+                    <input
+                        placeholder="0.00"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        className="m-1 w-20 rounded px-1 outline outline-1 outline-slate-200 focus:outline-slate-400"
+                    />
+                </label>
+                <label>
+                    Note:
+                    <br />
+                    <input
+                        placeholder="Ex: Music Festival"
+                        value={note}
+                        onChange={(e) => setNote(e.target.value)}
+                        className="w-full rounded px-1 outline outline-1 outline-slate-200 focus:outline-slate-400"
+                    />
+                </label>
+
+                <button
+                    className="rounded-lg bg-green-500 px-2 py-2 text-xl text-white shadow-3xl duration-300 hover:-translate-y-1 disabled:transform-none disabled:bg-slate-500"
+                    onClick={handleSubmit}
+                    disabled={!price || !note || !dates.from || !dates.to}
+                >
+                    Create New Pricing Window
+                </button>
+            </div>
         </div>
     );
 }
