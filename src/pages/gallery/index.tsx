@@ -1,29 +1,37 @@
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import GalleryCard from "~/components/Gallery/Card";
+import LoadingCard from "~/components/Gallery/Loading";
+import { api } from "~/utils/api";
 
 export default function Gallery() {
-    const images = [
-        "1_new-front.jpg",
-        "2_new-side.jpg",
-        "3_new-kitchen.jpg",
-        "4_deck.jpg",
-        "5_room.jpg",
-        "6_bath.jpg",
-        "7_high-view.jpg",
-        "8_birds-eye.jpg",
-        "9_sunset.jpg",
-    ];
+    const { data } = api.images.getAll.useQuery();
+    const [load, setLoad] = useState(0);
+
+    useEffect(() => {
+        if (data && load < data.length) {
+            const fade = setTimeout(() => setLoad(load + 1), 100);
+
+            return () => clearTimeout(fade);
+        }
+    }, [data, load]);
+
     return (
-        <div className="flex flex-wrap justify-center gap-2">
-            {images.map((url, index) => (
-                <div key={url}>
-                    <Image
-                        src={`/tempPhotos/${url ?? "1_front.jpg"}`}
-                        alt={`Image #${index + 1}`}
-                        width={900}
-                        height={900}
-                    />
+        <>
+            <div className="pt-20" />
+            {data && (
+                <div className="grid grid-cols-1 gap-5 bg-slate-500 p-5 md:grid-cols-2 lg:grid-cols-3">
+                    {data.map((url, i) => (
+                        <GalleryCard url={url} i={i} key={i} load={load > i} />
+                    ))}
                 </div>
-            ))}
-        </div>
+            )}
+            {!data && (
+                <div className="grid grid-cols-1 gap-5 bg-slate-500 p-5 md:grid-cols-2 lg:grid-cols-3">
+                    {[1, 2, 3, 4, 5, 6].map((_, i) => (
+                        <LoadingCard key={i} />
+                    ))}
+                </div>
+            )}
+        </>
     );
 }
