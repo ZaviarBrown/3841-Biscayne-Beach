@@ -78,6 +78,7 @@ export const stripeRouter = createTRPCRouter({
     createCheckoutSession: protectedProcedure
         .input(z.object({ priceId: z.string(), url: z.string() }))
         .mutation(async ({ input: { priceId, url }, ctx }) => {
+            console.log(url);
             const session = await ctx.stripe.checkout.sessions.create({
                 ui_mode: "embedded",
                 line_items: [
