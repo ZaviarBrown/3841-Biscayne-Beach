@@ -4,7 +4,7 @@ import {
     EmbeddedCheckoutProvider,
     EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
-import { api } from "~/utils/api";
+import { api, getBaseUrl } from "~/utils/api";
 import { loadStripe } from "@stripe/stripe-js";
 import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
@@ -44,7 +44,7 @@ export default function ConfirmAndPay() {
 
     useEffect(() => {
         if (booking && !clientSecret) {
-            createCheckout(booking);
+            createCheckout({...booking, url: getBaseUrl()});
         }
     }, [booking, clientSecret, createCheckout]);
 
