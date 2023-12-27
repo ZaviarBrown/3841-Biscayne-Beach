@@ -25,12 +25,22 @@ export default function StripeReturn() {
 
     if (status === "complete") {
         return (
-            <section id="success">
+            <section
+                className="m-auto text-center text-3xl text-white"
+                id="success"
+            >
+                <p>We appreciate you booking with us!</p>
+                <p>A confirmation email will be sent to {customerEmail}</p>
+
                 <p>
-                    We appreciate your business! A confirmation email will be
-                    sent to {customerEmail}. If you have any questions, please
-                    email{" "}
-                    <a href="mailto:orders@example.com">orders@example.com</a>.
+                    If you have any questions, please email
+                    <a
+                        className="text-blue-300 underline underline-offset-4"
+                        href="mailto:lynnthompson001@gmail.com"
+                    >
+                        {" "}
+                        lynnthompson001@gmail.com
+                    </a>
                 </p>
             </section>
         );
