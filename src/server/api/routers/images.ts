@@ -15,7 +15,8 @@ export const imagesRouter = createTRPCRouter({
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
 
-        console.log(__dirname);
+        console.log(readdirSync("../"));
+        console.log(readdirSync("../../"));
 
         const images: string[] = readdirSync("./public/allPhotos");
 
