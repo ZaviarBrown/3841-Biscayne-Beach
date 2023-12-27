@@ -51,8 +51,6 @@ export const stripeRouter = createTRPCRouter({
         .mutation(async ({ input, ctx }) => {
             const { priceInUSD, startDate, endDate } = input;
 
-            console.log(convertDollarsIntoCents(priceInUSD));
-
             const newPrice = await ctx.stripe.prices.create({
                 currency: "usd",
                 product: env.STRIPE_PRODUCT_ID,

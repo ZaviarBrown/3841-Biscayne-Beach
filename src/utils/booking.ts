@@ -78,9 +78,6 @@ export const calculateTotalPrice = (
             }
         }
 
-        console.log({ priceForTheDay });
-        console.log({ window: customPrices[currentPricingWindow] });
-
         totalPrice += priceForTheDay;
     });
 
