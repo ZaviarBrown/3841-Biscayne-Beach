@@ -1,5 +1,8 @@
 import { readdirSync } from "fs";
 import { z } from "zod";
+import { env } from "~/env.mjs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import {
     createTRPCRouter,
@@ -9,7 +12,10 @@ import {
 
 export const imagesRouter = createTRPCRouter({
     getAll: publicProcedure.query(() => {
-        console.log(readdirSync("./src"));
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(__filename);
+
+        console.log(__dirname);
 
         const images: string[] = readdirSync("./public/allPhotos");
 
