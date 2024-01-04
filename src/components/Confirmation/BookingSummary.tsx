@@ -9,8 +9,8 @@ const BookingSummary = ({
     endDate: string;
     totalPrice: string;
 }) => {
-    console.log(startDate, endDate, totalPrice);
-    console.log(typeof startDate);
+
+
 
     return (
         <div className="mb-6">
