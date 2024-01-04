@@ -2,18 +2,26 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useScrollContext } from "~/context/ScrollContext";
 
 const NavBar = () => {
-    const { scrollY, height } = useScrollContext();
+    const { scrollY, height, scrollDirection } = useScrollContext();
     const { data: session } = useSession();
     const { pathname } = useRouter();
+    const [hideNav, setHideNav] = useState(false);
+
+    useEffect(() => {
+        if (scrollY <= height / 3) {
+            setHideNav(false);
+        } else setHideNav(scrollDirection === "down");
+    }, [scrollY, height, scrollDirection]);
 
     return (
         <nav
-            className={`fixed left-0 right-0 top-0 z-50 transform bg-black bg-opacity-50 p-4 backdrop-blur transition-transform duration-500 ${
-                scrollY >= height - 70 ? "-translate-y-full" : "translate-y-0"
-            } `}
+            className={`fixed left-0 right-0 top-0 z-50 transform p-4 ${
+                hideNav ? "-translate-y-full" : "translate-y-0"
+            } bg-black bg-opacity-50 backdrop-blur transition-transform duration-700 `}
             aria-label="Main Navigation"
         >
             <ul className="flex items-center justify-between text-xl text-white">

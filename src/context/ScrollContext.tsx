@@ -4,6 +4,7 @@ const ScrollContext = createContext({
     scrollY: 0,
     showCarousel: true,
     height: 0,
+    scrollDirection: "down",
 });
 
 export function ScrollContextProvider({
@@ -13,6 +14,9 @@ export function ScrollContextProvider({
 }) {
     const [height, setHeight] = useState(0);
     const [scrollY, setScrollY] = useState(0);
+    const [oldY, setOldY] = useState(0);
+    const [scrollDirection, setScrollDirection] = useState("down");
+
     const [showCarousel, setShowCarousel] = useState(true);
 
     useEffect(() => {
@@ -20,7 +24,10 @@ export function ScrollContextProvider({
         setHeight(window.innerHeight);
 
         const handleScroll = () => {
-            setScrollY(window.scrollY);
+            setScrollY((oldY) => {
+                setOldY(oldY);
+                return window.scrollY;
+            });
 
             if (window.scrollY > window.innerHeight) setShowCarousel(false);
             else setShowCarousel(true);
@@ -30,8 +37,18 @@ export function ScrollContextProvider({
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+
+
+
+        if (scrollY < oldY) setScrollDirection("up");
+        else setScrollDirection("down");
+    }, [scrollY, oldY]);
+
     return (
-        <ScrollContext.Provider value={{ scrollY, showCarousel, height }}>
+        <ScrollContext.Provider
+            value={{ scrollY, showCarousel, height, scrollDirection }}
+        >
             {children}
         </ScrollContext.Provider>
     );
