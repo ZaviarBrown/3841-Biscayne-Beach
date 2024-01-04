@@ -71,9 +71,28 @@ const dates = [
     },
 ];
 
+const admins = [
+    {
+        email: "brown.zaviar@gmail.com",
+        role: "admin",
+    },
+    {
+        email: "sworrall@drivegc.com",
+        role: "admin",
+    },
+    {
+        email: "worrallstephena@gmail.com",
+        role: "admin",
+    },
+];
+
 async function main() {
     for (const data of dates) {
         await prisma.pricingWindows.create({ data });
+    }
+
+    for (const data of admins) {
+        await prisma.user.create({ data });
     }
 }
 
