@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useModalContext } from "~/context/ModalContext";
 
-export default function AdminConfirmDeleteModal() {
+export default function AdminConfirmDeleteBookingModal() {
     const { closeModal, submitModal } = useModalContext();
     const [confirmUser, setConfirmUser] = useState(false);
     const [confirmRefund, setConfirmRefund] = useState(false);
