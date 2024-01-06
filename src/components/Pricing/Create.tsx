@@ -63,49 +63,50 @@ export default function CreatePricingWindow({
         const { from: startDate, to: endDate } = dates;
 
         if (startDate && endDate) {
+            let dollarCheck = price;
+            if (!price.includes(".")) dollarCheck += ".00";
             createWindow({
                 startDate,
                 endDate,
-                priceInDollars: price,
+                priceInDollars: dollarCheck,
                 note,
             });
         }
     };
 
     return (
-        <div className="m-5 flex h-full rounded-lg bg-white p-5 text-slate-800 shadow-3xl">
-            <DayPicker
-                mode="range"
-                selected={dates}
-                onSelect={(range, justSelected) => {
-                    if (!range) return setDates({ from: undefined });
+        <div className="flex justify-evenly">
+            <div className="m-5 flex rounded-lg p-8 text-slate-800">
+                <DayPicker
+                    mode="range"
+                    selected={dates}
+                    onSelect={(range, justSelected) => {
+                        if (!range) return setDates({ from: undefined });
 
-                    if (customPrices && range?.from && range.to) {
-                        for (const { startDate } of customPrices) {
-                            if (isBefore(range.from, startDate)) {
-                                if (isAfter(range.to, startDate)) {
-                                    return setDates({ from: justSelected });
-                                } else return setDates(range);
+                        if (customPrices && range?.from && range.to) {
+                            for (const { startDate } of customPrices) {
+                                if (isBefore(range.from, startDate)) {
+                                    if (isAfter(range.to, startDate)) {
+                                        return setDates({ from: justSelected });
+                                    } else return setDates(range);
+                                }
                             }
                         }
-                    }
-                    setDates(range);
-                }}
-                className="h-fit scale-110 rounded-lg bg-white p-1 shadow-3xl"
-                {...createCalendarOptions(customPrices)}
-            />
+                        setDates(range);
+                    }}
+                    className="scale-125 rounded-lg bg-white p-1 shadow-3xl"
+                    {...createCalendarOptions(customPrices)}
+                />
+            </div>
 
-            <div className="ml-5 flex flex-col justify-between p-5 text-xl">
-                <div>
-                    <p>
-                        Start date:{" "}
-                        {dates.from ? dates.from.toLocaleDateString() : "..."}
-                    </p>
-                    <p>
-                        End date:{" "}
-                        {dates.to ? dates.to.toLocaleDateString() : "..."}
-                    </p>
-                </div>
+            <div className="my-8 flex flex-col justify-around rounded-lg bg-white p-5 text-xl shadow-2xl">
+                <p>
+                    Start date:{" "}
+                    {dates.from ? dates.from.toLocaleDateString() : "..."}
+                </p>
+                <p>
+                    End date: {dates.to ? dates.to.toLocaleDateString() : "..."}
+                </p>
 
                 <label>
                     Price in USD: $
@@ -128,7 +129,7 @@ export default function CreatePricingWindow({
                 </label>
 
                 <button
-                    className="rounded-lg bg-green-500 px-2 py-2 text-xl text-white shadow-3xl duration-300 hover:-translate-y-1 disabled:transform-none disabled:bg-slate-500"
+                    className="rounded-lg bg-green-500 px-2 py-2 text-xl text-white shadow-3xl duration-200 hover:-translate-y-1 disabled:transform-none disabled:bg-slate-500"
                     onClick={handleSubmit}
                     disabled={!price || !note || !dates.from || !dates.to}
                 >
