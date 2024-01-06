@@ -3,7 +3,7 @@ import DeleteBooking from "../Booking/Delete";
 import AdminBookingCard from "../Booking/AdminCard";
 import { useState } from "react";
 
-export type SubPagesType = "upcoming" | "past" | "canceled" | "create";
+type SubPagesType = "upcoming" | "past" | "canceled" | "create";
 
 export default function ManageBookings() {
     const { data } = api.booking.getAllDetailed.useQuery();
@@ -13,12 +13,12 @@ export default function ManageBookings() {
         <div className="flex h-full flex-col gap-5">
             <InfoCard />
             <div className="flex h-full flex-col rounded-lg bg-slate-100 text-black shadow-3xl">
-                <div className="flex h-16 w-full items-center justify-evenly rounded-t-lg bg-white px-5 text-center text-xl">
+                <div className="flex h-16 w-full items-center justify-evenly rounded-t-lg bg-white text-center text-xl">
                     <p
-                        className={`w-32 p-4 hover:cursor-pointer ${
+                        className={`w-full p-4 hover:cursor-pointer ${
                             subPage === "upcoming"
                                 ? "border-b-[6px] border-cyan-500 font-bold transition-all duration-200"
-                                : "transition-all duration-200 hover:rounded-3xl hover:bg-slate-300"
+                                : "transition-all duration-200 hover:rounded-lg hover:bg-slate-300"
                         }`}
                         onClick={() => setSubPage("upcoming")}
                     >
@@ -28,10 +28,10 @@ export default function ManageBookings() {
                     <span className="h-12 border-r" />
 
                     <p
-                        className={`w-32 p-4 hover:cursor-pointer ${
+                        className={`w-full p-4 hover:cursor-pointer ${
                             subPage === "past"
                                 ? "border-b-[6px] border-cyan-500 font-bold transition-all duration-200"
-                                : "transition-all duration-200 hover:rounded-3xl hover:bg-slate-300"
+                                : "transition-all duration-200 hover:rounded-lg hover:bg-slate-300"
                         }`}
                         onClick={() => setSubPage("past")}
                     >
@@ -41,10 +41,10 @@ export default function ManageBookings() {
                     <span className="h-12 border-r" />
 
                     <p
-                        className={`w-32 p-4 hover:cursor-pointer ${
+                        className={`w-full p-4 hover:cursor-pointer ${
                             subPage === "canceled"
                                 ? "border-b-[6px] border-cyan-500 font-bold transition-all duration-200"
-                                : "transition-all duration-200 hover:rounded-3xl hover:bg-slate-300"
+                                : "transition-all duration-200 hover:rounded-lg hover:bg-slate-300"
                         }`}
                         onClick={() => setSubPage("canceled")}
                     >
@@ -54,10 +54,10 @@ export default function ManageBookings() {
                     <span className="h-12 border-r" />
 
                     <p
-                        className={`w-32 p-4 hover:cursor-pointer ${
+                        className={`w-full p-4 hover:cursor-pointer ${
                             subPage === "create"
                                 ? "border-b-[6px] border-cyan-500 font-bold transition-all duration-200"
-                                : "transition-all duration-200 hover:rounded-3xl hover:bg-slate-300"
+                                : "transition-all duration-200 hover:rounded-lg hover:bg-slate-300"
                         }`}
                         onClick={() => setSubPage("create")}
                     >
@@ -71,7 +71,7 @@ export default function ManageBookings() {
                     <p>Check-In</p>
                     <p>Check-Out</p>
                     <p>Duration</p>
-                    <p>Actions</p>
+                    <p>Delete</p>
                 </div>
                 {data &&
                     data.map((booking, i) => {
