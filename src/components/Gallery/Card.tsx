@@ -10,7 +10,7 @@ export default function GalleryCard({
     load: boolean;
 }) {
     return (
-        <div className="relative h-80 w-full overflow-hidden rounded-lg border-2 border-slate-200 shadow-3xl duration-300 hover:-translate-y-1">
+        <div className="relative h-80 w-full overflow-hidden rounded-lg border-2 border-slate-200 bg-slate-500 shadow-3xl duration-300 hover:-translate-y-1">
             <Image
                 src={`/allPhotos/${url}`}
                 alt={`Artwork ${i + 1}`}
