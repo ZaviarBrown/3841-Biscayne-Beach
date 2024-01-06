@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import AdjustPricing from "~/components/Admin/AdjustPricing";
+import ManagePricing from "~/components/Admin/ManagePricing";
 import ManageBookings from "~/components/Admin/ManageBookings";
 import ManageUsers from "~/components/Admin/ManageUsers";
 import SideBar from "~/components/Admin/SideBar";
@@ -21,7 +21,7 @@ export default function AdminPage() {
 
                     <div className="m-5 w-full">
                         {page === "bookings" && <ManageBookings />}
-                        {page === "pricing" && <AdjustPricing />}
+                        {page === "pricing" && <ManagePricing />}
                         {page === "users" && <ManageUsers />}
                     </div>
                 </div>
