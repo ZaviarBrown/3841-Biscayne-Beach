@@ -125,7 +125,7 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
                 <OpenModalButton
                     modalComponent={<ConfirmRulesModal />}
                     buttonText="Continue"
-                    className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
+                    className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:scale-100 disabled:bg-slate-300 disabled:text-slate-500"
                     disabled={disabled}
                     onModalSubmit={startBookingCreation}
                     onModalClose={() => {
