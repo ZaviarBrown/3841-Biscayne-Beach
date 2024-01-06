@@ -12,14 +12,16 @@ const NavBar = () => {
     const [hideNav, setHideNav] = useState(false);
 
     useEffect(() => {
-        if (scrollY <= height / 3) {
-            setHideNav(false);
-        } else setHideNav(scrollDirection === "down");
-    }, [scrollY, height, scrollDirection]);
+        if (pathname === "/") {
+            if (scrollY <= height / 3) {
+                setHideNav(false);
+            } else setHideNav(scrollDirection === "down");
+        }
+    }, [scrollY, height, scrollDirection, pathname]);
 
     return (
         <nav
-            className={`fixed left-0 right-0 top-0 z-50 transform p-4 ${
+            className={`fixed left-0 right-0 top-0 z-50 transform border-b border-white p-4 ${
                 hideNav ? "-translate-y-full" : "translate-y-0"
             } bg-black bg-opacity-50 backdrop-blur transition-transform duration-700 `}
             aria-label="Main Navigation"
@@ -38,7 +40,7 @@ const NavBar = () => {
                     <Link className="group relative" href="/gallery">
                         Gallery
                         <span
-                            className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
+                            className={`absolute -bottom-0.5 left-0 h-0.5 bg-white ${
                                 pathname === "/gallery"
                                     ? "w-full"
                                     : "w-0 transition-all duration-200 group-hover:w-full"
