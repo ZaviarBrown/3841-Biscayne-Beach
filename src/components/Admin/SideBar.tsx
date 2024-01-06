@@ -17,8 +17,8 @@ export default function SideBar({
                     <li
                         className={`p-4 hover:cursor-pointer ${
                             page === "bookings"
-                                ? "bg-slate-800"
-                                : "transition-colors duration-200 hover:bg-slate-600"
+                                ? "border-r-[6px] border-cyan-500 bg-cyan-700 bg-opacity-50 transition-all duration-200"
+                                : "transition-all duration-200 hover:bg-white hover:bg-opacity-20"
                         }`}
                         onClick={() => setPage("bookings")}
                     >
@@ -27,8 +27,8 @@ export default function SideBar({
                     <li
                         className={`p-4 hover:cursor-pointer ${
                             page === "pricing"
-                                ? "bg-slate-800"
-                                : "transition-colors duration-200 hover:bg-slate-600"
+                                ? "border-r-[6px] border-cyan-500 bg-cyan-700 bg-opacity-50 transition-all duration-200"
+                                : "transition-all duration-200 hover:bg-white hover:bg-opacity-20"
                         }`}
                         onClick={() => setPage("pricing")}
                     >
@@ -37,8 +37,8 @@ export default function SideBar({
                     <li
                         className={`p-4 hover:cursor-pointer ${
                             page === "users"
-                                ? "bg-slate-800"
-                                : "transition-colors duration-200 hover:bg-slate-600"
+                                ? "border-r-[6px] border-cyan-500 bg-cyan-700 bg-opacity-50 transition-all duration-200"
+                                : "transition-all duration-200 hover:bg-white hover:bg-opacity-20"
                         }`}
                         onClick={() => setPage("users")}
                     >
@@ -46,7 +46,7 @@ export default function SideBar({
                     </li>
                 </ul>
             </nav>
-            <div className="w-1/6" />
+            <div className="pr-48" />
         </>
     );
 }
