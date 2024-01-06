@@ -16,10 +16,10 @@ export default function AdminPage() {
         return (
             <>
                 <NavBarSpacer />
-                <div className="flex w-full justify-between bg-slate-500">
+                <div className="flex min-h-screen w-full justify-between ">
                     <SideBar page={page} setPage={setPage} />
 
-                    <div className="w-4/6">
+                    <div className="m-5 w-full">
                         {page === "bookings" && <ManageBookings />}
                         {page === "pricing" && <AdjustPricing />}
                         {page === "users" && <GrantRole />}
