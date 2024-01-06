@@ -6,7 +6,7 @@ interface OpenModalButtonProps {
     buttonText: string;
     onModalSubmit: React.SetStateAction<(() => void) | null>;
     onModalClose: React.SetStateAction<(() => void) | null>;
-    disabled: boolean;
+    disabled?: boolean;
     className: string;
 }
 
