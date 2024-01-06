@@ -27,16 +27,16 @@ export default function Gallery() {
     return (
         <>
             <div className="pt-20" />
-            {images && (
-                <div className="grid grid-cols-1 gap-5 bg-slate-500 p-5 md:grid-cols-2 lg:grid-cols-3">
+            {images.length !== 0 && (
+                <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-2 lg:grid-cols-3">
                     {images.map((url, i) => (
                         <GalleryCard url={url} i={i} key={i} load={load > i} />
                     ))}
                 </div>
             )}
-            {!images && (
-                <div className="grid grid-cols-1 gap-5 bg-slate-500 p-5 md:grid-cols-2 lg:grid-cols-3">
-                    {[1, 2, 3, 4, 5, 6].map((_, i) => (
+            {images.length === 0 && (
+                <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-2 lg:grid-cols-3">
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
                         <LoadingCard key={i} />
                     ))}
                 </div>
