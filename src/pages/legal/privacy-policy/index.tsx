@@ -4,7 +4,7 @@ export default function PrivacyPolicy() {
     return (
         <>
             <NavBarSpacer />
-            <div className="m-5 w-1/2 self-center text-white">
+            <div className="m-6 w-1/2 self-center text-white">
                 <div className="flex justify-center text-5xl font-bold">
                     Privacy Policy
                 </div>
