@@ -9,13 +9,16 @@ export default function AdminBookingCard({
     numberOfNights,
 }: Booking) {
     return (
-        <div className="flex flex-col items-start text-2xl text-slate-800">
-            <p>Name: {name}</p>
-            <p>Email: {email}</p>
-            <p>Booked on: {createdAt.toLocaleDateString()}</p>
+        <>
+            <p>{name}</p>
+            <p className="flex flex-wrap justify-center">
+                <span> {`${email.split("@")[0] || "not found"}`}</span>
+                <span>{`@${email.split("@")[1] || "gmail.com"}`}</span>
+            </p>
+            <p>{createdAt.toLocaleDateString()}</p>
+            <p>{startDate.toLocaleDateString()}</p>
+            <p>{endDate.toLocaleDateString()}</p>
             <p>{numberOfNights} nights</p>
-            <p>Check-in: {startDate.toLocaleDateString()}</p>
-            <p>Check-out: {endDate.toLocaleDateString()}</p>
-        </div>
+        </>
     );
 }
