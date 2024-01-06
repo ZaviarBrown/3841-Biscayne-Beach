@@ -1,3 +1,3 @@
 export default function NavBarSpacer() {
-    return <div className="pt-[70px]" />;
+    return <div className="pt-16" />;
 }
