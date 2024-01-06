@@ -6,7 +6,7 @@ const Footer = () => {
 
     return (
         <>
-            <ul className="flex h-16 items-center justify-evenly border-t border-white bg-slate-700 text-white">
+            <ul className="z-10 flex h-16 items-center justify-evenly border-t border-white bg-slate-700 text-white">
                 <li>
                     <p>
                         <a
