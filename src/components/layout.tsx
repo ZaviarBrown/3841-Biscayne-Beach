@@ -32,7 +32,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Head>
             <div className="flex min-h-screen flex-col">
                 <NavBar />
-                <main className="flex flex-grow flex-col">{children}</main>
+                <main className="flex min-h-screen flex-grow flex-col">
+                    {children}
+                </main>
                 <Footer />
             </div>
         </>
