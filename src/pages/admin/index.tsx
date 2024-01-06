@@ -1,8 +1,8 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import AdjustPricing from "~/components/Admin/AdjustPricing";
-import GrantRole from "~/components/Admin/GrantRole";
 import ManageBookings from "~/components/Admin/ManageBookings";
+import ManageUsers from "~/components/Admin/ManageUsers";
 import SideBar from "~/components/Admin/SideBar";
 import NavBarSpacer from "~/components/NavBarSpacer";
 
@@ -22,7 +22,7 @@ export default function AdminPage() {
                     <div className="m-5 w-full">
                         {page === "bookings" && <ManageBookings />}
                         {page === "pricing" && <AdjustPricing />}
-                        {page === "users" && <GrantRole />}
+                        {page === "users" && <ManageUsers />}
                     </div>
                 </div>
             </>
