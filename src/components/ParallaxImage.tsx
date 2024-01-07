@@ -33,13 +33,13 @@ export default function ParallaxImage({
             <Image
                 src={src}
                 alt={alt}
-                className="-z-10 overflow-visible object-cover object-left-top"
                 fill
+                className="-z-10 overflow-visible object-cover object-left-bottom"
                 style={{
-                    transform: `translateY(-${offset * 0.2}px) scale(1.5)`,
+                    transform: `translateY(${offset * 0.1}px) scale(1.1)`,
                 }}
             />
-            <div className="h-3 w-full bg-black" />
+            <div className="h-4 w-full bg-black" />
             {children}
         </div>
     );
