@@ -38,9 +38,6 @@ export function ScrollContextProvider({
     }, []);
 
     useEffect(() => {
-
-
-
         if (scrollY < oldY) setScrollDirection("up");
         else setScrollDirection("down");
     }, [scrollY, oldY]);
