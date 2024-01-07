@@ -10,28 +10,53 @@ export default function GoogleMapsEmbed() {
     return (
         <>
             <div className="h-3 w-full bg-black" />
-            <div className="flex h-screen w-full items-center justify-between bg-black bg-opacity-20">
+            <div className="flex h-screen min-h-screen w-full flex-grow items-center justify-between bg-black bg-opacity-20">
                 <div className="absolute -z-10 h-screen w-full bg-black">
                     <Image
                         className="object-cover"
                         fill
-                        src="/allPhotos/8_birds-eye.jpg"
+                        src="/images/aerial-view.jpg"
                         alt="Birds-eye view"
                     />
                 </div>
-                <div className="flex h-full w-1/3 flex-col items-center justify-center gap-3 bg-black bg-opacity-70 text-center text-white backdrop-blur-sm">
-                    <h2 className="text-6xl text-white">Nearby favorites</h2>
-                    <p className="text-2xl">Bolivar Ferry</p>
-                    <p className="text-2xl">Fishing Charters</p>
-                    <p className="text-2xl">Bolivar Lighthouse</p>
-                    <p className="text-2xl">{"Houghton’s Hot Spot"}</p>
-                    <p className="text-2xl">{"“Jose’s”"}</p>
-                    <p className="text-2xl">“Hard Heads”</p>
-                    <p className="text-2xl">Margaritaville</p>
-                    <p className="text-2xl">Stingaree</p>
-                    <p className="text-2xl">{"Nauti’s Beaver Hut"}</p>
-                    <p className="text-2xl">{"Tia Juanita’s"}</p>
-                    <p className="text-2xl">Latitude 29.2 Surf Shop</p>
+                <div className="flex h-full w-1/3 flex-col gap-5 overflow-y-auto overflow-x-hidden border-r border-white bg-black bg-opacity-70 p-3 text-center text-white backdrop-blur-sm">
+                    <div className="m-auto w-full break-words text-2xl">
+                        <p className="p-3">
+                            The Bolivar Peninsula is located across the ferry
+                            from Galveston. When you come across the bay to the
+                            peninsula via ferry boat, the landscape changes from
+                            urban port to small beach town charm.
+                        </p>
+                        <p className="p-3">
+                            There are local amenities and restaurants and a few
+                            well stocked stores. For local events, activities,
+                            and all kinds of information, visit{" "}
+                            <a
+                                className="underline hover:text-cyan-400"
+                                href="https://www.bolivarpeninsulatexas.com"
+                            >
+                                bolivarpeninsulatexas.com
+                            </a>
+                        </p>
+                    </div>
+
+                    <div className="m-auto w-full break-words text-xl">
+                        <h2 className="pb-5 text-3xl">
+                            {"Here's some of our nearby favorites"}
+                        </h2>
+                        <div className="grid w-full grid-flow-row grid-cols-2 justify-items-center gap-2 text-xl">
+                            <p>Bolivar Ferry</p>
+                            <p>Fishing Charters</p>
+                            <p>Bolivar Lighthouse</p>
+                            <p>{"Houghton's Hot Spot"}</p>
+                            <p>Hard Heads</p>
+                            <p>Margaritaville</p>
+                            <p>Stingaree</p>
+                            <p>{"Nauti's Beaver Hut"}</p>
+                            <p>{"Tia Juanita's"}</p>
+                            <p>Latitude 29.2 Surf Shop</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="mx-10 h-4/5 w-2/3 rounded-2xl  bg-white p-3">
                     <iframe
