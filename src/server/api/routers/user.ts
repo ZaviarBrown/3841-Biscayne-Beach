@@ -22,13 +22,16 @@ export const userRouter = createTRPCRouter({
         }),
 
     changeRole: adminProcedure
-        .input(z.string())
-        .mutation(async ({ input: id, ctx }) => {
+        .input(
+            z.object({
+                id: z.string(),
+                role: z.string(),
+            })
+        )
+        .mutation(async ({ input: { id, role }, ctx }) => {
             const updatedToAdmin = await ctx.prisma.user.update({
                 where: { id },
-                data: {
-                    role: "admin",
-                },
+                data: { role },
             });
 
             return updatedToAdmin;
