@@ -94,23 +94,33 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
 
     return (
         <div className="flex w-full flex-col justify-between border-l-2 border-slate-200 bg-white p-5 pl-14 text-xl text-black">
-            <h2 className="text-center text-3xl font-semibold">
-                Booking Preview
-            </h2>
-
+            <div>
+                <h2 className="text-center text-3xl font-semibold">
+                    Booking Preview
+                </h2>
+                <h3
+                    className={`text-center text-xl italic transition duration-200 ${
+                        disabled && selected.from && selected.to
+                            ? "scale-105 font-bold text-red-600"
+                            : ""
+                    }`}
+                >
+                    5 night minimum
+                </h3>
+            </div>
             <div className="w-3/4 self-center border border-slate-200" />
 
-            <span className="flex justify-between">
+            <span className="flex flex-wrap justify-between">
                 <p>Check-in: </p> <p>{selected.from?.toLocaleDateString()}</p>
             </span>
 
-            <span className="flex justify-between">
+            <span className="flex flex-wrap justify-between">
                 <p>Check-out: </p> <p>{selected.to?.toLocaleDateString()}</p>
             </span>
 
             <div className="w-3/4 self-center border border-slate-200" />
 
-            <span className="flex justify-between">
+            <span className="flex flex-wrap justify-between">
                 <p>Total: </p> <p>{totalPrice}</p>
             </span>
 
