@@ -13,8 +13,8 @@ export default function GrantRole() {
     });
 
     return (
-        <form className="m-5 flex h-fit w-fit flex-col items-center gap-10 rounded-lg bg-white px-10 py-10 text-slate-800 shadow-3xl">
-            <h1 className="text-3xl">Grant Admin Role</h1>
+        <form className="flex flex-col items-center gap-10 rounded-lg p-5 text-slate-800 ">
+            <h1 className="text-center text-3xl">Pre-create a User as Admin</h1>
             <input
                 className="rounded-lg p-2 outline outline-1 outline-black"
                 placeholder="Email"
