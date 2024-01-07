@@ -1,19 +1,23 @@
 /** Next
- * 
- * Book now opens a modal, you must agree to these terms
- * 
- * Take out reviews from the site for now
- * 
- * 
- * ! New NavBar
- * Gallery | House Rules | Book Now | Sign In / Menu Icon
- * 
- * ! Menu Icon
- * "Hi Zaviar!"
- * Your Bookings 
- * 
  *
- */
+ * 
+    * !!!Checkout Timer!!!
+        * On first load of dates, check createdAt & pending
+        * Delete pending bookings after 30min
+ *
+    * ? Gallery page: 
+        * - Making each photo clickable to display a larger version 
+ *
+    * ? Admin page:
+        * - Allow booking creation without payment
+        * - Adding a past vs future bookings breakdown
+ * 
+ * Double check stripe
+ * Aria label EVERYTHING
+ * Make Admin quick-views functional
+ * Redesign db to store canceled bookings
+ * 
+*/
 
 /**
  *
