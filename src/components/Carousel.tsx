@@ -1,17 +1,9 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useScrollContext } from "~/context/ScrollContext";
+import type { StaticImagesType } from "~/pages";
 
-const images = [
-    "2_new-side.jpg",
-    "3_new-kitchen.jpg",
-    "4_deck.jpg",
-    "5_room.jpg",
-    "6_bath.jpg",
-    "9_sunset.jpg",
-];
-
-const Carousel = () => {
+const Carousel = ({ images }: { images: StaticImagesType[] }) => {
     const { showCarousel } = useScrollContext();
     const [currentImage, setCurrentImage] = useState(0);
 
@@ -31,23 +23,18 @@ const Carousel = () => {
         }, 4000);
 
         return () => clearInterval(interval);
-    }, [currentImage]);
+    }, [currentImage, images.length]);
 
     return (
         <div className="flex h-screen w-full items-center justify-between bg-black bg-opacity-40">
-            {images.map((url, index) => (
+            {images.map(({ src, alt }, index) => (
                 <div
-                    key={url}
+                    key={src}
                     className={`${showCarousel ? "" : "hidden"} ${
                         index === currentImage ? "opacity-100" : "opacity-0"
                     } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
                 >
-                    <Image
-                        src={`/allPhotos/${url ?? "2_new-side.jpg"}`}
-                        alt={`Image #${index + 1}`}
-                        className="object-cover"
-                        fill
-                    />
+                    <Image src={src} alt={alt} className="object-cover" fill />
                 </div>
             ))}
 
