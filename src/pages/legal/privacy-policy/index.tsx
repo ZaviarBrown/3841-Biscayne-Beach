@@ -4,12 +4,12 @@ export default function PrivacyPolicy() {
     return (
         <>
             <NavBarSpacer />
-            <div className="m-6 w-1/2 self-center text-white">
+            <div className="m-6 w-3/4 self-center rounded-lg bg-white p-5 text-black shadow-3xl">
                 <div className="flex justify-center text-5xl font-bold">
                     Privacy Policy
                 </div>
 
-                <div className="mb-5 flex justify-between text-white">
+                <div className="mb-5 flex justify-between">
                     <div className=" rounded-lg p-2">
                         Effective on 10-25-2023
                     </div>
@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
                         Last updated on 10-25-2023
                     </div>
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white">
+                <p className=" mb-5 rounded-2xl p-4">
                     {`Thanks for trusting 3841 Biscayne Beach
                     ('3841 Biscayne Beach', 'we', 'us', 'our') with your personal
                     information! We take our responsibility to you very
@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
                     Information We Collect
                 </div>
                 <div className="mb-2 text-xl ">Personal Information</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` We may collect personal information, such as your name, 
                     email address, phone number, and other contact or 
                     identification information that you voluntarily provide to 
@@ -47,7 +47,7 @@ export default function PrivacyPolicy() {
                      a booking or upon signing up.`}
                 </p>
                 <div className="mb-2 text-xl ">Password Security</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` Your security is our priority. We use OAuth, a secure 
                     authentication protocol, to ensure the confidentiality of 
                     your account credentials. We never store your passwords 
@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
                     layer of protection for your sensitive information.`}
                 </p>
                 {/* <div className="mb-2 text-xl "> Communication Preferences</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` Providing your phone number is optional. If you choose 
                     to provide your phone number, we will use it to send appointment confirmations and essential communications related to your bookings.`}
                 </p> */}
@@ -66,39 +66,39 @@ export default function PrivacyPolicy() {
                 </div>
                 <div className="mb-2 text-xl ">Providing Services</div>
 
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` We use your personal information to provide you with the 
                     services you request, such as creating a booking and 
                     communicating with you about your bookings.`}
                 </p>
                 <div className="mb-2 text-xl ">Communication</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`We may use your email address to send you transactional 
                     emails or messages related to your bookings. We may also 
                     send you promotional and marketing communications if you 
                     have opted in to receive them.`}
                 </p>
                 <div className="mb-2 text-xl ">Improving Our Services</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`We analyze usage data to improve the functionality and 
                     user experience of the Website and Services.`}
                 </p>
                 {/* <div className="mb-2 text-xl ">Phone Number Removal</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`If you wish to have your phone number removed from our records or stop receiving SMS notifications, please contact us at the provided contact information. We will promptly remove your phone number and cease sending messages to it upon your request.`}
                 </p> */}
                 <div className="mb-5 text-4xl font-bold">
                     Information Sharing and Disclosure
                 </div>
                 <div className="mb-2 text-xl ">Service Providers</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`We may share your personal information with third-party 
                     service providers who perform services on our behalf, 
                     such as payment processing, data analysis, email delivery, 
                     hosting services, and customer service.`}
                 </p>
                 <div className="mb-2 text-xl ">Legal Compliance</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`We may disclose your information if required by law, 
                     regulation, court order, or other governmental authority or 
                     when we believe in good faith that disclosure is necessary 
@@ -109,12 +109,12 @@ export default function PrivacyPolicy() {
                 <div className="mb-5 text-4xl font-bold">
                     How Do We Store Your Data?
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`3841 Biscayne Beach stores your data securely in a database using Prisma and Neon.db`}
                 </p>
 
                 <div className="mb-5 text-4xl font-bold">What Are Cookies?</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`Cookies are small pieces of text sent by your web browser 
                     by a website you visit. A cookie file is stored in your web 
                     browser and allows the Website or a third-party service to 
@@ -126,7 +126,7 @@ export default function PrivacyPolicy() {
                 </div>
                 <div className="mb-2 text-xl ">Authentication</div>
 
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`We use cookies to keep you signed in while you navigate 
                     our Website. These cookies are essential for the proper 
                     functioning of our authentication system.`}
@@ -135,13 +135,13 @@ export default function PrivacyPolicy() {
                     Your Choices Regarding Cookies
                 </div>
                 <div className="mb-2 text-xl ">Disabling Cookies</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`You can choose to disable cookies through your individual 
                     browser options. However, please note that if you disable 
                     cookies, you may not be able to use some portions of our Website properly.`}
                 </p>
                 <div className="mb-2 text-xl ">Opting Out</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`You can opt-out of cookies by adjusting the settings in 
                     your web browser. Please refer to your browser's "help" section 
                     or a similar feature to learn more about how to manage cookie preferences.`}
@@ -150,7 +150,7 @@ export default function PrivacyPolicy() {
                 <div className="mb-5 text-4xl font-bold">
                     What Are Your Data Protection Rights?
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white">
+                <p className=" mb-5 rounded-2xl p-4">
                     {` Every user is entitled
                     to the following: The right to access. You have the right
                     to request 3841 Biscayne Beach for copies of your personal data. We
@@ -176,7 +176,7 @@ export default function PrivacyPolicy() {
                 <div className="mb-5 text-4xl font-bold">
                     Personal Information Request
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white">
+                <p className=" mb-5 rounded-2xl p-4">
                     You have the right to request access to the personal
                     information we collect from you, change that information, or
                     delete it. To request to review, update, or delete your
@@ -186,7 +186,7 @@ export default function PrivacyPolicy() {
                 <div className="mb-5 text-4xl font-bold">
                     Privacy Policy Modification
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white">
+                <p className=" mb-5 rounded-2xl p-4">
                     {`3841 Biscayne Beach may revise this Privacy Policy for its
                     Website at any time without prior notice. The updated
                     version will be indicated by an updated "Last Updated" date.

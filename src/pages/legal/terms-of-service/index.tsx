@@ -5,18 +5,16 @@ export default function TermsOfService() {
     return (
         <>
             <NavBarSpacer />
-            <div className="m-6 w-1/2 self-center text-white">
+            <div className="m-6 w-3/4 self-center rounded-lg bg-white p-5 text-black shadow-3xl">
                 <div className="flex justify-center text-5xl font-bold">
                     Terms of Service
                 </div>
-                <div className="mb-5 flex text-white">
-                    Last updated on 12-25-2023
-                </div>
+                <div className="mb-5 flex">Last updated on 12-25-2023</div>
                 <div className="font-boldfont-bold mb-5 text-4xl">
                     {" "}
                     Agreement
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`These Terms of Service govern your use of this website 
                     located at 3841biscaynebeach.com. 
                     Please read these Terms of Service carefully
@@ -32,18 +30,18 @@ export default function TermsOfService() {
                     Use of the Website
                 </div>
                 <div className="mb-2 text-xl "> Eligibility</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` You must be at least 18 years old to use the Website. 
                     By using the Website, you represent and warrant that you are at least 18 years old.`}
                 </p>
                 <div className="mb-2 text-xl "> Personal Information</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` You agree to provide accurate, current, and complete 
                     information during the booking process and to update such 
                     information to keep it accurate, current, and complete.`}
                 </p>
                 <div className="mb-2 text-xl "> Prohibited Activities</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` You may not use the Website for any illegal or 
                     unauthorized purpose. You may not, in the use of the 
                     Website, violate any applicable laws, regulations, or rights of others.`}
@@ -52,14 +50,14 @@ export default function TermsOfService() {
                     Bookings and Services
                 </div>
                 <div className="mb-2 text-xl "> Bookings</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`3841 Biscayne Beach offers online booking 
                     services through our Website. All bookings are subject to 
                     availability. By making a booking through our Website, you 
                     agree to abide by the terms and conditions outlined in this section.`}
                 </p>
                 <div className="mb-2 text-xl "> Right to Refuse Service</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`  3841 Biscayne Beach reserves the right to refuse service
                      to anyone for any reason at any time. We take pride in 
                      providing a safe and respectful environment for everyone.`}
@@ -67,24 +65,24 @@ export default function TermsOfService() {
                 <div className="mb-2 text-xl ">
                     Cancellation and Modification of Bookings
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`If you need to cancel your booking, you can do so by 
                     reviewing the cancellation policy, which can be found on 
                     the Website. Failure to adhere to the cancellation policy may result in applicable fees or penalties.`}
                 </p>
                 <div className="mb-2 text-xl ">{`Host's Right to Cancel`}</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`In rare circumstances, 3841 Biscayne Beach may need to cancel a booking due to unforeseen events or emergencies. In such cases, we will make every effort to reschedule your booking at a convenient time for you, or provide a full refund.`}
                 </p>
                 <div className="mb-2 text-xl ">Rescheduling Bookings</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`If you wish to reschedule a booking, you are required to 
                     reach out to 3841 Biscayne Beach promptly. Please contact us 
                     via our contact email to discuss the options for rescheduling 
                     your booking.`}
                 </p>
                 <div className="mb-2 text-xl ">Booking through the Website</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`When creating a booking through our Website, you agree
                      that you are bound by our cancellation policy. 
                      Booking through the site indicates your acceptance of the 
@@ -95,13 +93,13 @@ export default function TermsOfService() {
                     Cancellation Policy
                 </div>
                 <div className="mb-2 text-xl ">Card Processing Fee</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`All payments on the Website use Stripe and incur a 
                     non-refundable 6% card processing fee. Any mention of refunds 
                     in this section include this fee.`}
                 </p>
                 <div className="mb-2 text-xl ">Cancellation Charges</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`Bookings canceled with more than 10 days notice will receive a full refund. 
                     Bookings canceled with less than 10 days notice will 
                     receive a refund equivalent to 50% of the total booking cost. 
@@ -113,7 +111,7 @@ export default function TermsOfService() {
                     Intellectual Property
                 </div>
                 <div className="mb-2 text-xl "> Ownership</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` All content and materials available on the Website, 
                     including but not limited to text, graphics, logos, button 
                     icons, images, audio clips, data compilations, and software, 
@@ -121,7 +119,7 @@ export default function TermsOfService() {
                     and protected by copyright laws.`}
                 </p>
                 <div className="mb-2 text-xl "> Trademarks</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` 3841 Biscayne Beach and any other trademarks, service 
                     marks, graphics, and logos used in connection with the 
                     Website are trademarks or registered trademarks of 3841 Biscayne Beach or its licensors.`}
@@ -129,7 +127,7 @@ export default function TermsOfService() {
                 <div className="mb-5 text-4xl font-bold">
                     Terms of Service Modification
                 </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white">
+                <p className=" mb-5 rounded-2xl p-4">
                     3841 Biscayne Beach may revise these Terms of Service for
                     its Website at any time without prior notice. By using this
                     Website, you are agreeing to be bound by the current version
@@ -137,7 +135,7 @@ export default function TermsOfService() {
                 </p>
                 {/* <div className="mb-5 text-4xl font-bold">Review Policy</div>
                 <div className="mb-2 text-xl ">Content Moderation</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`At 3841 Biscayne Beach, we value honest feedback and 
                     reviews from our customers. We encourage you to share your 
                     experiences on our Website. However, we reserve the right to
@@ -145,23 +143,23 @@ export default function TermsOfService() {
                      inappropriate, or violates our content guidelines.`}
                 </p>
                 <div className="mb-2 text-xl ">Offensive Content</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`Reviews that contain offensive language, discriminatory remarks, or violate the privacy of our staff or other customers will be promptly removed. We believe in maintaining a respectful and positive online environment for everyone.`}
                 </p>{" "}
                 <div className="mb-2 text-xl ">Moderation Process </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`Our moderation process aims to ensure that the reviews displayed on our Website are constructive, helpful, and relevant to the experiences of our customers. While we encourage your honest opinions, we request that you express them in a respectful manner.`}
                 </p>{" "}
                 <div className="mb-2 text-xl "> Right to Remove</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`We have the ability to remove any review that we find offensive to others. If you believe your review was removed in error, please contact our customer support team at lynnthompson001@gmail.com to address your concerns.`}
                 </p>{" "}
                 <div className="mb-2 text-xl "> Feedback Welcome</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`We appreciate your understanding and cooperation in maintaining a respectful review environment. If you have any feedback or questions about our review policy, please feel free to reach out to us.`}
                 </p>{" "} */}
                 <div className="mb-5 text-4xl font-bold"> Privacy Policy</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     If you use our Services, you must abide by our{" "}
                     <Link
                         href="/legal/privacy-policy"
@@ -187,7 +185,7 @@ export default function TermsOfService() {
                     from us or Users.`}
                 </p>
                 <div className="mb-5 text-4xl font-bold"> Limitations</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white">
+                <p className=" mb-5 rounded-2xl p-4">
                     {`To the fullest extent permitted by applicable law, 
                     3841 Biscayne Beach shall not be liable for any indirect, incidental,
                     special, consequential, or punitive damages, or any loss of
@@ -199,7 +197,7 @@ export default function TermsOfService() {
                 </p>
                 <div className="mb-5 text-4xl font-bold"> Disclaimer</div>
                 <div className="mb-2 text-xl "> Accuracy of Information</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`While we strive to provide accurate and up-to-date 
                     information on our Website, 3841 Biscayne Beach makes no 
                     representations or warranties of any kind, express or 
@@ -210,7 +208,7 @@ export default function TermsOfService() {
                     place on such information is therefore strictly at your own risk.`}
                 </p>
                 <div className="mb-2 text-xl ">Service Availability</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {` 3841 Biscayne Beach reserves the right to modify, 
                     suspend, or discontinue any part of the Website or the 
                     services provided at any time without prior notice. We will 
@@ -218,7 +216,7 @@ export default function TermsOfService() {
                     Website is unavailable at any time or for any period.`}
                 </p>
                 <div className="mb-2 text-xl ">Third-Party Links </div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`Our Website may contain links to third-party websites or 
                     services that are not owned or controlled by 3841 Biscayne Beach. 
                     We have no control over and assume no responsibility for the 
@@ -231,7 +229,7 @@ export default function TermsOfService() {
                     on or through any such websites or services.`}
                 </p>
                 <div className="mb-2 text-xl "> User Responsibilities</div>
-                <p className=" mb-5 rounded-2xl p-4 text-white ">
+                <p className=" mb-5 rounded-2xl p-4 ">
                     {`Users are responsible for their interactions with other 
                     users and third parties. 3841 Biscayne Beach disclaims any 
                     liability arising from such interactions. Users are also 
