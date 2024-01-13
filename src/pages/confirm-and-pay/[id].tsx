@@ -46,7 +46,10 @@ export default function ConfirmAndPay() {
 
     useEffect(() => {
         if (booking && !clientSecret) {
-            createCheckout(booking);
+            createCheckout({
+                id: booking.id,
+                priceId: booking.priceId as string,
+            });
         }
     }, [booking, clientSecret, createCheckout]);
 
