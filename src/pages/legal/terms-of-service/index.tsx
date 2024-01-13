@@ -9,7 +9,7 @@ export default function TermsOfService() {
                 <div className="flex justify-center text-5xl font-bold">
                     Terms of Service
                 </div>
-                <div className="mb-5 flex">Last updated on 12-25-2023</div>
+                <div className="mb-5 flex">Last updated on 1-13-2024</div>
                 <div className="font-boldfont-bold mb-5 text-4xl">
                     {" "}
                     Agreement
@@ -100,10 +100,10 @@ export default function TermsOfService() {
                 </p>
                 <div className="mb-2 text-xl ">Cancellation Charges</div>
                 <p className=" mb-5 rounded-2xl p-4 ">
-                    {`Bookings canceled with more than 10 days notice will receive a full refund. 
-                    Bookings canceled with less than 10 days notice will 
+                    {`Bookings cancelled with more than 14 days notice will receive a full refund. 
+                    Bookings cancelled with less than 14 days notice will 
                     receive a refund equivalent to 50% of the total booking cost. 
-                    Bookings canceled with less than 3 days notice will receive 
+                    Bookings cancelled with less than 3 days notice will receive 
                     no refund.`}
                 </p>
                 <div className="mb-5 text-4xl font-bold">
