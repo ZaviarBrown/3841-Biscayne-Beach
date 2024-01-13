@@ -88,7 +88,7 @@ export const Modal = () => {
 
     return createPortal(
         <div
-            className={`fixed inset-0 flex items-center justify-center ${
+            className={`fixed inset-0 z-50 flex items-center justify-center ${
                 isOpen ? "opacity-100" : "opacity-0"
             } transition-opacity duration-300`}
         >
