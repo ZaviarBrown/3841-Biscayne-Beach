@@ -32,6 +32,9 @@ export const bookingRouter = createTRPCRouter({
                     gte: new Date(),
                 },
             },
+            orderBy: {
+                startDate: "asc",
+            },
         });
     }),
 
@@ -41,6 +44,9 @@ export const bookingRouter = createTRPCRouter({
                 startDate: {
                     lte: new Date(),
                 },
+            },
+            orderBy: {
+                startDate: "desc",
             },
         });
     }),
@@ -54,6 +60,9 @@ export const bookingRouter = createTRPCRouter({
                         email: true,
                     },
                 },
+            },
+            orderBy: {
+                cancelDate: "desc",
             },
         });
     }),
@@ -179,19 +188,34 @@ export const bookingRouter = createTRPCRouter({
     delete: protectedProcedure
         .input(
             z.object({
-                id: z.string(),
-                userId: z.string(),
-                refundPrice: z.number(),
-                paymentId: z.string().nullable().optional(),
+                bookingInfo: z.object({
+                    id: z.string(),
+                    userId: z.string(),
+                    refundPrice: z.number(),
+                    paymentId: z.string().nullable().optional(),
+                }),
+                emailInfo: z.object({
+                    to: z.string().email(),
+                    subject: z.string(),
+                    html: z.string(),
+                }),
             })
         )
         .mutation(
-            async ({ input: { id, userId, refundPrice, paymentId }, ctx }) => {
+            async ({
+                input: {
+                    bookingInfo: { id, userId, paymentId, refundPrice },
+                    emailInfo,
+                },
+                ctx,
+            }) => {
                 if (paymentId) {
                     const refund = await ctx.stripe.refunds.create({
                         payment_intent: paymentId,
                         amount: refundPrice,
                     });
+
+                    void sendEmail(emailInfo);
 
                     await ctx.prisma.cancelledBooking.create({
                         data: {
