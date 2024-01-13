@@ -1,19 +1,31 @@
 import { z } from "zod";
 
-import {
-    createTRPCRouter,
-    publicProcedure,
-    protectedProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { sendEmail } from "~/utils/email";
 
-export const contactRouter = createTRPCRouter({});
-
-// TODO: sendMessage
-
-// getAll
-
-// getAllPending
-
-// getAllResolved
-
-// markResolved
+export const contactRouter = createTRPCRouter({
+    confirmationEmail: publicProcedure
+        .input(
+            z.object({
+                to: z.string().email(),
+                subject: z.string(),
+                html: z.string(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            await sendEmail(input);
+            return "Success";
+        }),
+    contactSupportEmail: publicProcedure
+        .input(
+            z.object({
+                from: z.string().email(),
+                subject: z.string(),
+                html: z.string(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            await sendEmail({ ...input, replyTo: input.from });
+            return "Success";
+        }),
+});
