@@ -9,7 +9,7 @@ import {
 
 export const userRouter = createTRPCRouter({
     createNewAdmin: adminProcedure
-        .input(z.string())
+        .input(z.string().email())
         .mutation(async ({ input: email, ctx }) => {
             const newAdmin = await ctx.prisma.user.create({
                 data: {
