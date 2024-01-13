@@ -1,7 +1,20 @@
 import { useState } from "react";
 import { useModalContext } from "~/context/ModalContext";
+import { convertCentsIntoDollars } from "~/utils/booking";
 
-export default function AdminConfirmDeleteBookingModal() {
+export default function AdminConfirmDeleteBookingModal({
+    name,
+    refundPrice,
+    startDate,
+    endDate,
+    paymentId,
+}: {
+    name: string;
+    refundPrice: number;
+    startDate: Date;
+    endDate: Date;
+    paymentId: string | null;
+}) {
     const { closeModal, submitModal } = useModalContext();
     const [confirmUser, setConfirmUser] = useState(false);
     const [confirmRefund, setConfirmRefund] = useState(false);
@@ -23,7 +36,9 @@ export default function AdminConfirmDeleteBookingModal() {
                         type="checkbox"
                         className="mx-5"
                     />
-                    {`I acknowledge that a refund of ${"$refund_amount"} will be charged to our Stripe account`}
+                    {`I acknowledge that a refund of ${convertCentsIntoDollars(
+                        refundPrice
+                    )} will be charged to our Stripe account`}
                 </label>
 
                 <label className="w-fit text-xl">
@@ -33,7 +48,7 @@ export default function AdminConfirmDeleteBookingModal() {
                         type="checkbox"
                         className="mx-5"
                     />
-                    {`I verified that ${"firstName_lastName"}'s booking for ${"startDate"} to ${"endDate"} is the correct booking to delete`}
+                    {`I verified that ${name}'s booking for ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()} is the correct booking to delete`}
                 </label>
 
                 <label className="w-fit text-xl">
@@ -45,7 +60,7 @@ export default function AdminConfirmDeleteBookingModal() {
                         type="checkbox"
                         className="mx-5"
                     />
-                    {`I understand that this CANNOT be undone and that ${"firstName_lastName"} must create a new booking if they wish to book again`}
+                    {`I understand that this CANNOT be undone and that ${name} must create a new booking if they wish to book again`}
                 </label>
             </div>
             <div className="mt-5 flex w-full justify-around rounded-b-2xl border-t border-slate-400 bg-slate-200 p-5 font-bold">
