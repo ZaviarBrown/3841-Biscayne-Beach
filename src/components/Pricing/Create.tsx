@@ -52,19 +52,40 @@ export default function CreatePricingWindow({
     const [dates, setDates] = useState<DateRange>({ from: undefined });
     const [price, setPrice] = useState("");
     const [note, setNote] = useState("");
+    const [error, setError] = useState("");
 
     const ctx = api.useContext();
 
     const { mutate: createWindow } = api.pricing.createWindow.useMutation({
-        onSuccess: () => void ctx.pricing.invalidate(),
+        onSuccess: () => {
+            setDates({ from: undefined });
+            setPrice("");
+            setNote("");
+            setError("");
+            void ctx.pricing.invalidate();
+        },
     });
 
     const handleSubmit = () => {
         const { from: startDate, to: endDate } = dates;
 
+        if (isNaN(Number(price))) {
+            return setError("Invalid price");
+        }
+
         if (startDate && endDate) {
-            let dollarCheck = price;
-            if (!price.includes(".")) dollarCheck += ".00";
+            let [dollarCheck, centCheck] = price.split(".");
+
+            if (!dollarCheck) return setError("Invalid price");
+
+            if (!centCheck) centCheck = "00";
+            if (centCheck.length === 1) centCheck += "0";
+            if (centCheck.length > 2) centCheck = centCheck.slice(0, 2);
+
+            dollarCheck += "." + centCheck;
+
+            setError("");
+
             createWindow({
                 startDate,
                 endDate,
@@ -107,8 +128,8 @@ export default function CreatePricingWindow({
                 <p>
                     End date: {dates.to ? dates.to.toLocaleDateString() : "..."}
                 </p>
-
                 <label>
+                    {error ? <p className="text-red-500">{error}</p> : null}
                     Price in USD: $
                     <input
                         placeholder="0.00"
