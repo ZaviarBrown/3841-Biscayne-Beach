@@ -7,13 +7,13 @@ import DeletePricingWindow from "../Pricing/Delete";
 type SubPagesType = "existing" | "create";
 
 export default function ManagePricing() {
-    const { data: pricingWindows, isLoading } =
+    const { data: pricingWindow, isLoading } =
         api.pricing.getAllValidWindows.useQuery();
     const [subPage, setSubPage] = useState<SubPagesType>("existing");
 
     if (isLoading) return <h1>Loading...</h1>;
 
-    if (!pricingWindows) return null;
+    if (!pricingWindow) return null;
 
     return (
         <div className="flex h-full flex-col gap-5">
@@ -49,7 +49,7 @@ export default function ManagePricing() {
                         <p>
                             Default Price:{" "}
                             {convertCentsIntoDollars(
-                                pricingWindows.defaultPrice
+                                pricingWindow.defaultPrice
                             )}
                         </p>
                     </div>
@@ -60,7 +60,7 @@ export default function ManagePricing() {
                         <p>
                             Weekend Price:{" "}
                             {convertCentsIntoDollars(
-                                pricingWindows.weekendPrice
+                                pricingWindow.weekendPrice
                             )}
                         </p>
                     </div>
@@ -80,7 +80,7 @@ export default function ManagePricing() {
                                 <p># of Bookings</p>
                                 <p>Delete</p>
                             </div>
-                            {pricingWindows.customPrices.map(
+                            {pricingWindow.customPrices.map(
                                 (
                                     { id, startDate, endDate, price, note },
                                     i
@@ -107,7 +107,7 @@ export default function ManagePricing() {
                                                 To{" "}
                                                 {endDate.toLocaleDateString()}
                                             </div>
-                                            <div>0</div>
+                                            <div>?</div>
                                             <DeletePricingWindow id={id} />
                                         </div>
                                     );
@@ -124,7 +124,7 @@ export default function ManagePricing() {
                 >
                     {subPage === "create" && (
                         <CreatePricingWindow
-                            customPrices={pricingWindows.customPrices}
+                            customPrices={pricingWindow.customPrices}
                         />
                     )}
                 </div>
@@ -140,7 +140,7 @@ const InfoCard = () => {
                 <p className="m-auto h-8 w-8 rounded-full bg-green-500 bg-opacity-70 text-2xl">
                     {"💰"}
                 </p>
-                <span className="text-2xl font-bold">$0.00</span>
+                <span className="text-2xl font-bold">$?</span>
                 <p className="text-sm text-slate-500">All-Time Revenue</p>
             </div>
             <span className="h-20 border-r" />
@@ -148,7 +148,7 @@ const InfoCard = () => {
                 <p className="m-auto h-8 w-8 rounded-full bg-green-500 bg-opacity-70 text-2xl">
                     {"💰"}
                 </p>
-                <span className="text-2xl font-bold">$0.00</span>
+                <span className="text-2xl font-bold">$?</span>
                 <p className="text-sm text-slate-500">Revenue This Year</p>
             </div>
             <span className="h-20 border-r" />
@@ -156,7 +156,7 @@ const InfoCard = () => {
                 <p className="m-auto h-8 w-8 rounded-full bg-red-500 bg-opacity-70 text-2xl">
                     {"💰"}
                 </p>
-                <span className="text-2xl font-bold">$0.00</span>
+                <span className="text-2xl font-bold">$?</span>
                 <p className="text-sm text-slate-500">All-Time Refunds</p>
             </div>
             <span className="h-20 border-r" />
@@ -164,7 +164,7 @@ const InfoCard = () => {
                 <p className="m-auto h-8 w-8 rounded-full bg-red-500 bg-opacity-70 text-2xl">
                     {"💰"}
                 </p>
-                <span className="text-2xl font-bold">$0.00</span>
+                <span className="text-2xl font-bold">$?</span>
                 <p className="text-sm text-slate-500">Refunds This Year</p>
             </div>
         </div>
