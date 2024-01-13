@@ -72,6 +72,7 @@ export const stripeRouter = createTRPCRouter({
             return {
                 status: session.status,
                 customerEmail: session.customer_details?.email,
+                paymentIntent: session.payment_intent,
             };
         }),
 
