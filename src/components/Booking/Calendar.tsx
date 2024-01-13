@@ -32,13 +32,13 @@ export interface CalendarOptions {
 const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
     const today = new Date();
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    const yesterday = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() - 1
-    );
+    // const yesterday = new Date(
+    //     today.getFullYear(),
+    //     today.getMonth(),
+    //     today.getDate() - 1
+    // );
 
-    const disabled = [...booked, { from: startOfMonth, to: yesterday }];
+    const disabled = [...booked, { from: startOfMonth, to: today }];
 
     const options = {
         disabled,
@@ -67,7 +67,7 @@ const Calendar = ({
     setDates: React.Dispatch<React.SetStateAction<DateRange>>;
 }) => {
     // TODO: SSR
-    let { data: booked } = api.booking.getAll.useQuery();
+    let { data: booked } = api.booking.getForCalendar.useQuery();
     if (!booked) booked = [];
 
     return (
