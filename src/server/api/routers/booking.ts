@@ -17,6 +17,26 @@ export const bookingRouter = createTRPCRouter({
         }));
     }),
 
+    getAllFuture: publicProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.booking.findMany({
+            where: {
+                startDate: {
+                    gte: new Date(),
+                },
+            },
+        });
+    }),
+
+    getAllPast: publicProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.booking.findMany({
+            where: {
+                startDate: {
+                    lte: new Date(),
+                },
+            },
+        });
+    }),
+
     getAllDetailed: publicProcedure.query(async ({ ctx }) => {
         const bookedArr = await ctx.prisma.booking.findMany();
 
@@ -50,7 +70,8 @@ export const bookingRouter = createTRPCRouter({
         .query(async ({ input, ctx }) => {
             return await ctx.prisma.booking.findMany({
                 where: { userId: input },
-                include: { Review: true },
+                // include: { Review: true },
+                orderBy: { startDate: "asc" },
             });
         }),
 
@@ -63,6 +84,7 @@ export const bookingRouter = createTRPCRouter({
                 startDate: z.date(),
                 endDate: z.date(),
                 priceId: z.string(),
+                price: z.number(),
                 numberOfNights: z.number(),
             })
         )
@@ -83,8 +105,10 @@ export const bookingRouter = createTRPCRouter({
                 email: z.string().email().optional(),
                 startDate: z.date().optional(),
                 endDate: z.date().optional(),
-                invoiceId: z.string().optional(),
-                transactionId: z.string().optional(),
+                priceId: z.string().optional(),
+                paymentId: z.string().nullable().optional(),
+                numberOfNights: z.number().optional(),
+                status: z.string().optional(),
             })
         )
         .mutation(async ({ input, ctx }) => {
@@ -103,12 +127,37 @@ export const bookingRouter = createTRPCRouter({
         }),
 
     delete: protectedProcedure
-        .input(z.string())
-        .mutation(async ({ input: id, ctx }) => {
-            await ctx.prisma.booking.delete({
-                where: { id },
-            });
+        .input(
+            z.object({
+                id: z.string(),
+                userId: z.string(),
+                refundPrice: z.number(),
+                paymentId: z.string().nullable().optional(),
+            })
+        )
+        .mutation(
+            async ({ input: { id, userId, refundPrice, paymentId }, ctx }) => {
+                if (paymentId) {
+                    const refund = await ctx.stripe.refunds.create({
+                        payment_intent: paymentId,
+                        amount: refundPrice,
+                    });
 
-            return "Successfully deleted";
-        }),
+                    await ctx.prisma.cancelledBooking.create({
+                        data: {
+                            userId,
+                            cancelDate: new Date(),
+                            refundPrice: refundPrice ?? 0,
+                            refundId: refund.id,
+                        },
+                    });
+                }
+
+                await ctx.prisma.booking.delete({
+                    where: { id },
+                });
+
+                return "Successfully deleted";
+            }
+        ),
 });
