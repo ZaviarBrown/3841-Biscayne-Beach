@@ -11,10 +11,10 @@ export default function PrivacyPolicy() {
 
                 <div className="mb-5 flex justify-between">
                     <div className=" rounded-lg p-2">
-                        Effective on 10-25-2023
+                        Effective on 10-13-2024
                     </div>
                     <div className=" rounded-lg p-2">
-                        Last updated on 10-25-2023
+                        Last updated on 1-13-2024
                     </div>
                 </div>
                 <p className=" mb-5 rounded-2xl p-4">
@@ -110,7 +110,7 @@ export default function PrivacyPolicy() {
                     How Do We Store Your Data?
                 </div>
                 <p className=" mb-5 rounded-2xl p-4 ">
-                    {`3841 Biscayne Beach stores your data securely in a database using Prisma and Neon.db`}
+                    {`3841 Biscayne Beach stores your data securely in a database using Prisma and Neon.db, and stores cookies for authentication purposes.`}
                 </p>
 
                 <div className="mb-5 text-4xl font-bold">What Are Cookies?</div>
