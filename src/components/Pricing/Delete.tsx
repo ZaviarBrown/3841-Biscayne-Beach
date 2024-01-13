@@ -14,9 +14,7 @@ export default function DeletePricingWindow({ id }: { id: string }) {
             buttonText="Delete Price"
             className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
             onModalSubmit={() => mutate(id)}
-            onModalClose={() => {
-                return "Hey";
-            }}
+            onModalClose={() => null}
         />
     );
 }
