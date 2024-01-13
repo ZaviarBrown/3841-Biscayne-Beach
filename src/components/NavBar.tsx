@@ -12,10 +12,14 @@ const NavBar = () => {
     const [hideNav, setHideNav] = useState(false);
 
     useEffect(() => {
-        if (pathname === "/") {
+        if (pathname === "/" || pathname === "/gallery") {
             if (scrollY <= height / 3) {
                 setHideNav(false);
             } else setHideNav(scrollDirection === "down");
+        }
+
+        if (pathname.startsWith("/confirm-and-pay")) {
+            setHideNav(true);
         }
 
         return () => setHideNav(false);
