@@ -88,7 +88,7 @@ const admins = [
 
 async function main() {
     for (const data of dates) {
-        await prisma.pricingWindows.create({ data });
+        await prisma.pricingWindow.create({ data });
     }
 
     for (const data of admins) {
