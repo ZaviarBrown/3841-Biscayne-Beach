@@ -90,15 +90,7 @@ export default function ManageBookings() {
                                         key={booking.id}
                                     >
                                         <AdminBookingCard {...booking} />
-                                        <DeleteBooking
-                                            id={booking.id}
-                                            userId={booking.userId}
-                                            name={booking.name}
-                                            price={booking.price}
-                                            paymentId={booking.paymentId}
-                                            startDate={booking.startDate}
-                                            endDate={booking.endDate}
-                                        />
+                                        <DeleteBooking {...booking} />
                                     </div>
                                 );
                             })}
@@ -132,7 +124,7 @@ export default function ManageBookings() {
                 )}
                 {subPage === "cancelled" && (
                     <>
-                        <div className="grid grid-cols-5 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
+                        <div className="grid grid-cols-5 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold">
                             <p>ID</p>
                             <p>Name</p>
                             <p>Email</p>
@@ -155,7 +147,9 @@ export default function ManageBookings() {
                     </>
                 )}
                 {subPage === "create" && (
-                    <AdminCreateBooking setSubPage={setSubPage} />
+                    <>
+                        <AdminCreateBooking setSubPage={setSubPage} />
+                    </>
                 )}
             </div>
         </div>
