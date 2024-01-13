@@ -26,6 +26,8 @@ export const env = createEnv({
         GOOGLE_CLIENT_SECRET: z.string(),
         STRIPE_SECRET: z.string(),
         STRIPE_PRODUCT_ID: z.string(),
+        EMAIL_USER: z.string().email(),
+        EMAIL_PASSWORD: z.string(),
     },
 
     /**
@@ -55,5 +57,7 @@ export const env = createEnv({
         STRIPE_SECRET: process.env.STRIPE_SECRET,
         STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,
         NEXT_PUBLIC_STRIPE_PUBLIC: process.env.NEXT_PUBLIC_STRIPE_PUBLIC,
+        EMAIL_USER: process.env.EMAIL_USER,
+        EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
     },
 });
