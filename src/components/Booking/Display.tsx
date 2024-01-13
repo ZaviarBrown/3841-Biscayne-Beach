@@ -1,7 +1,7 @@
 import { api } from "~/utils/api";
 import DeleteBooking from "./Delete";
 import BookingCard from "./Card";
-import HasReviewed from "./HasReviewed";
+// import HasReviewed from "./HasReviewed";
 import Link from "next/link";
 
 // TODO: Order
@@ -27,13 +27,14 @@ export default function DisplayBookings({ userId }: { userId: string }) {
             {userBookings.map((booking) => {
                 return (
                     <div key={booking.id}>
-                        {/* 
-                            // TODO: Different links depending on booking status
-                            */}
-                        {/* <Link href={`/confirm-and-pay/${booking.id}`}> */}
-                        <BookingCard {...booking} />
-                        {/* </Link> */}
-                        
+                        {booking.status === "pending" ? (
+                            <Link href={`/confirm-and-pay/${booking.id}`}>
+                                <BookingCard {...booking} />
+                            </Link>
+                        ) : (
+                            <BookingCard {...booking} />
+                        )}
+
                         {/* <HasReviewed
                             bookingId={booking.id}
                             review={booking.Review}
