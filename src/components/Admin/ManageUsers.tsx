@@ -1,5 +1,7 @@
 import { api } from "~/utils/api";
 import GrantRole from "./GrantRole";
+import OpenModalButton from "../Modal/OpenModalButton";
+import ConfirmRoleChangeModal from "../Modal/ConfirmRoleChange";
 
 export default function ManageUsers() {
     const ctx = api.useContext();
@@ -35,7 +37,33 @@ export default function ManageUsers() {
                                     <p>{email}</p>
                                     <p>{role}</p>
                                     <p>?</p>
-                                    <button
+                                    <OpenModalButton
+                                        modalComponent={
+                                            <ConfirmRoleChangeModal
+                                                name={name}
+                                                currentRole={role}
+                                                newRole={
+                                                    role === "admin"
+                                                        ? "user"
+                                                        : "admin"
+                                                }
+                                            />
+                                        }
+                                        buttonText={
+                                            role === "admin"
+                                                ? "Demote"
+                                                : "Promote"
+                                        }
+                                        onModalSubmit={() =>
+                                            changeRole({
+                                                id,
+                                                role:
+                                                    role === "admin"
+                                                        ? "user"
+                                                        : "admin",
+                                            })
+                                        }
+                                        onModalClose={() => null}
                                         className={`m-auto w-fit rounded-lg ${
                                             role === "admin"
                                                 ? "bg-red-500"
@@ -45,20 +73,7 @@ export default function ManageUsers() {
                                                 ? "hover:bg-red-600"
                                                 : "hover:bg-green-600"
                                         } `}
-                                        onClick={() =>
-                                            changeRole({
-                                                id,
-                                                role:
-                                                    role === "admin"
-                                                        ? "user"
-                                                        : "admin",
-                                            })
-                                        }
-                                    >
-                                        {role === "admin"
-                                            ? "Demote"
-                                            : "Promote"}
-                                    </button>
+                                    />
                                 </div>
                             );
                         })}
@@ -76,19 +91,19 @@ const InfoCard = () => {
         <div className="flex w-full items-center justify-evenly rounded-lg bg-white p-3 text-center shadow-lg">
             <div>
                 <p className="text-2xl">{"👤"}</p>
-                <span className="text-2xl font-bold">0</span>
+                <span className="text-2xl font-bold">?</span>
                 <p className="text-sm text-slate-500">Total Users</p>
             </div>
             <span className="h-20 border-r" />
             <div>
                 <p className="text-2xl">{"🎉"}</p>
-                <span className="text-2xl font-bold">0</span>
+                <span className="text-2xl font-bold">?</span>
                 <p className="text-sm text-slate-500">New Users This Year</p>
             </div>
             <span className="h-20 border-r" />
             <div>
                 <p className="text-2xl">{"🔐"}</p>
-                <span className="text-2xl font-bold">0</span>
+                <span className="text-2xl font-bold">?</span>
                 <p className="text-sm text-slate-500">Admins</p>
             </div>
         </div>
