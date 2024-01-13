@@ -54,7 +54,14 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
     useEffect(() => {
         const { from, to } = selected;
 
-        if (stripePrice && session && session.user && from && to) {
+        if (
+            to &&
+            from &&
+            session &&
+            stripePrice &&
+            session.user &&
+            stripePrice.unit_amount
+        ) {
             createPendingBooking({
                 userId: session.user.id,
                 name: session.user.name ?? "",
@@ -62,6 +69,7 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
                 startDate: from,
                 endDate: to,
                 priceId: stripePrice.id,
+                price: stripePrice.unit_amount,
                 numberOfNights,
             });
         }
