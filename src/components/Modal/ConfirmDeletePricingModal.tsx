@@ -15,7 +15,7 @@ export default function ConfirmDeletePricingModal() {
                 </button>
             </div>
             <div className="mx-5 flex h-full flex-col justify-around">
-                <h2 className="text-center text-2xl">
+                <h2 className="text-center text-3xl">
                     This action is permanent!
                 </h2>
                 <h2 className="text-center text-2xl">
@@ -34,7 +34,7 @@ export default function ConfirmDeletePricingModal() {
                     className="rounded-md bg-green-600 px-4 py-2 text-white shadow-xl duration-200 hover:-translate-y-0.5"
                     onClick={submitModal}
                 >
-                    {"Yes I'm sure just delete it!"}
+                    {"Yes I'm sure, delete it!"}
                 </button>
             </div>
         </div>
