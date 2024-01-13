@@ -4,11 +4,19 @@ import {
     createTRPCRouter,
     publicProcedure,
     protectedProcedure,
+    adminProcedure,
 } from "~/server/api/trpc";
+import { sendEmail } from "~/utils/email";
 
 export const bookingRouter = createTRPCRouter({
-    getAll: publicProcedure.query(async ({ ctx }) => {
-        const bookedArr = await ctx.prisma.booking.findMany();
+    getForCalendar: publicProcedure.query(async ({ ctx }) => {
+        const bookedArr = await ctx.prisma.booking.findMany({
+            where: {
+                endDate: {
+                    gte: new Date(),
+                },
+            },
+        });
 
         return bookedArr.map((el) => ({
             id: el.id,
@@ -32,6 +40,19 @@ export const bookingRouter = createTRPCRouter({
             where: {
                 startDate: {
                     lte: new Date(),
+                },
+            },
+        });
+    }),
+
+    getAllCancelled: adminProcedure.query(async ({ ctx }) => {
+        return await ctx.prisma.cancelledBooking.findMany({
+            include: {
+                user: {
+                    select: {
+                        name: true,
+                        email: true,
+                    },
                 },
             },
         });
@@ -75,12 +96,41 @@ export const bookingRouter = createTRPCRouter({
             });
         }),
 
+    adminCreate: adminProcedure
+        .input(
+            z.object({
+                bookingInfo: z.object({
+                    userId: z.string(),
+                    name: z.string(),
+                    email: z.string().email(),
+                    startDate: z.date(),
+                    endDate: z.date(),
+                    price: z.number(),
+                    numberOfNights: z.number(),
+                }),
+                emailInfo: z.object({
+                    to: z.string().email(),
+                    subject: z.string(),
+                    html: z.string(),
+                }),
+            })
+        )
+        .mutation(async ({ input: { bookingInfo, emailInfo }, ctx }) => {
+            const newBooking = await ctx.prisma.booking.create({
+                data: { ...bookingInfo, status: "admin" },
+            });
+
+            await sendEmail(emailInfo);
+
+            return newBooking;
+        }),
+
     create: protectedProcedure
         .input(
             z.object({
                 userId: z.string(),
                 name: z.string(),
-                email: z.string(),
+                email: z.string().email(),
                 startDate: z.date(),
                 endDate: z.date(),
                 priceId: z.string(),
