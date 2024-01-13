@@ -2,11 +2,15 @@ import { api } from "~/utils/api";
 import DeleteBooking from "../Booking/Delete";
 import AdminBookingCard from "../Booking/AdminCard";
 import { useState } from "react";
+import CancelledBookingCard from "../Booking/CancelledCard";
+import AdminCreateBooking from "./Create";
 
-type SubPagesType = "upcoming" | "past" | "cancelled" | "create";
+export type SubPagesType = "upcoming" | "past" | "cancelled" | "create";
 
 export default function ManageBookings() {
-    const { data } = api.booking.getAllDetailed.useQuery();
+    const { data: futureBookings } = api.booking.getAllFuture.useQuery();
+    const { data: pastBookings } = api.booking.getAllPast.useQuery();
+    const { data: cancelledBookings } = api.booking.getAllCancelled.useQuery();
     const [subPage, setSubPage] = useState<SubPagesType>("upcoming");
 
     return (
@@ -76,8 +80,8 @@ export default function ManageBookings() {
                             <p>Duration</p>
                             <p>Delete</p>
                         </div>
-                        {data &&
-                            data.map((booking, i) => {
+                        {futureBookings &&
+                            futureBookings.map((booking, i) => {
                                 return (
                                     <div
                                         className={`grid h-fit grid-cols-7  items-center p-2 text-center ${
@@ -86,7 +90,15 @@ export default function ManageBookings() {
                                         key={booking.id}
                                     >
                                         <AdminBookingCard {...booking} />
-                                        <DeleteBooking id={booking.id} />
+                                        <DeleteBooking
+                                            id={booking.id}
+                                            userId={booking.userId}
+                                            name={booking.name}
+                                            price={booking.price}
+                                            paymentId={booking.paymentId}
+                                            startDate={booking.startDate}
+                                            endDate={booking.endDate}
+                                        />
                                     </div>
                                 );
                             })}
@@ -103,8 +115,8 @@ export default function ManageBookings() {
                             <p>Check-Out</p>
                             <p>Duration</p>
                         </div>
-                        {data &&
-                            data.map((booking, i) => {
+                        {pastBookings &&
+                            pastBookings.map((booking, i) => {
                                 return (
                                     <div
                                         className={`grid h-fit grid-cols-6  items-center p-2 text-center ${
@@ -120,57 +132,30 @@ export default function ManageBookings() {
                 )}
                 {subPage === "cancelled" && (
                     <>
-                        <div className="grid grid-cols-7 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
+                        <div className="grid grid-cols-5 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
+                            <p>ID</p>
                             <p>Name</p>
                             <p>Email</p>
-                            <p>Booked on</p>
-                            <p>Check-In</p>
-                            <p>Check-Out</p>
-                            <p>Duration</p>
-                            <p>Delete</p>
+                            <p>Cancelled on</p>
+                            <p>Refund</p>
                         </div>
-                        {data &&
-                            data.map((booking, i) => {
+                        {cancelledBookings &&
+                            cancelledBookings.map((booking, i) => {
                                 return (
                                     <div
-                                        className={`grid h-fit grid-cols-7  items-center p-2 text-center ${
+                                        className={`grid h-fit grid-cols-5  items-center p-2 text-center ${
                                             i % 2 ? "bg-slate-200" : "bg-white"
                                         }`}
                                         key={booking.id}
                                     >
-                                        <AdminBookingCard {...booking} />
-                                        <DeleteBooking id={booking.id} />
+                                        <CancelledBookingCard {...booking} />
                                     </div>
                                 );
                             })}
                     </>
                 )}
                 {subPage === "create" && (
-                    <>
-                        <div className="grid grid-cols-7 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
-                            <p>Name</p>
-                            <p>Email</p>
-                            <p>Booked on</p>
-                            <p>Check-In</p>
-                            <p>Check-Out</p>
-                            <p>Duration</p>
-                            <p>Delete</p>
-                        </div>
-                        {data &&
-                            data.map((booking, i) => {
-                                return (
-                                    <div
-                                        className={`grid h-fit grid-cols-7  items-center p-2 text-center ${
-                                            i % 2 ? "bg-slate-200" : "bg-white"
-                                        }`}
-                                        key={booking.id}
-                                    >
-                                        <AdminBookingCard {...booking} />
-                                        <DeleteBooking id={booking.id} />
-                                    </div>
-                                );
-                            })}
-                    </>
+                    <AdminCreateBooking setSubPage={setSubPage} />
                 )}
             </div>
         </div>
