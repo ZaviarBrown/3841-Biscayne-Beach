@@ -7,13 +7,11 @@ export default function AdminConfirmDeleteBookingModal({
     refundPrice,
     startDate,
     endDate,
-    paymentId,
 }: {
     name: string;
     refundPrice: number;
     startDate: Date;
     endDate: Date;
-    paymentId: string | null;
 }) {
     const { closeModal, submitModal } = useModalContext();
     const [confirmUser, setConfirmUser] = useState(false);
@@ -29,6 +27,17 @@ export default function AdminConfirmDeleteBookingModal({
                 <h2 className="text-center text-3xl">
                     This action is PERMANENT
                 </h2>
+                <label className="w-fit text-xl">
+                    <input
+                        checked={confirmIrreversible}
+                        onChange={(e) =>
+                            setConfirmIrreversible(e.target.checked)
+                        }
+                        type="checkbox"
+                        className="mx-5"
+                    />
+                    {`I understand that this CANNOT be undone.`}
+                </label>
                 <label className="w-fit text-xl">
                     <input
                         checked={confirmRefund}
@@ -49,18 +58,6 @@ export default function AdminConfirmDeleteBookingModal({
                         className="mx-5"
                     />
                     {`I verified that ${name}'s booking for ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()} is the correct booking to delete`}
-                </label>
-
-                <label className="w-fit text-xl">
-                    <input
-                        checked={confirmIrreversible}
-                        onChange={(e) =>
-                            setConfirmIrreversible(e.target.checked)
-                        }
-                        type="checkbox"
-                        className="mx-5"
-                    />
-                    {`I understand that this CANNOT be undone and that ${name} must create a new booking if they wish to book again`}
                 </label>
             </div>
             <div className="mt-5 flex w-full justify-around rounded-b-2xl border-t border-slate-400 bg-slate-200 p-5 font-bold">
