@@ -17,13 +17,13 @@ export interface PricingWindowType {
 export const pricingRouter = createTRPCRouter({
     getAllValidWindows: publicProcedure.query(async ({ ctx }) => {
         const [defaultPrice, weekendPrice] =
-            await ctx.prisma.pricingWindows.findMany({
+            await ctx.prisma.pricingWindow.findMany({
                 where: {
                     startDate: null,
                 },
             });
 
-        const customPrices = (await ctx.prisma.pricingWindows.findMany({
+        const customPrices = (await ctx.prisma.pricingWindow.findMany({
             where: {
                 startDate: {
                     not: null,
@@ -61,7 +61,7 @@ export const pricingRouter = createTRPCRouter({
             }) => {
                 const price = convertDollarsIntoCents(priceInDollars);
 
-                const newWindow = await ctx.prisma.pricingWindows.create({
+                const newWindow = await ctx.prisma.pricingWindow.create({
                     data: {
                         startDate,
                         endDate,
@@ -91,7 +91,7 @@ export const pricingRouter = createTRPCRouter({
             }) => {
                 const price = convertDollarsIntoCents(priceInDollars);
 
-                const updatedWindow = await ctx.prisma.pricingWindows.update({
+                const updatedWindow = await ctx.prisma.pricingWindow.update({
                     where: {
                         id,
                     },
@@ -111,7 +111,7 @@ export const pricingRouter = createTRPCRouter({
     deleteWindow: adminProcedure
         .input(z.string())
         .mutation(async ({ input: id, ctx }) => {
-            await ctx.prisma.pricingWindows.delete({ where: { id } });
+            await ctx.prisma.pricingWindow.delete({ where: { id } });
 
             return "Successfully deleted";
         }),
