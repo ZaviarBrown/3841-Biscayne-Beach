@@ -1,8 +1,21 @@
 import Link from "next/link";
+
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
     const { pathname } = useRouter();
+    const [hideFooter, setHideFooter] = useState(false);
+
+    useEffect(() => {
+        if (pathname.startsWith("/confirm-and-pay")) {
+            setHideFooter(true);
+        }
+
+        return () => setHideFooter(false);
+    }, [pathname]);
+
+    if (hideFooter) return null;
 
     return (
         <>
@@ -45,6 +58,18 @@ const Footer = () => {
                         <span
                             className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
                                 pathname === "/legal/privacy-policy"
+                                    ? "w-full"
+                                    : "w-0 transition-all duration-200 group-hover:w-full"
+                            }`}
+                        ></span>
+                    </Link>
+                </li>
+                <li>
+                    <Link className="group relative" href="/contact">
+                        Contact Us
+                        <span
+                            className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
+                                pathname === "/contact"
                                     ? "w-full"
                                     : "w-0 transition-all duration-200 group-hover:w-full"
                             }`}
