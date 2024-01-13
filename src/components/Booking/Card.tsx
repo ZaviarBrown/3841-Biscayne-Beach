@@ -3,11 +3,12 @@ import DeleteBooking from "./Delete";
 import { useEffect, useState } from "react";
 
 export default function BookingCard({
+    id,
+    name,
+    email,
+    userId,
     startDate,
     endDate,
-    id,
-    userId,
-    name,
     paymentId,
     price,
     status,
@@ -30,14 +31,16 @@ export default function BookingCard({
             {isFuture && (
                 <DeleteBooking
                     id={id}
-                    userId={userId}
                     name={name}
+                    email={email}
+                    userId={userId}
                     price={price}
                     paymentId={paymentId}
                     startDate={startDate}
                     endDate={endDate}
+                    status={status}
                 />
-            )}{" "}
+            )}
         </div>
     );
 }
