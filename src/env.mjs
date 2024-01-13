@@ -38,6 +38,7 @@ export const env = createEnv({
     client: {
         NEXT_PUBLIC_STRIPE_PUBLIC: z.string(),
         NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string(),
+        NEXT_PUBLIC_STRIPE_FEE: z.string(),
     },
 
     /**
@@ -57,6 +58,7 @@ export const env = createEnv({
         STRIPE_SECRET: process.env.STRIPE_SECRET,
         STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,
         NEXT_PUBLIC_STRIPE_PUBLIC: process.env.NEXT_PUBLIC_STRIPE_PUBLIC,
+        NEXT_PUBLIC_STRIPE_FEE: process.env.NEXT_PUBLIC_STRIPE_FEE,
         EMAIL_USER: process.env.EMAIL_USER,
         EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
     },
