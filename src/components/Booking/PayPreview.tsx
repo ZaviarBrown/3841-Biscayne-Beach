@@ -2,7 +2,7 @@ import { differenceInCalendarDays } from "date-fns";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { calculateTotalPrice, convertCentsIntoDollars } from "~/utils/booking";
+import { calculateSubtotal, convertCentsIntoDollars } from "~/utils/booking";
 import { api } from "~/utils/api";
 import { useBookingContext } from "~/context/BookingContext";
 
@@ -10,6 +10,7 @@ import type { DateRange } from "react-day-picker";
 import type { RouterOutputs } from "~/utils/api";
 import OpenModalButton from "../Modal/OpenModalButton";
 import ConfirmRulesModal from "../Modal/ConfirmRulesModal";
+import { env } from "~/env.mjs";
 
 type StripePriceType = RouterOutputs["stripe"]["createPriceForBooking"];
 
@@ -19,6 +20,8 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
     const { setBooking } = useBookingContext();
 
     const [disabled, setDisabled] = useState(true);
+    const [subTotal, setSubTotal] = useState("...");
+    const [taxPrice, setTaxPrice] = useState("...");
     const [totalPrice, setTotalPrice] = useState("...");
     const [numberOfNights, setNumberOfNights] = useState(0);
     const [stripePrice, setStripePrice] = useState<StripePriceType>();
@@ -86,10 +89,15 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
                 setDisabled(true);
                 setTotalPrice("...");
             } else if (prices) {
-                const cents = calculateTotalPrice(prices, { from, to });
-
+                const subInCents = calculateSubtotal(prices, { from, to });
+                const taxInCents =
+                    subInCents * Number(env.NEXT_PUBLIC_TAX_RATE);
+                const totalInCents = subInCents + taxInCents;
+                
                 setDisabled(false);
-                setTotalPrice(convertCentsIntoDollars(cents));
+                setSubTotal(convertCentsIntoDollars(subInCents));
+                setTaxPrice(convertCentsIntoDollars(taxInCents));
+                setTotalPrice(convertCentsIntoDollars(totalInCents));
             }
         }
     }, [selected, prices, numberOfNights]);
@@ -127,6 +135,14 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
             </span>
 
             <div className="w-3/4 self-center border border-slate-200" />
+
+            <span className="flex flex-wrap justify-between">
+                <p>Subtotal: </p> <p>{subTotal}</p>
+            </span>
+
+            <span className="flex flex-wrap justify-between">
+                <p>Tax: </p> <p>{taxPrice}</p>
+            </span>
 
             <span className="flex flex-wrap justify-between">
                 <p>Total: </p> <p>{totalPrice}</p>
