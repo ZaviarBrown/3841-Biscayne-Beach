@@ -6,6 +6,7 @@ import {
     isBefore,
     isAfter,
 } from "date-fns";
+import { env } from "~/env.mjs";
 import type { PricingWindowType } from "~/server/api/routers/pricing";
 import type { RouterOutputs } from "~/utils/api";
 
@@ -39,10 +40,9 @@ interface UserSelectedDatesType {
     to: Date;
 }
 
-export const calculateTotalPrice = (
+export const calculateSubtotal = (
     { defaultPrice, weekendPrice, customPrices }: GetAllPricesType,
-    { from, to }: UserSelectedDatesType,
-    taxRate = 1.085
+    { from, to }: UserSelectedDatesType
 ): number => {
     let totalPrice = 0;
     let currentPricingWindow = 0;
@@ -81,7 +81,7 @@ export const calculateTotalPrice = (
         totalPrice += priceForTheDay;
     });
 
-    return totalPrice * taxRate;
+    return totalPrice * Number(env.NEXT_PUBLIC_PURCHASE_FEE);
 };
 
 export const convertCentsIntoDollars = (price: number) => {
