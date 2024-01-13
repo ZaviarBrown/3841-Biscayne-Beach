@@ -9,8 +9,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { useBookingContext } from "~/context/BookingContext";
-
-import NavBarSpacer from "~/components/NavBarSpacer";
+import { HashLoader } from "react-spinners";
 
 // TODO: getServerSideProps
 
@@ -27,6 +26,9 @@ const formatTimeLeft = (time: number): string => {
 export default function ConfirmAndPay() {
     const router = useRouter();
     const [clientSecret, setClientSecret] = useState("");
+    const [showLoading, setShowLoading] = useState(true);
+    const [startFade, setStartFade] = useState(false);
+    const [startSlide, setStartSlide] = useState(false);
 
     const { booking, setBooking, timeLeft } = useBookingContext();
 
@@ -54,22 +56,48 @@ export default function ConfirmAndPay() {
         }
     }, [booking, restoreBooking, setBooking]);
 
-    if (isLoading) return <div>Loading...</div>;
+    useEffect(() => {
+        if (booking && clientSecret) {
+            setStartFade(true);
+            const hideLoading = setTimeout(() => setShowLoading(false), 750);
+            const showSliding = setTimeout(() => setStartSlide(true), 800);
 
-    if (!booking && !restoreBooking) {
+            return () => {
+                clearTimeout(hideLoading);
+                clearTimeout(showSliding);
+            };
+        }
+    }, [booking, clientSecret]);
+
+    if (!isLoading && !booking && !restoreBooking) {
         void router.push("/");
         return null;
     }
 
-    if (!booking) return <div>Loading...</div>;
-
-    if (!clientSecret) return <div>Loading...</div>;
+    if (isLoading || !booking || !clientSecret || showLoading) {
+        return (
+            <div
+                className={`flex h-screen w-screen items-center justify-center bg-white`}
+            >
+                <HashLoader
+                    className={`transition-opacity duration-700 ${
+                        startFade ? "opacity-0" : "opacity-100"
+                    }`}
+                    size={100}
+                    color="#149BD6"
+                />
+            </div>
+        );
+    }
 
     return (
         <>
-            <NavBarSpacer />
-            <div className="relative m-10 flex justify-evenly">
-                <div className="sticky top-[80px] flex h-1/2 flex-col items-center justify-start rounded-2xl bg-white p-10 shadow-3xl">
+            <div className="flex min-h-screen justify-between bg-white">
+                <div
+                    className={`flex w-full transition-transform ${
+                        startSlide ? "-translate-x-0" : "-translate-x-full"
+                    } flex-col items-center justify-start bg-[#0074D4] p-10 duration-1000`}
+                >
                     <h1 className="text-4xl">{formatTimeLeft(timeLeft)}</h1>
 
                     <div className="text-center">
@@ -77,7 +105,11 @@ export default function ConfirmAndPay() {
                         <BookingCard {...booking} />
                     </div>
                 </div>
-                <div className="w-1/3 rounded-2xl bg-white p-10 shadow-3xl">
+                <div
+                    className={`z-10 w-full bg-white p-10 transition-opacity duration-1000 ${
+                        startSlide ? "opacity-100" : "opacity-0"
+                    } shadow-4xlL`}
+                >
                     {clientSecret && (
                         <EmbeddedCheckoutProvider
                             stripe={stripePromise}
