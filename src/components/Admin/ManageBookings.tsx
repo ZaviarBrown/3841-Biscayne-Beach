@@ -3,7 +3,7 @@ import DeleteBooking from "../Booking/Delete";
 import AdminBookingCard from "../Booking/AdminCard";
 import { useState } from "react";
 
-type SubPagesType = "upcoming" | "past" | "canceled" | "create";
+type SubPagesType = "upcoming" | "past" | "cancelled" | "create";
 
 export default function ManageBookings() {
     const { data } = api.booking.getAllDetailed.useQuery();
@@ -42,13 +42,13 @@ export default function ManageBookings() {
 
                     <p
                         className={`w-full p-4 hover:cursor-pointer ${
-                            subPage === "canceled"
+                            subPage === "cancelled"
                                 ? "border-b-[6px] border-cyan-500 font-bold transition-all duration-200"
                                 : "transition-all duration-200 hover:rounded-lg hover:bg-slate-300"
                         }`}
-                        onClick={() => setSubPage("canceled")}
+                        onClick={() => setSubPage("cancelled")}
                     >
-                        Canceled
+                        Cancelled
                     </p>
 
                     <span className="h-12 border-r" />
@@ -64,29 +64,114 @@ export default function ManageBookings() {
                         Create
                     </p>
                 </div>
-                <div className="grid grid-cols-7 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
-                    <p>Name</p>
-                    <p>Email</p>
-                    <p>Booked on</p>
-                    <p>Check-In</p>
-                    <p>Check-Out</p>
-                    <p>Duration</p>
-                    <p>Delete</p>
-                </div>
-                {data &&
-                    data.map((booking, i) => {
-                        return (
-                            <div
-                                className={`grid h-fit grid-cols-7  items-center p-2 text-center ${
-                                    i % 2 ? "bg-slate-200" : "bg-white"
-                                }`}
-                                key={booking.id}
-                            >
-                                <AdminBookingCard {...booking} />
-                                <DeleteBooking id={booking.id} />
-                            </div>
-                        );
-                    })}
+
+                {subPage === "upcoming" && (
+                    <>
+                        <div className="grid grid-cols-7 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
+                            <p>Name</p>
+                            <p>Email</p>
+                            <p>Booked on</p>
+                            <p>Check-In</p>
+                            <p>Check-Out</p>
+                            <p>Duration</p>
+                            <p>Delete</p>
+                        </div>
+                        {data &&
+                            data.map((booking, i) => {
+                                return (
+                                    <div
+                                        className={`grid h-fit grid-cols-7  items-center p-2 text-center ${
+                                            i % 2 ? "bg-slate-200" : "bg-white"
+                                        }`}
+                                        key={booking.id}
+                                    >
+                                        <AdminBookingCard {...booking} />
+                                        <DeleteBooking id={booking.id} />
+                                    </div>
+                                );
+                            })}
+                    </>
+                )}
+
+                {subPage === "past" && (
+                    <>
+                        <div className="grid grid-cols-6 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
+                            <p>Name</p>
+                            <p>Email</p>
+                            <p>Booked on</p>
+                            <p>Check-In</p>
+                            <p>Check-Out</p>
+                            <p>Duration</p>
+                        </div>
+                        {data &&
+                            data.map((booking, i) => {
+                                return (
+                                    <div
+                                        className={`grid h-fit grid-cols-6  items-center p-2 text-center ${
+                                            i % 2 ? "bg-slate-200" : "bg-white"
+                                        }`}
+                                        key={booking.id}
+                                    >
+                                        <AdminBookingCard {...booking} />
+                                    </div>
+                                );
+                            })}
+                    </>
+                )}
+                {subPage === "cancelled" && (
+                    <>
+                        <div className="grid grid-cols-7 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
+                            <p>Name</p>
+                            <p>Email</p>
+                            <p>Booked on</p>
+                            <p>Check-In</p>
+                            <p>Check-Out</p>
+                            <p>Duration</p>
+                            <p>Delete</p>
+                        </div>
+                        {data &&
+                            data.map((booking, i) => {
+                                return (
+                                    <div
+                                        className={`grid h-fit grid-cols-7  items-center p-2 text-center ${
+                                            i % 2 ? "bg-slate-200" : "bg-white"
+                                        }`}
+                                        key={booking.id}
+                                    >
+                                        <AdminBookingCard {...booking} />
+                                        <DeleteBooking id={booking.id} />
+                                    </div>
+                                );
+                            })}
+                    </>
+                )}
+                {subPage === "create" && (
+                    <>
+                        <div className="grid grid-cols-7 border-y border-slate-400 bg-slate-300 p-2 text-center font-semibold ">
+                            <p>Name</p>
+                            <p>Email</p>
+                            <p>Booked on</p>
+                            <p>Check-In</p>
+                            <p>Check-Out</p>
+                            <p>Duration</p>
+                            <p>Delete</p>
+                        </div>
+                        {data &&
+                            data.map((booking, i) => {
+                                return (
+                                    <div
+                                        className={`grid h-fit grid-cols-7  items-center p-2 text-center ${
+                                            i % 2 ? "bg-slate-200" : "bg-white"
+                                        }`}
+                                        key={booking.id}
+                                    >
+                                        <AdminBookingCard {...booking} />
+                                        <DeleteBooking id={booking.id} />
+                                    </div>
+                                );
+                            })}
+                    </>
+                )}
             </div>
         </div>
     );
@@ -97,32 +182,32 @@ const InfoCard = () => {
         <div className="flex w-full items-center justify-evenly rounded-lg bg-white p-3 text-center shadow-lg">
             <div>
                 <p className="text-2xl">{"💯"}</p>
-                <span className="text-2xl font-bold">0</span>
+                <span className="text-2xl font-bold">?</span>
                 <p className="text-sm text-slate-500">All-Time Total</p>
             </div>
             <span className="h-20 border-r" />
             <div>
                 <p className="text-2xl">{"✅"}</p>
-                <span className="text-2xl font-bold">0</span>
+                <span className="text-2xl font-bold">?</span>
                 <p className="text-sm text-slate-500">Completed This Year</p>
             </div>
             <span className="h-20 border-r" />
             <div>
                 <p className="text-2xl">{"📅"}</p>
-                <span className="text-2xl font-bold">0</span>
+                <span className="text-2xl font-bold">?</span>
                 <p className="text-sm text-slate-500">Scheduled This Year</p>
             </div>
             <span className="h-20 border-r" />
             <div>
                 <p className="text-2xl">{"🔜"}</p>
-                <span className="text-2xl font-bold">0</span>
+                <span className="text-2xl font-bold">?</span>
                 <p className="text-sm text-slate-500">In The Next 3 Months</p>
             </div>
             <span className="h-20 border-r" />
             <div>
                 <p className="text-2xl">{"🚫"}</p>
-                <span className="text-2xl font-bold">0</span>
-                <p className="text-sm text-slate-500">Canceled Total</p>
+                <span className="text-2xl font-bold">?</span>
+                <p className="text-sm text-slate-500">Cancelled Total</p>
             </div>
         </div>
     );
