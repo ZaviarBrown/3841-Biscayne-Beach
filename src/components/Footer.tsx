@@ -19,20 +19,30 @@ const Footer = () => {
 
     return (
         <>
-            <ul className="z-10 flex h-16 items-center justify-evenly border-t border-white bg-slate-700 text-white">
+            <ul className="relative z-10 flex h-16 items-center justify-center gap-10 border-t border-white bg-slate-700 px-5 text-white">
+                {/* <li className="absolute bottom-2 left-2 text-xs text-slate-300">
+                    <Link className="group relative" href="/legal/attributions">
+                        Attributions
+                        <span
+                            className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
+                                pathname === "/legal/attributions"
+                                    ? "w-full"
+                                    : "w-0 transition-all duration-200 group-hover:w-full"
+                            }`}
+                        ></span>
+                    </Link>
+                </li> */}
                 <li>
-                    <p>
-                        <a
-                            target="_blank"
-                            href="https://icons8.com/icon/VhqD3P4a8KMP/island-on-water"
-                        >
-                            Island
-                        </a>{" "}
-                        icon by{" "}
-                        <a target="_blank" href="https://icons8.com">
-                            Icons8
-                        </a>
-                    </p>
+                    <Link className="group relative" href="/contact">
+                        Contact Us
+                        <span
+                            className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
+                                pathname === "/contact"
+                                    ? "w-full"
+                                    : "w-0 transition-all duration-200 group-hover:w-full"
+                            }`}
+                        ></span>
+                    </Link>
                 </li>
                 <li>
                     <Link
@@ -58,18 +68,6 @@ const Footer = () => {
                         <span
                             className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
                                 pathname === "/legal/privacy-policy"
-                                    ? "w-full"
-                                    : "w-0 transition-all duration-200 group-hover:w-full"
-                            }`}
-                        ></span>
-                    </Link>
-                </li>
-                <li>
-                    <Link className="group relative" href="/contact">
-                        Contact Us
-                        <span
-                            className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
-                                pathname === "/contact"
                                     ? "w-full"
                                     : "w-0 transition-all duration-200 group-hover:w-full"
                             }`}
