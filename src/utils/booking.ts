@@ -12,28 +12,18 @@ import type { RouterOutputs } from "~/utils/api";
 
 export type GetAllPricesType = RouterOutputs["pricing"]["getAllValidWindows"];
 
-// TODO: Get timezones working
-// import { utcToZonedTime } from "date-fns-tz";
-// import { set, getYear, getMonth, getDate } from "date-fns";
-// export const convertToCST = (localDate: Date) => {
-//     const year = getYear(localDate);
-//     const month = getMonth(localDate);
-//     const day = getDate(localDate);
+import { zonedTimeToUtc, utcToZonedTime, format } from "date-fns-tz";
 
-//     const utcMilliseconds = Date.UTC(year, month, day);
+export const convertToUTCNoonCST = (dateInput: Date) => {
+    const cstTimeZone = "America/Chicago";
 
-//     const cst = utcToZonedTime(utcMilliseconds, "America/Chicago");
+    const cstDate = utcToZonedTime(dateInput, cstTimeZone);
+    cstDate.setHours(19, 0, 0, 0); // Set to 12 PM CST
 
-//     return cst;
-// };
+    const utcDate = zonedTimeToUtc(cstDate, cstTimeZone);
 
-// export const convertToLocal = (utcDate: Date) => {
-//     const year = getYear(utcDate);
-//     const month = getMonth(utcDate);
-//     const day = getDate(utcDate);
-
-//     return new Date(year, month, day);
-// };
+    return format(utcDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+};
 
 interface UserSelectedDatesType {
     from: Date;
