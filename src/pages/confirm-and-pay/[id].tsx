@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import BookingCard from "~/components/Booking/Card";
 import {
     EmbeddedCheckoutProvider,
     EmbeddedCheckout,
@@ -10,6 +9,8 @@ import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { useBookingContext } from "~/context/BookingContext";
 import { HashLoader } from "react-spinners";
+import BookingSideCard from "~/components/Booking/SideCard";
+import Image from "next/image";
 
 // TODO: getServerSideProps
 
@@ -97,16 +98,27 @@ export default function ConfirmAndPay() {
         <>
             <div className="flex min-h-screen justify-between bg-white">
                 <div
-                    className={`flex w-full transition-transform ${
+                    className={`flex w-full text-2xl text-slate-200 transition-transform ${
                         startSlide ? "-translate-x-0" : "-translate-x-full"
-                    } flex-col items-center justify-start bg-[#0074D4] p-10 duration-1000`}
+                    } flex-col items-center justify-start gap-5 bg-[#0074D4] p-5 duration-1000`}
                 >
-                    <h1 className="text-4xl">{formatTimeLeft(timeLeft)}</h1>
+                    <h1 className="text-6xl">{formatTimeLeft(timeLeft)}</h1>
+
+                    <div className="relative h-1/5 w-1/2 rounded-3xl shadow-3xl">
+                        <Image
+                            src={"/images/house-3.jpg"}
+                            alt={"Front view of house"}
+                            className="rounded-3xl object-cover"
+                            fill
+                        />
+                    </div>
 
                     <div className="text-center">
-                        <h1 className="text-3xl">Confirm and pay</h1>
-                        <BookingCard {...booking} />
+                        <h1 className="text-4xl">Confirm and pay</h1>
                     </div>
+
+                        <BookingSideCard {...booking} />
+
                 </div>
                 <div
                     className={`z-10 w-full bg-white p-10 transition-opacity duration-1000 ${
