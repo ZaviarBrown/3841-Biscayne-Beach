@@ -4,12 +4,13 @@ import type { ReactNode } from "react";
 import type { Booking } from "@prisma/client";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
+import { add, differenceInSeconds } from "date-fns";
 
 export interface BookingContextType {
     booking: Booking | null;
     setBooking: (booking: Booking) => void;
     timeLeft: number;
-    checkoutComplete: () => void; // Function to call when user completes checkout
+    checkoutComplete: () => void;
 }
 
 const BookingContext = createContext<BookingContextType | null>(null);
@@ -26,16 +27,22 @@ export const BookingContextProvider = ({
 
     const timerId = useRef<NodeJS.Timeout | null>(null);
 
-    const { mutate: deletePendingBooking } = api.booking.delete.useMutation({
-        onSuccess: () => {
-            void router.push("/");
-        },
-    });
+    const { mutate: deletePendingBooking } =
+        api.booking.deletePending.useMutation({
+            onSuccess: () => {
+                void router.push("/");
+            },
+        });
 
-    // Start timer when a booking is set
     useEffect(() => {
         if (booking) {
-            setTimeLeft(900);
+            const expiration = add(booking.createdAt, { minutes: 15 });
+            const now = new Date();
+
+            const seconds = differenceInSeconds(expiration, now);
+
+            setTimeLeft(seconds);
+
             timerId.current = setInterval(() => {
                 setTimeLeft((prevTime) => prevTime - 1);
             }, 1000);
@@ -46,9 +53,8 @@ export const BookingContextProvider = ({
         };
     }, [booking]);
 
-    // End checkout session if timeLeft hits 0
     useEffect(() => {
-        if (timeLeft <= 0 && booking) {
+        if (timeLeft <= 0 && booking && booking.status === "pending") {
             clearInterval(timerId.current as NodeJS.Timeout);
             deletePendingBooking(booking.id);
         }
