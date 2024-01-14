@@ -26,12 +26,12 @@ export const sendEmail = async ({
     to,
 }: EmailDetailsType) =>
     transporter.sendMail({
-        // to: to || "contact@3841biscaynebeach.com",
-        // from: from || "contact@3841biscaynebeach.com",
-        // replyTo: replyTo || "contact@3841biscaynebeach.com",
-        to: to || "zaviar.brown@gmail.com",
-        from: from || "zaviar.brown@gmail.com",
-        replyTo: replyTo || "zaviar.brown@gmail.com",
+        to: to || "contact@3841biscaynebeach.com",
+        from: from || "contact@3841biscaynebeach.com",
+        replyTo: replyTo || "contact@3841biscaynebeach.com",
+        // to: to || "zaviar.brown@gmail.com",
+        // from: from || "zaviar.brown@gmail.com",
+        // replyTo: replyTo || "zaviar.brown@gmail.com",
         subject,
         html,
     });

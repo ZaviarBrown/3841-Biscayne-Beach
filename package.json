@@ -7,8 +7,7 @@
         "dev": "next dev",
         "postinstall": "prisma generate",
         "lint": "next lint",
-        "start": "next start",
-        "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe/webhook --latest"
+        "start": "next start"
     },
     "prisma": {
         "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
