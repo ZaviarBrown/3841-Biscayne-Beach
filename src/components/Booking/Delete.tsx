@@ -10,6 +10,7 @@ import UserConfirmDeleteBookingModal from "../Modal/UserConfirmDeleteBookingModa
 import DeleteFreeBookingModal from "../Modal/DeleteFreeBookingModal";
 import { render } from "@react-email/render";
 import CancelConfirmationEmail from "~/emails/CancelConfirmation";
+import RevertPendingBooking from "../Modal/RevertPendingBooking";
 
 export default function DeleteBooking({
     id,
@@ -39,6 +40,12 @@ export default function DeleteBooking({
     const { mutate } = api.booking.delete.useMutation({
         onSuccess: () => {
             if (router.query.id) void router.push("/book");
+            void ctx.booking.invalidate();
+        },
+    });
+
+    const { mutate: deletePending } = api.booking.deletePending.useMutation({
+        onSuccess: () => {
             void ctx.booking.invalidate();
         },
     });
@@ -94,6 +101,17 @@ export default function DeleteBooking({
                     className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
                     onModalSubmit={handleSubmit}
                     onModalClose={() => null}
+                />
+            );
+
+        if (status === "pending")
+            return (
+                <OpenModalButton
+                    buttonText="Cancel Booking"
+                    onModalClose={() => null}
+                    className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
+                    onModalSubmit={() => deletePending(id)}
+                    modalComponent={<RevertPendingBooking />}
                 />
             );
 
