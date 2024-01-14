@@ -1,6 +1,8 @@
 import type { Booking } from "@prisma/client";
 import DeleteBooking from "./Delete";
 import { useEffect, useState } from "react";
+import { convertCentsIntoDollars } from "~/utils/booking";
+import Link from "next/link";
 
 export default function BookingCard({
     id,
@@ -22,25 +24,46 @@ export default function BookingCard({
     }, [startDate]);
 
     return (
-        <div className="m-5 flex items-center rounded-lg bg-white p-5 text-2xl text-slate-800 shadow-3xl">
-            <div className="flex flex-col text-left">
-                <p>Check-in: {startDate.toLocaleDateString()}</p>
-                <p>Check-out: {endDate.toLocaleDateString()}</p>
-                <p>Payment status: {status}</p>
+        <>
+            <div className="grid grid-cols-5 items-center gap-6 pb-5 text-center align-middle">
+                <p className="col-span-2">
+                    Check-in: {startDate.toLocaleDateString()}
+                </p>
+                <span className="m-auto h-10 w-0 border-r" />
+                <p className="col-span-2">
+                    Check-out: {endDate.toLocaleDateString()}
+                </p>
+                <p className="col-span-2">Payment: {status}</p>
+                <span className="m-auto h-10 w-0 border-r" />
+                <p className="col-span-2">
+                    Price: {!price ? "$0.00" : convertCentsIntoDollars(price)}
+                </p>
             </div>
-            {isFuture && (
-                <DeleteBooking
-                    id={id}
-                    name={name}
-                    email={email}
-                    userId={userId}
-                    price={price}
-                    paymentId={paymentId}
-                    startDate={startDate}
-                    endDate={endDate}
-                    status={status}
-                />
-            )}
-        </div>
+
+            <div className="flex justify-around">
+                {status === "pending" && (
+                    <Link
+                        className="m-auto w-fit rounded-lg bg-blue-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-blue-600 "
+                        href={`/confirm-and-pay/${id}`}
+                    >
+                        Finish Payment
+                    </Link>
+                )}
+
+                {isFuture && (
+                    <DeleteBooking
+                        id={id}
+                        name={name}
+                        email={email}
+                        userId={userId}
+                        price={price}
+                        paymentId={paymentId}
+                        startDate={startDate}
+                        endDate={endDate}
+                        status={status}
+                    />
+                )}
+            </div>
+        </>
     );
 }
