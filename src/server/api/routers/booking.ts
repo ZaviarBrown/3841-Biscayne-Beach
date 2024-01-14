@@ -6,6 +6,7 @@ import {
     protectedProcedure,
     adminProcedure,
 } from "~/server/api/trpc";
+import { convertToUTCNoonCST } from "~/utils/booking";
 import { sendEmail } from "~/utils/email";
 
 export const bookingRouter = createTRPCRouter({
@@ -67,12 +68,6 @@ export const bookingRouter = createTRPCRouter({
         });
     }),
 
-    getAllDetailed: publicProcedure.query(async ({ ctx }) => {
-        const bookedArr = await ctx.prisma.booking.findMany();
-
-        return bookedArr;
-    }),
-
     getById: publicProcedure
         .input(z.string())
         .query(async ({ input: id, ctx }) => {
@@ -126,7 +121,12 @@ export const bookingRouter = createTRPCRouter({
         )
         .mutation(async ({ input: { bookingInfo, emailInfo }, ctx }) => {
             const newBooking = await ctx.prisma.booking.create({
-                data: { ...bookingInfo, status: "admin" },
+                data: {
+                    ...bookingInfo,
+                    status: "admin",
+                    startDate: convertToUTCNoonCST(bookingInfo.startDate),
+                    endDate: convertToUTCNoonCST(bookingInfo.endDate),
+                },
             });
 
             await sendEmail(emailInfo);
@@ -149,7 +149,12 @@ export const bookingRouter = createTRPCRouter({
         )
         .mutation(async ({ input: bookingInfo, ctx }) => {
             const newBooking = await ctx.prisma.booking.create({
-                data: { ...bookingInfo, status: "pending" },
+                data: {
+                    ...bookingInfo,
+                    status: "pending",
+                    startDate: convertToUTCNoonCST(bookingInfo.startDate),
+                    endDate: convertToUTCNoonCST(bookingInfo.endDate),
+                },
             });
 
             return newBooking;
@@ -234,4 +239,14 @@ export const bookingRouter = createTRPCRouter({
                 return "Successfully deleted";
             }
         ),
+
+    deletePending: protectedProcedure
+        .input(z.string())
+        .mutation(async ({ input: id, ctx }) => {
+            await ctx.prisma.booking.delete({
+                where: { id },
+            });
+
+            return "Successfully deleted";
+        }),
 });
