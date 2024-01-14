@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { sendEmail } from "~/utils/email";
+import { sendEmail } from "~/server/email";
 
 export const contactRouter = createTRPCRouter({
     confirmationEmail: publicProcedure

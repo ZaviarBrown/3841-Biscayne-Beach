@@ -7,7 +7,7 @@ import {
     adminProcedure,
 } from "~/server/api/trpc";
 import { convertToUTCNoonCST } from "~/utils/booking";
-import { sendEmail } from "~/utils/email";
+import { sendEmail } from "~/server/email";
 
 export const bookingRouter = createTRPCRouter({
     getForCalendar: publicProcedure.query(async ({ ctx }) => {
