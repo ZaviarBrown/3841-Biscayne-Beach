@@ -84,16 +84,20 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
         if (!(from && to)) {
             setDisabled(true);
             setTotalPrice("...");
+            setSubTotal("...");
+            setTaxPrice("...");
         } else {
             if (numberOfNights < 5) {
                 setDisabled(true);
                 setTotalPrice("...");
+                setSubTotal("...");
+                setTaxPrice("...");
             } else if (prices) {
                 const subInCents = calculateSubtotal(prices, { from, to });
                 const taxInCents =
                     subInCents * Number(env.NEXT_PUBLIC_TAX_RATE);
                 const totalInCents = subInCents + taxInCents;
-                
+
                 setDisabled(false);
                 setSubTotal(convertCentsIntoDollars(subInCents));
                 setTaxPrice(convertCentsIntoDollars(taxInCents));
@@ -115,10 +119,13 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
                     Booking Preview
                 </h2>
                 <h3
-                    className={`text-center text-xl italic transition duration-200 ${
-                        disabled && selected.from && selected.to
-                            ? "scale-105 font-bold text-red-600"
-                            : ""
+                    className={`text-center text-xl italic transition-all duration-200 ${
+                        disabled &&
+                        selected.from &&
+                        selected.to &&
+                        totalPrice === "..."
+                            ? "scale-110 font-bold text-red-600"
+                            : "scale-100 font-normal"
                     }`}
                 >
                     5 night minimum
