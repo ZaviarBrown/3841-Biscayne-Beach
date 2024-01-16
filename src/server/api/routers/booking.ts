@@ -7,7 +7,6 @@ import {
     adminProcedure,
 } from "~/server/api/trpc";
 import { convertToUTCNoonCST } from "~/utils/booking";
-import { sendEmail } from "~/server/email";
 
 export const bookingRouter = createTRPCRouter({
     getForCalendar: publicProcedure.query(async ({ ctx }) => {
@@ -129,7 +128,7 @@ export const bookingRouter = createTRPCRouter({
                 },
             });
 
-            await sendEmail(emailInfo);
+            await ctx.sendEmail(emailInfo);
 
             return newBooking;
         }),
@@ -220,7 +219,7 @@ export const bookingRouter = createTRPCRouter({
                         amount: refundPrice,
                     });
 
-                    void sendEmail(emailInfo);
+                    void ctx.sendEmail(emailInfo);
 
                     await ctx.prisma.cancelledBooking.create({
                         data: {
