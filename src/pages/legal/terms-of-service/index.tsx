@@ -95,8 +95,7 @@ export default function TermsOfService() {
                 <div className="mb-2 text-xl ">Card Processing Fee</div>
                 <p className=" mb-5 rounded-2xl p-4 ">
                     {`All payments on the Website use Stripe and incur a 
-                    non-refundable 6% card processing fee. Any mention of refunds 
-                    in this section include this fee.`}
+                    non-refundable 6% card processing fee. Card processing fees are non-refundable`}
                 </p>
                 <div className="mb-2 text-xl ">Cancellation Charges</div>
                 <p className=" mb-5 rounded-2xl p-4 ">
