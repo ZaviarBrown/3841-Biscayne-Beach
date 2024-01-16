@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import NavBarSpacer from "~/components/NavBarSpacer";
 import { api } from "~/utils/api";
-import { render } from "@react-email/render";
+import { render, renderAsync } from "@react-email/render";
 import ContactMessageEmail from "~/emails/ContactMessage";
 import { PulseLoader } from "react-spinners";
 
@@ -42,7 +42,7 @@ export default function ContactForm() {
         else setDisabled(false);
     }, [name, email, message]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         setShowErrors(false);
@@ -50,7 +50,13 @@ export default function ContactForm() {
 
         console.log(render);
 
-        const html = render(
+        console.log(renderAsync);
+
+        // const html = render(
+        //     <ContactMessageEmail name={name} email={email} message={message} />
+        // );
+
+        const html = await renderAsync(
             <ContactMessageEmail name={name} email={email} message={message} />
         );
 
