@@ -48,6 +48,14 @@ export default function ContactForm() {
         setShowErrors(false);
         setHasSubmitted(true);
 
+        console.log(render);
+
+        const html = render(
+            <ContactMessageEmail name={name} email={email} message={message} />
+        );
+
+        console.log(html);
+
         // sendEmail({
         //     from: email,
         //     subject: `${name}'s Contact Message`,
