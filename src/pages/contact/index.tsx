@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import NavBarSpacer from "~/components/NavBarSpacer";
 import { api } from "~/utils/api";
-import { render, renderAsync } from "@react-email/render";
+import { render } from "@react-email/render";
 import ContactMessageEmail from "~/emails/ContactMessage";
 import { PulseLoader } from "react-spinners";
 
@@ -42,37 +42,23 @@ export default function ContactForm() {
         else setDisabled(false);
     }, [name, email, message]);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         setShowErrors(false);
         setHasSubmitted(true);
 
-        console.log(render);
-
-        console.log(renderAsync);
-
-        // const html = render(
-        //     <ContactMessageEmail name={name} email={email} message={message} />
-        // );
-
-        const html = await renderAsync(
-            <ContactMessageEmail name={name} email={email} message={message} />
-        );
-
-        console.log(html);
-
-        // sendEmail({
-        //     from: email,
-        //     subject: `${name}'s Contact Message`,
-        //     html: render(
-        //         <ContactMessageEmail
-        //             name={name}
-        //             email={email}
-        //             message={message}
-        //         />
-        //     ),
-        // });
+        sendEmail({
+            from: email,
+            subject: `${name}'s Contact Message`,
+            html: render(
+                <ContactMessageEmail
+                    name={name}
+                    email={email}
+                    message={message}
+                />
+            ),
+        });
     };
 
     return (
@@ -92,7 +78,7 @@ export default function ContactForm() {
             )}
             {!showSuccess && (
                 <form
-                    onSubmit={void handleSubmit}
+                    onSubmit={handleSubmit}
                     className="m-auto flex w-96 flex-col gap-4 rounded-xl bg-white p-5 shadow-3xl"
                 >
                     {" "}
