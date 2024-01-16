@@ -48,17 +48,17 @@ export default function ContactForm() {
         setShowErrors(false);
         setHasSubmitted(true);
 
-        sendEmail({
-            from: email,
-            subject: `${name}'s Contact Message`,
-            html: render(
-                <ContactMessageEmail
-                    name={name}
-                    email={email}
-                    message={message}
-                />
-            ),
-        });
+        // sendEmail({
+        //     from: email,
+        //     subject: `${name}'s Contact Message`,
+        //     html: render(
+        //         <ContactMessageEmail
+        //             name={name}
+        //             email={email}
+        //             message={message}
+        //         />
+        //     ),
+        // });
     };
 
     return (
