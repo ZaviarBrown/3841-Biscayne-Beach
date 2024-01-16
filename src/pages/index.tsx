@@ -40,7 +40,7 @@ export const getStaticProps = (() => {
             alt: "Kitchen wide-angle view",
         },
         {
-            text: `We do not tack on any extra fees, the price you see is the price you pay. Please carefully review the house rules and our terms of service.  If you need any assistance, please reach out to us using the contact form provided and we will get back to you as soon as possible`,
+            text: `When you book directly through this website, we do not tack on any extra fees, the price you see is the price you pay. Please carefully review the house rules and our terms of service.  If you need any assistance, please reach out to us using the contact form provided and we will get back to you as soon as possible`,
             src: "/images/house-sunset.jpg",
             alt: "Sunset view from the deck",
         },
