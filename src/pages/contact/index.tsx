@@ -92,7 +92,7 @@ export default function ContactForm() {
             )}
             {!showSuccess && (
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={void handleSubmit}
                     className="m-auto flex w-96 flex-col gap-4 rounded-xl bg-white p-5 shadow-3xl"
                 >
                     {" "}
