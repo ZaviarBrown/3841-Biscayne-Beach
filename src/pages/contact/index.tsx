@@ -49,7 +49,7 @@ export default function ContactForm() {
         setHasSubmitted(true);
 
         sendEmail({
-            from: email,
+            replyTo: email,
             subject: `${name}'s Contact Message`,
             html: render(
                 <ContactMessageEmail

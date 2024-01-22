@@ -18,13 +18,13 @@ export const contactRouter = createTRPCRouter({
     contactSupportEmail: publicProcedure
         .input(
             z.object({
-                from: z.string().email(),
+                replyTo: z.string().email(),
                 subject: z.string(),
                 html: z.string(),
             })
         )
         .mutation(async ({ input, ctx }) => {
-            await ctx.sendEmail({ ...input, replyTo: input.from });
+            await ctx.sendEmail(input);
             return "Success";
         }),
 });
