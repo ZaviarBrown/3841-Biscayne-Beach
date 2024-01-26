@@ -26,7 +26,7 @@ export const sendEmail = async ({
     to,
 }: EmailDetailsType) =>
     transporter.sendMail({
-        to: to || "contact@3841biscaynebeach.com",
+        to: to || env.EMAIL_USER, // "contact@3841biscaynebeach.com",
         from: from || "contact@3841biscaynebeach.com",
         replyTo: replyTo || "contact@3841biscaynebeach.com",
         // to: to || "zaviar.brown@gmail.com",
