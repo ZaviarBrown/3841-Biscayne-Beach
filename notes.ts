@@ -3,6 +3,8 @@
  * ? Gallery page:
  * - Making each photo clickable to display a larger version
  *
+ * Redirect on "Book Now"
+ *
  * Error handling
  * More Stripe checks
  * Make Admin quick-views functional
