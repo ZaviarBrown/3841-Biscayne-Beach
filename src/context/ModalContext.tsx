@@ -97,7 +97,7 @@ export const Modal = () => {
                 onClick={closeModal}
             />
             <div
-                className={`absolute flex h-1/2 w-2/5 flex-col rounded-2xl bg-white ${
+                className={`absolute m-5 flex flex-col rounded-2xl bg-white ${
                     isOpen ? "translate-y-0" : "-translate-y-20"
                 } transition-transform duration-500`}
             >
