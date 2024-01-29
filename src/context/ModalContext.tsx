@@ -9,6 +9,8 @@ interface ModalContextType {
     modalRef: React.RefObject<HTMLDivElement>;
     modalContent: React.ReactNode | null;
     isOpen: boolean;
+    bgColor: string;
+    setBgColor: React.Dispatch<React.SetStateAction<string>>;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setModalContent: React.Dispatch<
         React.SetStateAction<React.ReactNode | null>
@@ -26,6 +28,7 @@ export const ModalContextProvider: React.FC<ModalProviderProps> = ({
 }) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [bgColor, setBgColor] = useState("white");
     const [modalContent, setModalContent] = useState<React.ReactNode | null>(
         null
     );
@@ -56,7 +59,9 @@ export const ModalContextProvider: React.FC<ModalProviderProps> = ({
         modalRef,
         modalContent,
         isOpen,
+        bgColor,
         setIsOpen,
+        setBgColor,
         setModalContent,
         setOnModalClose,
         setOnModalSubmit,
@@ -75,7 +80,7 @@ export const ModalContextProvider: React.FC<ModalProviderProps> = ({
 };
 
 export const Modal = () => {
-    const { isOpen, setIsOpen, modalRef, modalContent, closeModal } =
+    const { isOpen, setIsOpen, modalRef, modalContent, closeModal, bgColor } =
         useContext(ModalContext) as ModalContextType;
 
     useEffect(() => {
@@ -97,7 +102,7 @@ export const Modal = () => {
                 onClick={closeModal}
             />
             <div
-                className={`absolute m-5 flex flex-col rounded-2xl bg-white ${
+                className={`absolute m-5 flex flex-col rounded-2xl bg-${bgColor} ${
                     isOpen ? "translate-y-0" : "-translate-y-20"
                 } transition-transform duration-500`}
             >
