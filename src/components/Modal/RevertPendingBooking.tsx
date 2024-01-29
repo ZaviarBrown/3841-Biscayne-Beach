@@ -10,7 +10,7 @@ export default function RevertPendingBooking() {
             <div className="mx-5 flex w-full justify-center rounded-t-2xl border-b border-slate-400 bg-slate-200 p-5 font-bold text-red-600">
                 <h1 className="text-4xl">Are you sure?</h1>
             </div>
-            <div className="mx-5 flex h-full flex-col justify-around">
+            <div className="mx-5 flex h-52 flex-col justify-around">
                 <h2 className="text-center text-3xl">
                     This action will take your dates off hold.
                 </h2>
