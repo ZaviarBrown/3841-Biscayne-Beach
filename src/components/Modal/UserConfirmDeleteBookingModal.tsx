@@ -22,49 +22,59 @@ export default function UserConfirmDeleteBookingModal({
             <div className="mx-5 flex w-full justify-center rounded-t-2xl border-b border-slate-400 bg-slate-200 p-5 font-bold text-red-600">
                 <h1 className="text-4xl">WARNING!</h1>
             </div>
-            <div className="mx-5 flex h-full flex-col justify-around">
+            <div className="mx-5 flex min-h-80 flex-col justify-around p-2">
                 <h2 className="text-center text-3xl">
                     This action is PERMANENT
                 </h2>
 
-                <label className="w-fit text-xl">
+                <div className="flex p-3">
                     <input
                         checked={confirmIrreversible}
                         onChange={(e) =>
                             setConfirmIrreversible(e.target.checked)
                         }
                         type="checkbox"
-                        className="mx-5"
+                        className="mx-3"
+                        id="undone"
                     />
-                    {`I understand that this CANNOT be undone.`}
-                </label>
-                <label className="w-fit text-xl">
+                    <label htmlFor="undone" className="w-fit text-xl">
+                        {`I understand that this CANNOT be undone.`}
+                    </label>
+                </div>
+
+                <div className="flex p-3">
                     <input
                         checked={confirmRefund}
                         onChange={(e) => setConfirmRefund(e.target.checked)}
                         type="checkbox"
-                        className="mx-5"
+                        className="mx-3"
+                        id="refund"
                     />
-                    {`I acknowledge that a refund of ${convertCentsIntoDollars(
-                        refundPrice
-                    )} will be issued to me through Stripe as per the `}
-                    <Link
-                        className="hover:text-blue-500 hover:underline"
-                        href={"/house-rules"}
-                    >
-                        Cancellation Policy.
-                    </Link>
-                </label>
+                    <label htmlFor="refund" className="w-fit text-xl">
+                        {`I acknowledge that a refund of ${convertCentsIntoDollars(
+                            refundPrice
+                        )} will be issued to me through Stripe as per the `}
+                        <Link
+                            className="text-blue-400 hover:text-blue-500 hover:underline"
+                            href={"/house-rules"}
+                        >
+                            Cancellation Policy.
+                        </Link>
+                    </label>
+                </div>
 
-                <label className="w-fit text-xl">
+                <div className="flex p-3">
                     <input
                         checked={confirmUser}
                         onChange={(e) => setConfirmUser(e.target.checked)}
                         type="checkbox"
-                        className="mx-5"
+                        className="mx-3"
+                        id="confirm"
                     />
-                    {`I verified that the booking for ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()} is the correct booking to delete.`}
-                </label>
+                    <label htmlFor="confirm" className="w-fit text-xl">
+                        {`I verified that the booking for ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()} is the correct booking to delete.`}
+                    </label>
+                </div>
             </div>
             <div className="mt-5 flex w-full justify-around rounded-b-2xl border-t border-slate-400 bg-slate-200 p-5 font-bold">
                 <button
