@@ -100,7 +100,6 @@ export default function DeleteBooking({
                     buttonText="Cancel Booking"
                     className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
                     onModalSubmit={handleSubmit}
-                    onModalClose={() => null}
                 />
             );
 
@@ -108,7 +107,6 @@ export default function DeleteBooking({
             return (
                 <OpenModalButton
                     buttonText="Cancel Booking"
-                    onModalClose={() => null}
                     className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
                     onModalSubmit={() => deletePending(id)}
                     modalComponent={<RevertPendingBooking />}
@@ -127,7 +125,6 @@ export default function DeleteBooking({
                 buttonText="Cancel Booking"
                 className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
                 onModalSubmit={handleSubmit}
-                onModalClose={() => null}
             />
         );
     }
@@ -145,7 +142,6 @@ export default function DeleteBooking({
             buttonText="Cancel Booking"
             className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
             onModalSubmit={handleSubmit}
-            onModalClose={() => null}
         />
     );
 }

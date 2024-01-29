@@ -1,13 +1,12 @@
-import type { ReactNode } from "react";
 import { useModalContext } from "~/context/ModalContext";
 
 interface OpenModalButtonProps {
-    modalComponent: ReactNode;
-    buttonText: string;
-    onModalSubmit: React.SetStateAction<(() => void) | null>;
-    onModalClose: React.SetStateAction<(() => void) | null>;
-    disabled?: boolean;
     className: string;
+    disabled?: boolean;
+    buttonText: string;
+    modalComponent: React.ReactNode;
+    onModalClose?: React.SetStateAction<() => void>;
+    onModalSubmit?: React.SetStateAction<() => void>;
 }
 
 export default function OpenModalButton({

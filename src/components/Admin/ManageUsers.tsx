@@ -63,7 +63,6 @@ export default function ManageUsers() {
                                                         : "admin",
                                             })
                                         }
-                                        onModalClose={() => null}
                                         className={`m-auto w-fit rounded-lg ${
                                             role === "admin"
                                                 ? "bg-red-500"
