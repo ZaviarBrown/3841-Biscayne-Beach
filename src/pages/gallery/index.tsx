@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import GalleryCard from "~/components/Gallery/Card";
 import LoadingCard from "~/components/Gallery/Loading";
 import type { StaticImagesType } from "../";
+import OpenModalContainer from "~/components/Modal/OpenModalContainer";
+import FullScreenView from "~/components/Gallery/FullScreenView";
+
+// TODO: Optimize this mess
 
 export default function Gallery({
     galleryImages,
@@ -26,12 +30,22 @@ export default function Gallery({
                 <>
                     <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-2 lg:grid-cols-3">
                         {galleryImages.map(({ src, alt }, i) => (
-                            <GalleryCard
-                                src={src}
-                                alt={alt}
+                            <OpenModalContainer
                                 key={i}
-                                load={load > i}
-                            />
+                                className=""
+                                modalComponent={
+                                    <FullScreenView
+                                        index={i}
+                                        galleryImages={galleryImages}
+                                    />
+                                }
+                            >
+                                <GalleryCard
+                                    src={src}
+                                    alt={alt}
+                                    load={load > i}
+                                />
+                            </OpenModalContainer>
                         ))}
                     </div>
                     <iframe
