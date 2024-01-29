@@ -8,7 +8,7 @@ export default function ConfirmRulesModal() {
     const [terms, setTerms] = useState(false);
 
     return (
-        <div className="flex h-full flex-col items-center justify-between overflow-hidden overflow-y-auto">
+        <div className="flex flex-col items-center justify-between overflow-hidden overflow-y-auto">
             <div className="mx-5 flex w-full justify-between rounded-t-2xl border-b border-slate-400 bg-slate-200 p-5 font-bold">
                 <h1 className="text-3xl">Booking Agreement</h1>
                 <button
@@ -18,7 +18,7 @@ export default function ConfirmRulesModal() {
                     X
                 </button>
             </div>
-            <div className="mx-5 flex h-full flex-col justify-around">
+            <div className="mx-5 flex min-h-60 flex-col justify-around p-2">
                 <h2 className="text-center text-2xl">
                     By booking with us, you agree to abide by the{" "}
                     <Link
@@ -39,25 +39,31 @@ export default function ConfirmRulesModal() {
                         Terms of Service
                     </Link>
                 </h2>
-                <label className="w-fit text-xl">
+                <div className="flex p-3">
                     <input
                         checked={rules}
                         onChange={(e) => setRules(e.target.checked)}
                         type="checkbox"
-                        className="mx-5"
+                        className="mx-3"
+                        id="rules"
                     />
-                    I agree to follow the House Rules
-                </label>
+                    <label htmlFor="rules" className="w-fit text-xl">
+                        I agree to follow the House Rules
+                    </label>
+                </div>
 
-                <label className="w-fit text-xl">
+                <div className="flex p-3">
                     <input
                         checked={terms}
                         onChange={(e) => setTerms(e.target.checked)}
                         type="checkbox"
-                        className="mx-5"
+                        className="mx-3"
+                        id="terms"
                     />
-                    I agree to the Terms of Service
-                </label>
+                    <label htmlFor="terms" className="w-fit text-xl">
+                        I agree to the Terms of Service
+                    </label>
+                </div>
             </div>
             <div className="mt-5 flex w-full justify-around rounded-b-2xl border-t border-slate-400 bg-slate-200 p-5 font-bold">
                 <button
