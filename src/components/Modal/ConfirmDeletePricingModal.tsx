@@ -4,7 +4,7 @@ export default function ConfirmDeletePricingModal() {
     const { closeModal, submitModal } = useModalContext();
 
     return (
-        <div className="flex h-full flex-col items-center justify-between overflow-hidden overflow-y-auto">
+        <div className="flex flex-col items-center justify-between overflow-hidden overflow-y-auto">
             <div className="mx-5 flex w-full justify-between rounded-t-2xl border-b border-slate-400 bg-slate-200 p-5 font-bold">
                 <h1 className="text-3xl">Are You Sure?</h1>
                 <button
@@ -14,8 +14,8 @@ export default function ConfirmDeletePricingModal() {
                     X
                 </button>
             </div>
-            <div className="mx-5 flex h-full flex-col justify-around">
-                <h2 className="text-center text-3xl">
+            <div className="mx-5 flex min-h-32 flex-col justify-around p-2">
+                <h2 className="p-3 text-center text-3xl">
                     This action is permanent!
                 </h2>
                 <h2 className="text-center text-2xl">
