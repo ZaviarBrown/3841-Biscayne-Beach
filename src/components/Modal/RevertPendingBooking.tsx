@@ -6,26 +6,29 @@ export default function RevertPendingBooking() {
     const [confirmIrreversible, setConfirmIrreversible] = useState(false);
 
     return (
-        <div className="flex h-full flex-col items-center justify-between overflow-hidden overflow-y-auto">
+        <div className="flex flex-col items-center justify-between overflow-hidden overflow-y-auto">
             <div className="mx-5 flex w-full justify-center rounded-t-2xl border-b border-slate-400 bg-slate-200 p-5 font-bold text-red-600">
                 <h1 className="text-4xl">Are you sure?</h1>
             </div>
-            <div className="mx-5 flex h-52 flex-col justify-around">
+            <div className="mx-5 flex min-h-52 flex-col justify-around p-2">
                 <h2 className="text-center text-3xl">
                     This action will take your dates off hold.
                 </h2>
 
-                <label className="w-fit text-xl">
+                <div className="flex p-3">
                     <input
                         checked={confirmIrreversible}
                         onChange={(e) =>
                             setConfirmIrreversible(e.target.checked)
                         }
                         type="checkbox"
-                        className="mx-5"
+                        className="mx-3"
+                        id="confirm"
                     />
-                    {`I understand that someone else may be able to select these dates.`}
-                </label>
+                    <label htmlFor="confirm" className="w-fit text-xl">
+                        {`I understand that someone else may be able to select these dates.`}
+                    </label>
+                </div>
             </div>
             <div className="mt-5 flex w-full justify-around rounded-b-2xl border-t border-slate-400 bg-slate-200 p-5 font-bold">
                 <button
