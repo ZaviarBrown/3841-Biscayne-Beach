@@ -3,7 +3,10 @@
  * ? Gallery page:
  * - Making each photo clickable to display a larger version
  *
- * Redirect on "Book Now"
+ * Show rates and dates without login
+ * Redirect to login once "Create Booking" is clicked
+ * Form to ask for name, email, phone number
+ * End calendar @ 12/31/24
  *
  * Error handling
  * More Stripe checks
