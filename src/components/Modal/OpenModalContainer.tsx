@@ -11,11 +11,11 @@ export default function OpenModalContainer({
     className,
     modalComponent,
 }: OpenModalContainerProps) {
-    const { setModalContent, setBgColor } = useModalContext();
+    const { bgColor, setModalContent, setBgColor } = useModalContext();
 
     const handleClick = () => {
+        if (bgColor !== "transparent") setBgColor("transparent");
         setModalContent(modalComponent);
-        setBgColor("transparent");
     };
 
     return (

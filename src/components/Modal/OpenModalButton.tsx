@@ -17,14 +17,19 @@ export default function OpenModalButton({
     disabled,
     className,
 }: OpenModalButtonProps) {
-    const { setBgColor, setModalContent, setOnModalClose, setOnModalSubmit } =
-        useModalContext();
+    const {
+        bgColor,
+        setBgColor,
+        setModalContent,
+        setOnModalClose,
+        setOnModalSubmit,
+    } = useModalContext();
 
     const handleClick = () => {
+        if (bgColor !== "white") setBgColor("white");
         if (onModalClose) setOnModalClose(() => onModalClose);
         if (onModalSubmit) setOnModalSubmit(() => onModalSubmit);
         setModalContent(modalComponent);
-        setBgColor("white");
     };
 
     return (

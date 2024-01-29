@@ -24,8 +24,6 @@ export default function FullScreenView({
         );
     };
 
-    console.log("uhhh hi");
-
     return (
         <div className="flex h-[94vh] w-[96vw] items-center justify-between rounded-2xl border-2 border-slate-200 backdrop-blur-lg">
             {galleryImages.map(({ src, alt }, index) => (
