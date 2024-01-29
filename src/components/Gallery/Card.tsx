@@ -15,6 +15,7 @@ export default function GalleryCard({
                 src={src}
                 alt={alt}
                 fill
+                sizes="33vw"
                 className={`object-cover ${
                     load ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-700`}
