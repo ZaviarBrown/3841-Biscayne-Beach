@@ -9,6 +9,7 @@ import { BookingContextProvider } from "~/context/BookingContext";
 import { ScrollContextProvider } from "~/context/ScrollContext";
 import { Modal, ModalContextProvider } from "~/context/ModalContext";
 import "default-passive-events";
+import { MobileContextProvider } from "~/context/MobileContext";
 
 const MyApp: AppType<{ session: Session | null }> = ({
     Component,
@@ -16,16 +17,18 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
     return (
         <SessionProvider session={session}>
-            <ScrollContextProvider>
-                <ModalContextProvider>
-                    <BookingContextProvider>
-                        <Modal />
-                        <Layout>
-                            <Component {...pageProps} />
-                        </Layout>
-                    </BookingContextProvider>
-                </ModalContextProvider>
-            </ScrollContextProvider>
+            <MobileContextProvider>
+                <ScrollContextProvider>
+                    <ModalContextProvider>
+                        <BookingContextProvider>
+                            <Modal />
+                            <Layout>
+                                <Component {...pageProps} />
+                            </Layout>
+                        </BookingContextProvider>
+                    </ModalContextProvider>
+                </ScrollContextProvider>
+            </MobileContextProvider>
         </SessionProvider>
     );
 };
