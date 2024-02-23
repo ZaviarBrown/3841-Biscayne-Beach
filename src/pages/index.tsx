@@ -1,8 +1,8 @@
 import type { NextPage, InferGetStaticPropsType, GetStaticProps } from "next";
 
-import Carousel from "../components/Carousel";
-import HomeDetails from "../components/HomeDetails";
-import GoogleMapsEmbed from "~/components/GoogleMapsEmbed";
+import Carousel from "../components/Home/Carousel";
+import HomeDetails from "../components/Home/HomeDetails";
+import GoogleMapsEmbed from "~/components/Home/GoogleMapsEmbed";
 
 export type HomeDetailsType = {
     text: string;

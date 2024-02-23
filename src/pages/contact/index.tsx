@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import NavBarSpacer from "~/components/NavBarSpacer";
+import NavBarSpacer from "~/components/Home/NavBarSpacer";
 import { api } from "~/utils/api";
 import { render } from "@react-email/render";
 import ContactMessageEmail from "~/emails/ContactMessage";

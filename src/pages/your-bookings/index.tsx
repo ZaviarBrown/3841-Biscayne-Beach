@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import DisplayBookings from "~/components/Booking/Display";
-import NavBarSpacer from "~/components/NavBarSpacer";
+import NavBarSpacer from "~/components/Home/NavBarSpacer";
 
 export default function UserBookingsPage() {
     const { data: session } = useSession();

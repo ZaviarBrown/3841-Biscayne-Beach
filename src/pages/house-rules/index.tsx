@@ -1,5 +1,5 @@
 import Link from "next/link";
-import NavBarSpacer from "~/components/NavBarSpacer";
+import NavBarSpacer from "~/components/Home/NavBarSpacer";
 
 export default function HouseRules() {
     const rules = [

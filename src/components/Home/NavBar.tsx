@@ -37,7 +37,7 @@ const NavBar = () => {
                 href="/"
                 aria-label="Home"
             >
-                3841 Biscayne Beach
+                Sexy Beaches
             </Link>
 
             <div className="flex items-center justify-end gap-5">
@@ -58,7 +58,7 @@ const NavBar = () => {
                         <Link className="group relative" href="/house-rules">
                             House Rules
                             <span
-                                className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
+                                className={`absolute -bottom-0.5 left-0 h-0.5 bg-white ${
                                     pathname === "/house-rules"
                                         ? "w-full"
                                         : "w-0 transition-all duration-200 group-hover:w-full"

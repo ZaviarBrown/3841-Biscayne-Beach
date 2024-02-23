@@ -4,7 +4,7 @@ import ManagePricing from "~/components/Admin/ManagePricing";
 import ManageBookings from "~/components/Admin/ManageBookings";
 import ManageUsers from "~/components/Admin/ManageUsers";
 import SideBar from "~/components/Admin/SideBar";
-import NavBarSpacer from "~/components/NavBarSpacer";
+import NavBarSpacer from "~/components/Home/NavBarSpacer";
 
 export type PagesType = "bookings" | "pricing" | "users";
 

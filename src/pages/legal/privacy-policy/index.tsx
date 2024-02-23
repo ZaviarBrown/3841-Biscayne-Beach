@@ -1,4 +1,4 @@
-import NavBarSpacer from "~/components/NavBarSpacer";
+import NavBarSpacer from "~/components/Home/NavBarSpacer";
 
 export default function PrivacyPolicy() {
     return (
