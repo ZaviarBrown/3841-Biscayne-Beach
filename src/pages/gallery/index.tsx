@@ -5,6 +5,7 @@ import LoadingCard from "~/components/Gallery/Loading";
 import type { StaticImagesType } from "../";
 import OpenModalContainer from "~/components/Modal/OpenModalContainer";
 import FullScreenView from "~/components/Gallery/FullScreenView";
+import { useMobileContext } from "~/context/MobileContext";
 
 // TODO: Optimize this mess
 
@@ -14,6 +15,7 @@ export default function Gallery({
     galleryImages: StaticImagesType[];
 }) {
     const [load, setLoad] = useState(0);
+    const { isMobile } = useMobileContext();
 
     useEffect(() => {
         if (load < galleryImages.length) {
@@ -48,10 +50,21 @@ export default function Gallery({
                             </OpenModalContainer>
                         ))}
                     </div>
-                    <iframe
-                        className="h-screen w-3/4 self-center p-10"
-                        src="/assets/FloorPlan.pdf"
-                    />
+                    {isMobile ? (
+                        <a
+                            className="mb-5 self-center rounded-lg border-2 border-slate-200 bg-slate-700 p-2 text-lg text-white shadow-3xl"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://utfs.io/f/2a6d41f8-d561-4184-96d8-9dddecc9949b-4tj1v9.pdf"
+                        >
+                            Tap here to view Floor Plan PDF
+                        </a>
+                    ) : (
+                        <iframe
+                            className="h-screen w-3/4 self-center p-10"
+                            src="/assets/FloorPlan.pdf"
+                        />
+                    )}
                 </>
             )}
             {galleryImages.length === 0 && (
