@@ -5,9 +5,11 @@ import { api } from "~/utils/api";
 import { render } from "@react-email/render";
 import ContactMessageEmail from "~/emails/ContactMessage";
 import { PulseLoader } from "react-spinners";
+import { useMobileContext } from "~/context/MobileContext";
 
 export default function ContactForm() {
     const { data: session } = useSession();
+    const { isMobile } = useMobileContext();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -79,7 +81,9 @@ export default function ContactForm() {
             {!showSuccess && (
                 <form
                     onSubmit={handleSubmit}
-                    className="m-auto flex w-96 flex-col gap-4 rounded-xl bg-white p-5 shadow-3xl"
+                    className={`m-auto flex ${
+                        isMobile ? "w-4/5 max-w-96" : "w-96"
+                    } flex-col gap-4 rounded-xl bg-white p-5 shadow-3xl`}
                 >
                     {" "}
                     <h1
