@@ -43,73 +43,80 @@ export default function MobileNavBar({
                             : "pointer-events-none opacity-0 delay-0 duration-500 ease-out"
                     } flex flex-col items-center gap-8 text-left transition-all`}
                 >
-                    <li className={`${""}`}>
-                        <Link className="group relative" href="/gallery">
+                    <li>
+                        <Link
+                            className={`p-1 ${
+                                pathname === "/gallery"
+                                    ? "outline outline-1 outline-white"
+                                    : ""
+                            }`}
+                            href="/gallery"
+                        >
                             Gallery
-                            <span
-                                className={`absolute -bottom-0.5 left-0 h-0.5 bg-white ${
-                                    pathname === "/gallery"
-                                        ? "w-full"
-                                        : "w-0 transition-all duration-200 group-hover:w-full"
-                                }`}
-                            ></span>
                         </Link>
                     </li>
-                    <li className={`${""}`}>
-                        <Link className="group relative" href="/house-rules">
+                    <li>
+                        <Link
+                            className={`p-1 ${
+                                pathname === "/house-rules"
+                                    ? "outline outline-1 outline-white"
+                                    : ""
+                            }`}
+                            href="/house-rules"
+                        >
                             House Rules
-                            <span
-                                className={`absolute -bottom-0.5 left-0 h-0.5 bg-white ${
-                                    pathname === "/house-rules"
-                                        ? "w-full"
-                                        : "w-0 transition-all duration-200 group-hover:w-full"
-                                }`}
-                            ></span>
                         </Link>
                     </li>
-                    <li className={`${""}`}>
-                        <Link className="group relative" href="/book">
+                    <li>
+                        <Link
+                            className={`p-1 ${
+                                pathname === "/book"
+                                    ? "outline outline-1 outline-white"
+                                    : ""
+                            }`}
+                            href="/book"
+                        >
                             Book Now
-                            <span
-                                className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
-                                    pathname === "/book"
-                                        ? "w-full"
-                                        : "w-0 transition-all duration-200 group-hover:w-full"
-                                }`}
-                            ></span>
                         </Link>
                     </li>
                     {session && (
-                        <li className={`${""}`}>
+                        <li>
                             <Link
-                                className="group relative"
+                                className={`p-1 ${
+                                    pathname === "/your-bookings"
+                                        ? "outline outline-1 outline-white"
+                                        : ""
+                                }`}
                                 href="/your-bookings"
                             >
                                 Your Bookings
-                                <span
-                                    className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
-                                        pathname === "/your-bookings"
-                                            ? "w-full"
-                                            : "w-0 transition-all duration-200 group-hover:w-full"
-                                    }`}
-                                ></span>
                             </Link>
                         </li>
                     )}
                     {session && session.user.role === "admin" && (
-                        <li className={`${""}`}>
-                            <Link className="group relative" href="/admin">
+                        <li>
+                            <Link
+                                className={`p-1 ${
+                                    pathname === "/admin"
+                                        ? "outline outline-1 outline-white"
+                                        : ""
+                                }`}
+                                href="/admin"
+                            >
                                 Admin
-                                <span
-                                    className={`absolute -bottom-0.5 left-0 h-0.5  bg-white ${
-                                        pathname === "/admin"
-                                            ? "w-full"
-                                            : "w-0 transition-all duration-200 group-hover:w-full"
-                                    }`}
-                                ></span>
                             </Link>
                         </li>
                     )}
+                    <li>
+                        <button
+                            onClick={() =>
+                                session ? void signOut() : void signIn("google")
+                            }
+                            className="flex h-10 min-w-fit items-center justify-between rounded-3xl border px-3 py-1 text-xl transition-all duration-200 hover:scale-105"
+                        >
+                            {session ? "Sign out" : "Sign in"}
+                        </button>
+                    </li>
                 </ul>
             </div>
             <button
