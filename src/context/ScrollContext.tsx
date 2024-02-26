@@ -29,7 +29,8 @@ export function ScrollContextProvider({
                 return window.scrollY;
             });
 
-            if (window.scrollY > window.innerHeight) setShowCarousel(false);
+            if (window.scrollY > window.innerHeight * 1.05)
+                setShowCarousel(false);
             else setShowCarousel(true);
         };
 
