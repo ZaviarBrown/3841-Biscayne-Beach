@@ -10,7 +10,7 @@ export function MobileContextProvider({
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        const resize = () => setIsMobile(window.innerWidth <= 1000);
+        const resize = () => setIsMobile(window.innerWidth <= 800);
         resize();
 
         window.addEventListener("resize", resize);
