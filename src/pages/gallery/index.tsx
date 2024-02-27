@@ -7,8 +7,6 @@ import FullScreenView from "~/components/Gallery/FullScreenView";
 import { useMobileContext } from "~/context/MobileContext";
 import { useModalContext } from "~/context/ModalContext";
 
-// TODO: Optimize this mess
-
 export default function Gallery({
     galleryImages,
 }: {
