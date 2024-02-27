@@ -1,24 +1,20 @@
 import Image from "next/image";
-import { useState } from "react";
 import type { StaticImagesType } from "~/pages";
 import { useModalContext } from "~/context/ModalContext";
 
 export default function FullScreenView({
-    index,
     galleryImages,
 }: {
-    index: number;
     galleryImages: StaticImagesType[];
 }) {
-    const { closeModal } = useModalContext();
-    const [currentImage, setCurrentImage] = useState(index);
+    const { galleryIndex, setGalleryIndex, closeModal } = useModalContext();
 
     const nextImage = () => {
-        setCurrentImage((prevImage) => (prevImage + 1) % galleryImages.length);
+        setGalleryIndex((prevImage) => (prevImage + 1) % galleryImages.length);
     };
 
     const previousImage = () => {
-        setCurrentImage(
+        setGalleryIndex(
             (prevImage) =>
                 (prevImage - 1 + galleryImages.length) % galleryImages.length
         );
@@ -30,7 +26,7 @@ export default function FullScreenView({
                 <div
                     key={src}
                     className={`${
-                        index === currentImage ? "opacity-100" : "opacity-0"
+                        index === galleryIndex ? "opacity-100" : "opacity-0"
                     } fixed inset-0 m-auto h-[99%] w-[99%] transition-opacity duration-1000`}
                 >
                     <Image
