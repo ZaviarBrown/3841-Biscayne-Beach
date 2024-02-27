@@ -6,6 +6,7 @@ import type { StaticImagesType } from "../";
 import FullScreenView from "~/components/Gallery/FullScreenView";
 import { useMobileContext } from "~/context/MobileContext";
 import { useModalContext } from "~/context/ModalContext";
+import NavBarSpacer from "~/components/Home/NavBarSpacer";
 
 export default function Gallery({
     galleryImages,
@@ -32,7 +33,7 @@ export default function Gallery({
 
     return (
         <>
-            <div className="pt-20" />
+            <NavBarSpacer />
             {galleryImages.length !== 0 && (
                 <>
                     <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-2 lg:grid-cols-3">
@@ -56,7 +57,7 @@ export default function Gallery({
                     </div>
                     {isMobile ? (
                         <a
-                            className="mb-5 self-center rounded-lg border-2 border-slate-200 bg-slate-700 p-2 text-lg text-white shadow-3xl"
+                            className="mb-5 self-center rounded-lg border-2 border-slate-200 bg-slate-700 p-2 text-center text-lg text-white shadow-3xl"
                             target="_blank"
                             rel="noopener noreferrer"
                             href="https://utfs.io/f/2a6d41f8-d561-4184-96d8-9dddecc9949b-4tj1v9.pdf"
