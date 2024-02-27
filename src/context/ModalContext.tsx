@@ -10,8 +10,10 @@ interface ModalContextType {
     modalContent: React.ReactNode | null;
     isOpen: boolean;
     bgColor: string;
+    galleryIndex: number;
     setBgColor: React.Dispatch<React.SetStateAction<string>>;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setGalleryIndex: React.Dispatch<React.SetStateAction<number>>;
     setModalContent: React.Dispatch<
         React.SetStateAction<React.ReactNode | null>
     >;
@@ -29,6 +31,7 @@ export const ModalContextProvider: React.FC<ModalProviderProps> = ({
     const modalRef = useRef<HTMLDivElement>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [bgColor, setBgColor] = useState("white");
+    const [galleryIndex, setGalleryIndex] = useState(0);
     const [modalContent, setModalContent] = useState<React.ReactNode | null>(
         null
     );
@@ -60,8 +63,10 @@ export const ModalContextProvider: React.FC<ModalProviderProps> = ({
         modalContent,
         isOpen,
         bgColor,
+        galleryIndex,
         setIsOpen,
         setBgColor,
+        setGalleryIndex,
         setModalContent,
         setOnModalClose,
         setOnModalSubmit,
