@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import GalleryCard from "~/components/Gallery/Card";
 import LoadingCard from "~/components/Gallery/Loading";
 import type { StaticImagesType } from "../";
-import OpenModalContainer from "~/components/Modal/OpenModalContainer";
 import FullScreenView from "~/components/Gallery/FullScreenView";
 import { useMobileContext } from "~/context/MobileContext";
+import { useModalContext } from "~/context/ModalContext";
 
 // TODO: Optimize this mess
 
@@ -15,7 +15,10 @@ export default function Gallery({
     galleryImages: StaticImagesType[];
 }) {
     const [load, setLoad] = useState(0);
+    const [fullView, setFullView] = useState<JSX.Element>();
     const { isMobile } = useMobileContext();
+    const { bgColor, setBgColor, setModalContent, setGalleryIndex } =
+        useModalContext();
 
     useEffect(() => {
         if (load < galleryImages.length) {
@@ -25,6 +28,10 @@ export default function Gallery({
         }
     }, [load, galleryImages.length]);
 
+    useEffect(() => {
+        setFullView(() => <FullScreenView galleryImages={galleryImages} />);
+    }, [galleryImages]);
+
     return (
         <>
             <div className="pt-20" />
@@ -32,22 +39,21 @@ export default function Gallery({
                 <>
                     <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-2 lg:grid-cols-3">
                         {galleryImages.map(({ src, alt }, i) => (
-                            <OpenModalContainer
+                            <div
                                 key={i}
-                                className=""
-                                modalComponent={
-                                    <FullScreenView
-                                        index={i}
-                                        galleryImages={galleryImages}
-                                    />
-                                }
+                                onClick={() => {
+                                    if (bgColor !== "transparent")
+                                        setBgColor("transparent");
+                                    setGalleryIndex(i);
+                                    setModalContent(fullView);
+                                }}
                             >
                                 <GalleryCard
                                     src={src}
                                     alt={alt}
                                     load={load > i}
                                 />
-                            </OpenModalContainer>
+                            </div>
                         ))}
                     </div>
                     {isMobile ? (
