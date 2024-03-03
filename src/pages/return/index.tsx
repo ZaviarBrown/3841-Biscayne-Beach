@@ -65,16 +65,20 @@ export default function StripeReturn() {
     if (booking && status === "complete") {
         return (
             <section
-                className="m-auto text-center text-3xl text-white"
+                className="m-auto text-center text-xl text-white md:text-3xl"
                 id="success"
             >
-                <p>We appreciate you booking with us!</p>
-                <p>A confirmation email will be sent to {customerEmail}</p>
+                <p className="break-words">
+                    We appreciate you booking with us!
+                </p>
+                <p className="break-words">
+                    A confirmation email will be sent to {customerEmail}
+                </p>
 
-                <p>
+                <p className="break-words">
                     If you have any questions, please email
                     <a
-                        className="text-blue-300 underline underline-offset-4"
+                        className="break-all text-blue-300 underline underline-offset-4"
                         href="mailto:contact@3841biscaynebeach.com"
                     >
                         {" "}
