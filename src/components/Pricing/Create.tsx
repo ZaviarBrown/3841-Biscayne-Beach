@@ -1,7 +1,7 @@
 import { api } from "~/utils/api";
 import { useState } from "react";
 import { DayPicker, type DateRange } from "react-day-picker";
-import type { CalendarOptions } from "../Booking/Calendar";
+import type { CalendarOptions } from "../Booking/Desktop/Calendar";
 import type { PricingWindowType } from "~/server/api/routers/pricing";
 import { isAfter, isBefore } from "date-fns";
 
