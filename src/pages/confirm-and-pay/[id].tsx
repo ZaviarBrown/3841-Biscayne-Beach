@@ -11,6 +11,7 @@ import { useBookingContext } from "~/context/BookingContext";
 import { HashLoader } from "react-spinners";
 import BookingSideCard from "~/components/Booking/SideCard";
 import Image from "next/image";
+import { useMobileContext } from "~/context/MobileContext";
 
 // TODO: getServerSideProps
 
@@ -26,6 +27,7 @@ const formatTimeLeft = (time: number): string => {
 
 export default function ConfirmAndPay() {
     const router = useRouter();
+    const { isMobile } = useMobileContext();
     const [clientSecret, setClientSecret] = useState("");
     const [showLoading, setShowLoading] = useState(true);
     const [startFade, setStartFade] = useState(false);
@@ -94,47 +96,94 @@ export default function ConfirmAndPay() {
         );
     }
 
-    return (
-        <>
-            <div className="flex min-h-screen justify-between bg-white">
-                <div
-                    className={`flex w-full text-2xl text-slate-200 transition-transform ${
-                        startSlide ? "-translate-x-0" : "-translate-x-full"
-                    } flex-col items-center justify-start gap-5 bg-[#0074D4] p-5 duration-1000`}
-                >
-                    <h1 className="text-6xl">{formatTimeLeft(timeLeft)}</h1>
+    if (isMobile)
+        return (
+            <>
+                <div className="flex min-h-screen flex-col justify-between bg-white">
+                    <div
+                        className={`flex h-full text-2xl text-slate-200 transition-transform ${
+                            startSlide ? "-translate-y-0" : "-translate-y-full"
+                        } flex-col items-center justify-start gap-5 bg-[#0074D4] p-5 duration-1000`}
+                    >
+                        <h1 className="text-4xl md:text-6xl">
+                            {formatTimeLeft(timeLeft)}
+                        </h1>
 
-                    <div className="relative h-1/5 w-1/2 rounded-3xl shadow-3xl">
-                        <Image
-                            src={"/images/house-3.jpg"}
-                            alt={"Front view of house"}
-                            className="rounded-3xl object-cover"
-                            fill
-                        />
-                    </div>
+                        <div className="relative h-36 w-44 rounded-3xl shadow-3xl">
+                            <Image
+                                src={"/images/house-3.jpg"}
+                                alt={"Front view of house"}
+                                className="rounded-3xl object-cover"
+                                fill
+                            />
+                        </div>
 
-                    <div className="text-center">
-                        <h1 className="text-4xl">Confirm and pay</h1>
-                    </div>
+                        <div className="text-center">
+                            <h1 className="text-3xl md:text-4xl">
+                                Confirm and pay
+                            </h1>
+                        </div>
 
                         <BookingSideCard {...booking} />
+                    </div>
+                    <div
+                        className={`z-10 h-full bg-white p-10 transition-opacity duration-1000 ${
+                            startSlide ? "opacity-100" : "opacity-0"
+                        } shadow-4xlL`}
+                    >
+                        {clientSecret && (
+                            <EmbeddedCheckoutProvider
+                                stripe={stripePromise}
+                                options={{ clientSecret }}
+                            >
+                                <EmbeddedCheckout />
+                            </EmbeddedCheckoutProvider>
+                        )}
+                    </div>
+                </div>
+            </>
+        );
+    else
+        return (
+            <>
+                <div className="flex min-h-screen justify-between bg-white">
+                    <div
+                        className={`flex w-full text-2xl text-slate-200 transition-transform ${
+                            startSlide ? "-translate-x-0" : "-translate-x-full"
+                        } flex-col items-center justify-start gap-5 bg-[#0074D4] p-5 duration-1000`}
+                    >
+                        <h1 className="text-6xl">{formatTimeLeft(timeLeft)}</h1>
 
+                        <div className="relative h-1/5 w-1/2 rounded-3xl shadow-3xl">
+                            <Image
+                                src={"/images/house-3.jpg"}
+                                alt={"Front view of house"}
+                                className="rounded-3xl object-cover"
+                                fill
+                            />
+                        </div>
+
+                        <div className="text-center">
+                            <h1 className="text-4xl">Confirm and pay</h1>
+                        </div>
+
+                        <BookingSideCard {...booking} />
+                    </div>
+                    <div
+                        className={`z-10 w-full bg-white p-10 transition-opacity duration-1000 ${
+                            startSlide ? "opacity-100" : "opacity-0"
+                        } shadow-4xlL`}
+                    >
+                        {clientSecret && (
+                            <EmbeddedCheckoutProvider
+                                stripe={stripePromise}
+                                options={{ clientSecret }}
+                            >
+                                <EmbeddedCheckout />
+                            </EmbeddedCheckoutProvider>
+                        )}
+                    </div>
                 </div>
-                <div
-                    className={`z-10 w-full bg-white p-10 transition-opacity duration-1000 ${
-                        startSlide ? "opacity-100" : "opacity-0"
-                    } shadow-4xlL`}
-                >
-                    {clientSecret && (
-                        <EmbeddedCheckoutProvider
-                            stripe={stripePromise}
-                            options={{ clientSecret }}
-                        >
-                            <EmbeddedCheckout />
-                        </EmbeddedCheckoutProvider>
-                    )}
-                </div>
-            </div>
-        </>
-    );
+            </>
+        );
 }
