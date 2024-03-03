@@ -11,10 +11,10 @@ export default function PrivacyPolicy() {
 
                 <div className="mb-5 flex justify-between">
                     <div className=" rounded-lg p-2">
-                        Effective on 10-13-2024
+                        Effective on 10-13-2023
                     </div>
                     <div className=" rounded-lg p-2">
-                        Last updated on 1-13-2024
+                        Last updated on 3-3-2024
                     </div>
                 </div>
                 <p className=" mb-5 rounded-2xl p-4">
