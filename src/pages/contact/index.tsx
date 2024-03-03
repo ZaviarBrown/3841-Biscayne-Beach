@@ -68,14 +68,16 @@ export default function ContactForm() {
             <NavBarSpacer />
             {showSuccess && (
                 <div
-                    className={`m-auto rounded-xl bg-white p-10 shadow-3xl transition-opacity duration-500 ${
+                    className={`m-auto rounded-xl ${
+                        isMobile ? "w-4/5 max-w-96" : ""
+                    } bg-white p-5 shadow-3xl transition-opacity duration-500 ${
                         startFade ? "opacity-100" : "opacity-0"
                     }`}
                 >
                     <h1 className="mb-10 text-center text-3xl">
                         Message Sent Successfully
                     </h1>
-                    <p className="text-center text-2xl">{`We'll reach out to you at ${email} as soon as we can!`}</p>
+                    <p className="break-words text-center text-2xl">{`We'll reach out to you at ${email} as soon as we can!`}</p>
                 </div>
             )}
             {!showSuccess && (
