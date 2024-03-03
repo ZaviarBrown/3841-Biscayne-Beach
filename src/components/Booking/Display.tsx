@@ -3,7 +3,10 @@ import BookingCard from "./Card";
 import Link from "next/link";
 
 export default function DisplayBookings({ userId }: { userId: string }) {
-    const { data: userBookings } = api.booking.getByUserId.useQuery(userId);
+    const { data: userBookings, isLoading } =
+        api.booking.getByUserId.useQuery(userId);
+
+    if (isLoading) return null;
 
     if (!userBookings || !userBookings.length)
         return (
