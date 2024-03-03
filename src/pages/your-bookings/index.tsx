@@ -7,7 +7,7 @@ export default function UserBookingsPage() {
 
     if (!session)
         return (
-            <h1 className="m-auto text-5xl text-white">
+            <h1 className="m-auto text-center text-5xl text-white">
                 You must be signed in to view this page
             </h1>
         );
