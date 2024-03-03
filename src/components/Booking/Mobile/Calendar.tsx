@@ -32,11 +32,6 @@ export interface CalendarOptions {
 const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
     const today = new Date();
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    // const yesterday = new Date(
-    //     today.getFullYear(),
-    //     today.getMonth(),
-    //     today.getDate() - 1
-    // );
 
     const disabled = [...booked, { from: startOfMonth, to: today }];
 
@@ -59,7 +54,7 @@ const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
     return options;
 };
 
-const Calendar = ({
+const MobileCalendar = ({
     dates,
     setDates,
 }: {
@@ -71,7 +66,7 @@ const Calendar = ({
     if (!booked) booked = [];
 
     return (
-        <div className="m-12">
+        <div>
             <DayPicker
                 mode="range"
                 selected={dates}
@@ -89,11 +84,11 @@ const Calendar = ({
                     }
                     setDates(range);
                 }}
-                className="scale-125 bg-white text-xl"
+                className="bg-white text-xl"
                 {...createCalendarOptions(booked)}
             />
         </div>
     );
 };
 
-export default Calendar;
+export default MobileCalendar;
