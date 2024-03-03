@@ -25,7 +25,7 @@ export default function BookingCard({
 
     return (
         <>
-            <div className="grid grid-cols-5 items-center gap-6 pb-5 text-center align-middle">
+            <div className="grid grid-cols-5 items-center gap-6 pb-5 text-center align-middle text-lg md:text-2xl">
                 <p className="col-span-2">
                     Check-in: {startDate.toLocaleDateString()}
                 </p>
@@ -40,10 +40,10 @@ export default function BookingCard({
                 </p>
             </div>
 
-            <div className="flex justify-around">
+            <div className="flex justify-around gap-3">
                 {status === "pending" && (
                     <Link
-                        className="m-auto w-fit rounded-lg bg-blue-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-blue-600 "
+                        className="m-auto w-fit rounded-lg bg-blue-500 px-5 py-2 text-center text-lg text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-blue-600 md:text-2xl "
                         href={`/confirm-and-pay/${id}`}
                     >
                         Finish Payment
