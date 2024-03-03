@@ -7,7 +7,7 @@ export default function DisplayBookings({ userId }: { userId: string }) {
 
     if (!userBookings || !userBookings.length)
         return (
-            <h1 className="m-auto rounded-lg bg-slate-700 p-10 text-4xl text-white">
+            <h1 className="mx-5 my-auto rounded-lg bg-slate-700 p-10 text-center text-2xl text-white md:m-auto md:text-4xl">
                 {"You don't have any bookings yet! "}
                 <Link
                     className="text-blue-400 underline underline-offset-2"
@@ -20,11 +20,11 @@ export default function DisplayBookings({ userId }: { userId: string }) {
 
     return (
         <>
-            <div className="mx-auto mt-5 flex flex-col items-center text-2xl">
+            <div className="mx-auto mt-5 flex flex-col items-center">
                 {userBookings.map((booking) => {
                     return (
                         <div
-                            className="m-5 flex w-fit flex-col justify-between gap-5 rounded-lg bg-slate-700 p-8 text-2xl text-slate-800 text-white shadow-3xl"
+                            className="m-5 flex w-fit flex-col justify-between gap-5 rounded-lg bg-slate-700 p-8 text-2xl text-white shadow-3xl"
                             key={booking.id}
                         >
                             <BookingCard {...booking} />
