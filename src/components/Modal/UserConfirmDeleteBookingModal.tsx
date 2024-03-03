@@ -20,10 +20,10 @@ export default function UserConfirmDeleteBookingModal({
     return (
         <div className="flex h-full flex-col items-center justify-between overflow-hidden overflow-y-auto">
             <div className="mx-5 flex w-full justify-center rounded-t-2xl border-b border-slate-400 bg-slate-200 p-5 font-bold text-red-600">
-                <h1 className="text-4xl">WARNING!</h1>
+                <h1 className="text-2xl md:text-4xl">WARNING!</h1>
             </div>
             <div className="mx-5 flex min-h-80 flex-col justify-around p-2">
-                <h2 className="text-center text-3xl">
+                <h2 className="text-center text-xl md:text-3xl">
                     This action is PERMANENT
                 </h2>
 
@@ -37,7 +37,7 @@ export default function UserConfirmDeleteBookingModal({
                         className="mx-3"
                         id="undone"
                     />
-                    <label htmlFor="undone" className="w-fit text-xl">
+                    <label htmlFor="undone" className="w-fit md:text-xl">
                         {`I understand that this CANNOT be undone.`}
                     </label>
                 </div>
@@ -50,7 +50,7 @@ export default function UserConfirmDeleteBookingModal({
                         className="mx-3"
                         id="refund"
                     />
-                    <label htmlFor="refund" className="w-fit text-xl">
+                    <label htmlFor="refund" className="w-fit md:text-xl">
                         {`I acknowledge that a refund of ${convertCentsIntoDollars(
                             refundPrice
                         )} will be issued to me through Stripe as per the `}
@@ -71,12 +71,12 @@ export default function UserConfirmDeleteBookingModal({
                         className="mx-3"
                         id="confirm"
                     />
-                    <label htmlFor="confirm" className="w-fit text-xl">
+                    <label htmlFor="confirm" className="w-fit md:text-xl">
                         {`I verified that the booking for ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()} is the correct booking to delete.`}
                     </label>
                 </div>
             </div>
-            <div className="mt-5 flex w-full justify-around rounded-b-2xl border-t border-slate-400 bg-slate-200 p-5 font-bold">
+            <div className="mt-5 flex w-full justify-around gap-5 rounded-b-2xl border-t border-slate-400 bg-slate-200 p-5 text-sm font-bold">
                 <button
                     className="rounded-md bg-blue-600 px-4 py-2 text-white shadow-xl duration-200 hover:-translate-y-0.5"
                     onClick={closeModal}
