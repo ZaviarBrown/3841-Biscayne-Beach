@@ -98,7 +98,7 @@ export default function DeleteBooking({
                         />
                     }
                     buttonText="Cancel Booking"
-                    className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
+                    className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-lg text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 md:text-2xl "
                     onModalSubmit={handleSubmit}
                 />
             );
@@ -107,7 +107,7 @@ export default function DeleteBooking({
             return (
                 <OpenModalButton
                     buttonText="Cancel Booking"
-                    className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
+                    className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-lg text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 md:text-2xl "
                     onModalSubmit={() => deletePending(id)}
                     modalComponent={<RevertPendingBooking />}
                 />
@@ -123,7 +123,7 @@ export default function DeleteBooking({
                     />
                 }
                 buttonText="Cancel Booking"
-                className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
+                className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-lg text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 md:text-2xl "
                 onModalSubmit={handleSubmit}
             />
         );
@@ -140,7 +140,7 @@ export default function DeleteBooking({
                 />
             }
             buttonText="Cancel Booking"
-            className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
+            className="m-auto w-fit rounded-lg bg-red-500 px-5 py-2 text-lg text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 md:text-2xl "
             onModalSubmit={handleSubmit}
         />
     );
