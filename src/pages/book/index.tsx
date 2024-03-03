@@ -7,7 +7,7 @@ export default function BookPage() {
 
     if (!session)
         return (
-            <h1 className="m-auto text-5xl text-white">
+            <h1 className="m-auto text-center text-5xl text-white">
                 You must be signed in to view this page
             </h1>
         );
@@ -15,13 +15,19 @@ export default function BookPage() {
     return (
         <>
             <NavBarSpacer />
-            <div className="mt-3 flex w-[650px] flex-col items-center gap-3 self-center rounded-lg bg-slate-700 px-5 py-1 text-center text-white shadow-3xl">
-                <h2 className="text-5xl">Select your dates</h2>
-                <p className="text-xl">
-                    Please NOTE: When you book directly through this website,
-                    this property does NOT tack on SERVICE FEES; CLEANING FEES;
-                    BOOKING FEES, CONVENIENCE FEES or the like. Cleaning,
-                    booking, and service is included in the total cost.
+            <div className="m-5 flex flex-col items-center gap-2 self-center rounded-lg bg-slate-700 px-5 py-2 text-center text-base text-white shadow-3xl md:text-xl">
+                <h2 className="text-2xl md:text-5xl">Select your dates</h2>
+                <p className="text-xl md:text-2xl">PLEASE NOTE: </p>
+                <p>
+                    When you book directly through this website, this property
+                    does NOT tack on
+                </p>
+                <p>
+                    SERVICE, CLEANING, BOOKING, CONVENIENCE, or any other fees.
+                </p>
+                <p>
+                    Cleaning, booking, and service is included in the total
+                    cost.
                 </p>
             </div>
             <CreateBooking />
