@@ -1,6 +1,6 @@
 import { DayPicker } from "react-day-picker";
 import { api } from "~/utils/api";
-import { isBefore, isAfter } from "date-fns";
+import { isBefore, isAfter, addYears } from "date-fns";
 import type { DateRange } from "react-day-picker";
 
 // TODO: Refactor to be reusable across all calendar instances
@@ -31,6 +31,7 @@ export interface CalendarOptions {
 // TODO: SSR
 const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
     const today = new Date();
+    const nextYear = addYears(today, 1);
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
     const disabled = [...booked, { from: startOfMonth, to: today }];
@@ -39,6 +40,7 @@ const createCalendarOptions = (booked: StartEndDates[]): CalendarOptions => {
         disabled,
         fromYear: today.getFullYear(),
         fromMonth: today,
+        toMonth: nextYear,
         modifiers: { booked },
         modifiersStyles: {
             booked: {
