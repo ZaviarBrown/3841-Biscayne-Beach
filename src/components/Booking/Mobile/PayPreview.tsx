@@ -8,13 +8,13 @@ import { useBookingContext } from "~/context/BookingContext";
 
 import type { DateRange } from "react-day-picker";
 import type { RouterOutputs } from "~/utils/api";
-import OpenModalButton from "../Modal/OpenModalButton";
-import ConfirmRulesModal from "../Modal/ConfirmRulesModal";
+import OpenModalButton from "../../Modal/OpenModalButton";
+import ConfirmRulesModal from "../../Modal/ConfirmRulesModal";
 import { env } from "~/env.mjs";
 
 type StripePriceType = RouterOutputs["stripe"]["createPriceForBooking"];
 
-const PayPreview = ({ selected }: { selected: DateRange }) => {
+const MobilePayPreview = ({ selected }: { selected: DateRange }) => {
     const router = useRouter();
     const { data: session } = useSession();
     const { setBooking } = useBookingContext();
@@ -113,9 +113,9 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
     }, [selected]);
 
     return (
-        <div className="flex w-full flex-col justify-between border-l-2 border-slate-200 bg-white p-5 pl-14 text-xl text-black">
+        <div className="mx-5 flex flex-col justify-between gap-2 border-t-2 border-slate-200 bg-white py-5 text-xl text-black">
             <div>
-                <h2 className="text-center text-3xl font-semibold">
+                <h2 className="text-center text-2xl font-semibold">
                     Booking Preview
                 </h2>
                 <h3
@@ -156,13 +156,6 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
             </span>
 
             <div className="flex justify-center">
-                {/* <button
-                    onClick={startBookingCreation}
-                    disabled={disabled}
-                    className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
-                >
-                    Continue
-                </button> */}
                 <OpenModalButton
                     modalComponent={<ConfirmRulesModal />}
                     buttonText="Continue"
@@ -175,4 +168,4 @@ const PayPreview = ({ selected }: { selected: DateRange }) => {
     );
 };
 
-export default PayPreview;
+export default MobilePayPreview;
