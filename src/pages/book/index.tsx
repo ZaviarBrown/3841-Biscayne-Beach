@@ -1,17 +1,7 @@
-import { useSession } from "next-auth/react";
 import CreateBooking from "~/components/Booking/Create";
 import NavBarSpacer from "~/components/Home/NavBarSpacer";
 
 export default function BookPage() {
-    const { data: session } = useSession();
-
-    if (!session)
-        return (
-            <h1 className="m-auto text-center text-5xl text-white">
-                You must be signed in to view this page
-            </h1>
-        );
-
     return (
         <>
             <NavBarSpacer />
