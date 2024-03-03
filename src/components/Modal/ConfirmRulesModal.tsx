@@ -10,16 +10,16 @@ export default function ConfirmRulesModal() {
     return (
         <div className="flex flex-col items-center justify-between overflow-hidden overflow-y-auto">
             <div className="mx-5 flex w-full justify-between rounded-t-2xl border-b border-slate-400 bg-slate-200 p-5 font-bold">
-                <h1 className="text-3xl">Booking Agreement</h1>
+                <h1 className="text-2xl md:text-3xl">Booking Agreement</h1>
                 <button
                     onClick={closeModal}
-                    className="rounded-full border-2 border-blue-500 px-2 text-2xl font-extrabold shadow-md shadow-blue-300"
+                    className="rounded-full border-2 border-blue-500 px-2 font-extrabold shadow-md shadow-blue-300 md:text-2xl"
                 >
                     X
                 </button>
             </div>
             <div className="mx-5 flex min-h-60 flex-col justify-around p-2">
-                <h2 className="text-center text-2xl">
+                <h2 className="text-center text-xl md:text-2xl">
                     By booking with us, you agree to abide by the{" "}
                     <Link
                         href="/house-rules"
@@ -47,7 +47,7 @@ export default function ConfirmRulesModal() {
                         className="mx-3"
                         id="rules"
                     />
-                    <label htmlFor="rules" className="w-fit text-xl">
+                    <label htmlFor="rules" className="w-fit md:text-xl">
                         I agree to follow the House Rules
                     </label>
                 </div>
@@ -60,7 +60,7 @@ export default function ConfirmRulesModal() {
                         className="mx-3"
                         id="terms"
                     />
-                    <label htmlFor="terms" className="w-fit text-xl">
+                    <label htmlFor="terms" className="w-fit md:text-xl">
                         I agree to the Terms of Service
                     </label>
                 </div>
