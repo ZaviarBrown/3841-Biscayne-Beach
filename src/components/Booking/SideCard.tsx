@@ -36,7 +36,7 @@ export default function BookingSideCard({
 
     return (
         <>
-            <div className="grid grid-cols-5 items-center gap-6 pb-5 text-center align-middle">
+            <div className="grid grid-cols-5 items-center gap-2 text-center align-middle text-xl md:gap-6 md:pb-5 md:text-2xl">
                 <p className="col-span-2">
                     Check-in: {startDate.toLocaleDateString()}
                 </p>
@@ -53,7 +53,7 @@ export default function BookingSideCard({
 
             <OpenModalButton
                 buttonText="Cancel Booking"
-                className="w-fit rounded-lg bg-red-500 px-5 py-2 text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 "
+                className="w-fit rounded-lg bg-red-500 px-5 py-2 text-xl text-slate-50 shadow-xl duration-200 hover:scale-105 hover:bg-red-600 md:text-2xl "
                 onModalSubmit={() => mutate(id)}
                 modalComponent={<RevertPendingBooking />}
             />
