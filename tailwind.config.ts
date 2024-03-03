@@ -4,6 +4,9 @@ export default {
     content: ["./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {
+            screens: {
+                book: "852px",
+            },
             boxShadow: {
                 "3xl": "0 6px 16px rgba(0,0,0,0.5)",
                 "4xlR": "10px 0px 16px rgba(0,0,0,0.5)",

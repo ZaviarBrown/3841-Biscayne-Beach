@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from "date-fns";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { calculateSubtotal, convertCentsIntoDollars } from "~/utils/booking";
@@ -133,43 +133,45 @@ const DesktopPayPreview = ({ selected }: { selected: DateRange }) => {
             </div>
             <div className="w-3/4 self-center border border-slate-200" />
 
-            <span className="flex flex-wrap justify-between">
+            <span className="flex flex-col flex-wrap items-center py-1 book:flex-row book:justify-between book:py-0">
                 <p>Check-in: </p> <p>{selected.from?.toLocaleDateString()}</p>
             </span>
 
-            <span className="flex flex-wrap justify-between">
+            <span className="flex flex-col flex-wrap items-center py-1 book:flex-row book:justify-between book:py-0">
                 <p>Check-out: </p> <p>{selected.to?.toLocaleDateString()}</p>
             </span>
 
             <div className="w-3/4 self-center border border-slate-200" />
 
-            <span className="flex flex-wrap justify-between">
+            <span className="flex flex-col flex-wrap items-center py-1 book:flex-row book:justify-between book:py-0">
                 <p>Subtotal: </p> <p>{subTotal}</p>
             </span>
 
-            <span className="flex flex-wrap justify-between">
+            <span className="flex flex-col flex-wrap items-center py-1 book:flex-row book:justify-between book:py-0">
                 <p>Tax: </p> <p>{taxPrice}</p>
             </span>
 
-            <span className="flex flex-wrap justify-between">
+            <span className="flex flex-col flex-wrap items-center py-1 book:flex-row book:justify-between book:py-0">
                 <p>Total: </p> <p>{totalPrice}</p>
             </span>
 
             <div className="flex justify-center">
-                {/* <button
-                    onClick={startBookingCreation}
-                    disabled={disabled}
-                    className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:bg-slate-300 disabled:text-slate-500"
-                >
-                    Continue
-                </button> */}
-                <OpenModalButton
-                    modalComponent={<ConfirmRulesModal />}
-                    buttonText="Continue"
-                    className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:scale-100 disabled:bg-slate-300 disabled:text-slate-500"
-                    disabled={disabled}
-                    onModalSubmit={startBookingCreation}
-                />
+                {session ? (
+                    <OpenModalButton
+                        modalComponent={<ConfirmRulesModal />}
+                        buttonText="Continue"
+                        className="rounded-lg bg-blue-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-blue-600 disabled:scale-100 disabled:bg-slate-300 disabled:text-slate-500"
+                        disabled={disabled}
+                        onModalSubmit={startBookingCreation}
+                    />
+                ) : (
+                    <button
+                        onClick={() => void signIn("google")}
+                        className="rounded-lg bg-red-500 px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:bg-red-600"
+                    >
+                        Sign in to book
+                    </button>
+                )}
             </div>
         </div>
     );
