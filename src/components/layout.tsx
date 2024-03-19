@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <Head>
-                <title>Biscayne Beach</title>
+                <title>3841 Biscayne Beach</title>
                 <meta
                     name="Biscayne Beach Rental"
                     content="Luxury beach-side home"
