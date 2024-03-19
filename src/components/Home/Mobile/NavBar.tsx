@@ -28,7 +28,7 @@ export default function MobileNavBar({
                 href="/"
                 aria-label="Home"
             >
-                Sexy Beaches
+                Biscayne Beach
             </Link>
             <div
                 className={`absolute left-0 top-0 bg-black bg-opacity-50 backdrop-blur transition-all duration-700 ease-out ${

@@ -27,7 +27,7 @@ export default function HouseRules() {
         "All trash should be taken out in bags and tied up.",
         "Please do not throw loose trash in the cans and do not overfill the cans.",
         "If you have more trash than the cans hold, leave it in bags tied up on the deck by the front steps.",
-        "No Cheetos. People who turn their kids loose with a bag of Cheetos inside the house will be charged additional cleaning fee, fined, and flogged.",
+        "No Cheetos. People who turn their kids loose with a bag of Cheetos inside the house will be charged additional cleaning fee.",
     ];
 
     const policies = [

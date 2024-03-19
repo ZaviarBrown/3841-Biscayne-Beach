@@ -23,7 +23,7 @@ export default function DesktopNavBar({
                 href="/"
                 aria-label="Home"
             >
-                Sexy Beaches
+                Biscayne Beach
             </Link>
 
             <div className="flex items-center justify-end gap-5">
