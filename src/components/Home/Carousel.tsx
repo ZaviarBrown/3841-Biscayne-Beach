@@ -81,7 +81,7 @@ const Carousel = ({ images }: { images: StaticImagesType[] }) => {
             </div>
 
             <div
-                className={`absolute ${
+                className={`absolute transition-all duration-700 ease-in-out ${
                     isMobile
                         ? 'bottom-[5%] right-[5%]'
                         : 'bottom-[10%] right-[10%]'
