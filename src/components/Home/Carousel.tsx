@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { useMobileContext } from "~/context/MobileContext";
-import { useScrollContext } from "~/context/ScrollContext";
-import type { StaticImagesType } from "~/pages";
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { useMobileContext } from '~/context/MobileContext';
+import { useScrollContext } from '~/context/ScrollContext';
+import type { StaticImagesType } from '~/pages';
 
 const Carousel = ({ images }: { images: StaticImagesType[] }) => {
     const { showCarousel } = useScrollContext();
@@ -27,75 +27,51 @@ const Carousel = ({ images }: { images: StaticImagesType[] }) => {
         return () => clearInterval(interval);
     }, [currentImage, images.length]);
 
+    // TODO: Image optimization
+
     return (
-        <div className="flex h-screen w-full items-center justify-between bg-black bg-opacity-40">
-            {isMobile ? (
-                <>
-                    {images.map(({ src, alt }, index) => (
-                        <div
-                            key={src}
-                            className={`${showCarousel ? "" : "hidden"} ${
-                                index === currentImage
-                                    ? "opacity-100"
-                                    : "opacity-0"
-                            } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
-                        >
-                            <Image
-                                src={src}
-                                alt={alt}
-                                className="scale-125 object-scale-down"
-                                fill
-                            />
-                            <Image
-                                src={src}
-                                alt={alt}
-                                className="-z-20 object-cover blur"
-                                fill
-                            />
-                        </div>
-                    ))}{" "}
-                </>
-            ) : (
-                <>
-                    {images.map(({ src, alt }, index) => (
-                        <div
-                            key={src}
-                            className={`${showCarousel ? "" : "hidden"} ${
-                                index === currentImage
-                                    ? "opacity-100"
-                                    : "opacity-0"
-                            } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
-                        >
-                            <Image
-                                src={src}
-                                alt={alt}
-                                className="object-cover"
-                                fill
-                            />
-                        </div>
-                    ))}
-                </>
-            )}
+        <div className='flex h-screen w-full items-center justify-between bg-black bg-opacity-40'>
+            {images.map(({ src, alt }, index) => (
+                <div
+                    key={src}
+                    className={`${showCarousel ? '' : 'hidden'} ${
+                        index === currentImage ? 'opacity-100' : 'opacity-0'
+                    } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
+                >
+                    <Image
+                        src={src}
+                        alt={alt}
+                        className='scale-125 object-scale-down'
+                        fill
+                    />
+                    <Image
+                        src={src}
+                        alt={alt}
+                        className='-z-20 object-cover blur'
+                        fill
+                    />
+                </div>
+            ))}
 
             <button
                 onClick={previousImage}
-                className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
+                className='mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90'
             >
-                {"<"}
+                {'<'}
             </button>
 
             <button
                 onClick={nextImage}
-                className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
+                className='mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90'
             >
-                {">"}
+                {'>'}
             </button>
 
             <div
-                className={`absolute ${
+                className={`absolute transition-all duration-700 ease-in-out ${
                     isMobile
-                        ? "bottom-[10%] left-[5%] text-2xl"
-                        : "bottom-[10%] left-[10%] text-5xl"
+                        ? 'bottom-[10%] left-[5%] text-2xl'
+                        : 'bottom-[10%] left-[10%] text-5xl'
                 } text-white`}
             >
                 <p>3841 Biscayne Beach Rd</p>
@@ -105,21 +81,21 @@ const Carousel = ({ images }: { images: StaticImagesType[] }) => {
             <div
                 className={`absolute ${
                     isMobile
-                        ? "bottom-[5%] right-[5%]"
-                        : "bottom-[10%] right-[10%]"
+                        ? 'bottom-[5%] right-[5%]'
+                        : 'bottom-[10%] right-[10%]'
                 } flex space-x-2`}
             >
                 {images.map((_, index) => (
                     <div
-                        className="py-2 hover:cursor-pointer"
+                        className='py-2 hover:cursor-pointer'
                         onClick={() => setCurrentImage(index)}
                         key={index}
                     >
                         <div
                             className={`h-0.5 ${
-                                isMobile ? "w-8" : "w-10"
+                                isMobile ? 'w-8' : 'w-10'
                             } rounded-full bg-white ${
-                                index === currentImage ? "animate-pulse" : ""
+                                index === currentImage ? 'animate-pulse' : ''
                             }`}
                         ></div>
                     </div>
