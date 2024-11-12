@@ -1,6 +1,6 @@
-import type { HomeDetailsType } from "~/pages";
-import ParallaxImage from "./ParallaxImage";
-import { useMobileContext } from "~/context/MobileContext";
+import type { HomeDetailsType } from '~/pages';
+import ParallaxImage from './ParallaxImage';
+import { useMobileContext } from '~/context/MobileContext';
 
 const ParallaxDetailScene = ({
     src,
@@ -15,7 +15,7 @@ const ParallaxDetailScene = ({
     text: string;
     isMobile: boolean;
 }) => {
-    const textArr = text.split(".");
+    const textArr = text.split('.');
 
     if (isMobile)
         return (
@@ -26,7 +26,7 @@ const ParallaxDetailScene = ({
                     >
                         {textArr.map((text, i) => {
                             return (
-                                <p key={i} className="break-words p-1 text-lg">
+                                <p key={i} className='break-words p-1 text-lg'>
                                     {text}.
                                 </p>
                             );
@@ -39,25 +39,25 @@ const ParallaxDetailScene = ({
         return (
             <>
                 <ParallaxImage src={src} alt={alt}>
-                    <div className="flex h-full w-full">
-                        {side === 1 && <div className="w-2/3" />}
+                    <div className='flex h-full w-full'>
+                        {side === 1 && <div className='w-2/3' />}
                         <div
                             className={`flex w-1/3 flex-col items-center justify-center gap-5 backdrop-blur-sm ${
-                                side === 0 ? "border-r" : "border-l"
+                                side === 0 ? 'border-r' : 'border-l'
                             } border-white bg-black bg-opacity-80 p-5 text-center text-white`}
                         >
                             {textArr.map((text, i) => {
                                 return (
                                     <p
                                         key={i}
-                                        className="w-full break-words p-3 text-2xl"
+                                        className='w-full break-words p-3 text-2xl'
                                     >
                                         {text}.
                                     </p>
                                 );
                             })}
                         </div>
-                        {side === 0 && <div className="w-2/3" />}
+                        {side === 0 && <div className='w-2/3' />}
                     </div>
                 </ParallaxImage>
             </>

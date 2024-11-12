@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { useScrollContext } from "~/context/ScrollContext";
-import Image from "next/image";
-import { useMobileContext } from "~/context/MobileContext";
+import { useEffect, useRef, useState } from 'react';
+import { useScrollContext } from '~/context/ScrollContext';
+import Image from 'next/image';
+import { useMobileContext } from '~/context/MobileContext';
 
 type BackgroundImageProps = {
     src: string;
@@ -31,13 +31,13 @@ export default function ParallaxImage({
         return (
             <div
                 ref={ref}
-                className="relative flex h-screen w-full flex-col overflow-hidden bg-black bg-opacity-50"
+                className='relative flex h-screen w-full flex-col overflow-hidden bg-black bg-opacity-50'
             >
                 <Image
                     src={src}
                     alt={alt}
                     fill
-                    className="object-scale-down object-bottom"
+                    className='object-scale-down object-bottom'
                     style={{
                         transform: `translateY(-${offset * 0.15}px) scale(1.5)`,
                     }}
@@ -46,9 +46,9 @@ export default function ParallaxImage({
                     src={src}
                     alt={alt}
                     fill
-                    className="-z-10 overflow-visible object-cover blur-sm"
+                    className='-z-10 overflow-visible object-cover blur-sm'
                 />
-                <div className="h-4 w-full bg-black" />
+                <div className='h-4 w-full bg-black' />
                 {children}
             </div>
         );
@@ -56,18 +56,18 @@ export default function ParallaxImage({
         return (
             <div
                 ref={ref}
-                className="relative flex h-screen w-full flex-col overflow-hidden"
+                className='relative flex h-screen w-full flex-col overflow-hidden'
             >
                 <Image
                     src={src}
                     alt={alt}
                     fill
-                    className="-z-10 overflow-visible object-cover object-left-bottom"
+                    className='-z-10 overflow-visible object-cover object-left-bottom'
                     style={{
                         transform: `translateY(${offset * 0.1}px) scale(1.1)`,
                     }}
                 />
-                <div className="h-4 w-full bg-black" />
+                <div className='h-4 w-full bg-black' />
                 {children}
             </div>
         );
