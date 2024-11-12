@@ -20,12 +20,14 @@ const Carousel = ({ images }: { images: StaticImagesType[] }) => {
     };
 
     useEffect(() => {
+        if (!showCarousel) return;
+
         const interval = setInterval(() => {
             setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
         }, 4000);
 
         return () => clearInterval(interval);
-    }, [currentImage, images.length]);
+    }, [currentImage, images.length, showCarousel]);
 
     // TODO: Image optimization
 
