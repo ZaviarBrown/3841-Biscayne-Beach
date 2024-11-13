@@ -31,24 +31,11 @@ export default function ParallaxImage({
         return (
             <div
                 ref={ref}
-                className='relative flex h-screen w-full flex-col overflow-hidden bg-black bg-opacity-50'
+                className='relative flex h-lvh flex-col bg-cover bg-fixed bg-center'
+                style={{
+                    backgroundImage: `url(${src})`,
+                }}
             >
-                <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    className='object-scale-down object-bottom'
-                    style={{
-                        transform: `translateY(-${offset * 0.15}px) scale(1.5)`,
-                    }}
-                />
-                <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    className='-z-10 overflow-visible object-cover blur-sm'
-                />
-                <div className='h-4 w-full bg-black' />
                 {children}
             </div>
         );
@@ -72,3 +59,19 @@ export default function ParallaxImage({
             </div>
         );
 }
+
+// <Image
+//     src={src}
+//     alt={alt}
+//     fill
+//     className='object-scale-down object-bottom'
+//     style={{
+//         transform: `translateY(-${offset * 0.15}px) scale(1.5)`,
+//     }}
+// />
+// <Image
+//     src={src}
+//     alt={alt}
+//     fill
+//     className='-z-10 overflow-visible object-cover blur-sm'
+// />

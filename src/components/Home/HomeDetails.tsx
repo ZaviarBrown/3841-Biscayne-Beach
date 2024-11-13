@@ -22,7 +22,7 @@ const ParallaxDetailScene = ({
             <>
                 <ParallaxImage src={src} alt={alt}>
                     <div
-                        className={`flex h-fit flex-col items-center justify-center gap-2 border-b border-white bg-black bg-opacity-80 p-5 text-center text-white backdrop-blur-sm`}
+                        className={`flex h-fit flex-col items-center justify-center gap-2 border-y border-white bg-black bg-opacity-80 p-8 text-center text-white shadow-4xl backdrop-blur-sm`}
                     >
                         {textArr.map((text, i) => {
                             return (
@@ -35,6 +35,7 @@ const ParallaxDetailScene = ({
                 </ParallaxImage>
             </>
         );
+    // TODO: Match Mobile
     else
         return (
             <>
