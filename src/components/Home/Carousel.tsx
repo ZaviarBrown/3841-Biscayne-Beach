@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useMobileContext } from '~/context/MobileContext';
 import { useScrollContext } from '~/context/ScrollContext';
-import type { StaticImagesType } from '~/pages';
+import { carouselImages as images } from '~/data';
 
-const Carousel = ({ images }: { images: StaticImagesType[] }) => {
+const Carousel = () => {
     const { showCarousel } = useScrollContext();
     const { isMobile } = useMobileContext();
     const [currentImage, setCurrentImage] = useState(0);
@@ -27,7 +27,7 @@ const Carousel = ({ images }: { images: StaticImagesType[] }) => {
         }, 4000);
 
         return () => clearInterval(interval);
-    }, [currentImage, images.length, showCarousel]);
+    }, [currentImage, showCarousel]);
 
     // TODO: Image optimization
 
