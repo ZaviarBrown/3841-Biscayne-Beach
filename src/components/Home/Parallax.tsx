@@ -8,9 +8,13 @@ type BackgroundImageProps = {
 };
 
 export const ParallaxImage = ({ src, alt, children }: BackgroundImageProps) => {
+    const bandAid = src === '/images/house-sunset.jpg';
+
     return (
         <div
-            className='relative flex h-screen flex-col bg-cover bg-fixed bg-center'
+            className={`relative flex h-screen flex-col bg-cover bg-fixed ${
+                bandAid ? 'bg-bottom' : 'bg-center'
+            }`}
             aria-label={alt}
             style={{
                 backgroundImage: `url(${src})`,
@@ -28,11 +32,18 @@ export const ParallaxDetailScene = ({ alt, src, textArr }: HomeDetailsType) => {
         <>
             <ParallaxImage src={src} alt={alt}>
                 <div
-                    className={`flex flex-col items-center justify-center gap-2 border-y border-white bg-black bg-opacity-80 p-5 text-center text-white shadow-4xl backdrop-blur-sm`}
+                    className={`flex flex-col items-center justify-center border-y border-white bg-black bg-opacity-80 p-2 text-center text-white shadow-4xl backdrop-blur-sm`}
                 >
                     {textArr.map((text, i) => {
                         return (
-                            <p key={i} className={`break-words p-1 text-lg`}>
+                            <p
+                                key={i}
+                                className={`break-words p-2 ${
+                                    isMobile
+                                        ? 'text-lg'
+                                        : 'max-w-[70vw] text-2xl'
+                                }`}
+                            >
                                 {text}
                             </p>
                         );

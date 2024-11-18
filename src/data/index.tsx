@@ -85,15 +85,25 @@ export const homeDetails: HomeDetailsType[] = [
                 {
                     <Link
                         className='text-blue-500 hover:underline'
-                        href={'/house-rules'}
+                        href={'/legal/terms-of-service'}
                     >
-                        House Rules
+                        Terms of Service
                     </Link>
                 }
-                .
+                {'.'}
             </>,
-            '  terms of service.',
-            'If you need any assistance, please reach out to us using the contact form provided and we will get back to you as soon as possible.',
+            <>
+                If you need any assistance, please reach out to us using the{' '}
+                {
+                    <Link
+                        className='text-blue-500 hover:underline'
+                        href={'/contact'}
+                    >
+                        Contact Form
+                    </Link>
+                }{' '}
+                and we will get back to you as soon as possible.
+            </>,
         ],
         src: '/images/house-sunset.jpg',
         alt: 'Sunset view from the deck',
@@ -274,7 +284,6 @@ export const galleryImages: StaticImagesType[] = [
         alt: 'sunset-6',
     },
 ];
-
 
 export const rules = [
     'No pets.',
