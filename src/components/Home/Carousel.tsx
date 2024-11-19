@@ -36,7 +36,7 @@ const Carousel = () => {
             {images.map(({ src, alt }, index) => (
                 <div
                     key={src}
-                    className={`${showCarousel ? '' : 'hidden'} ${
+                    className={`${
                         index === currentImage ? 'opacity-100' : 'opacity-0'
                     } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
                 >
