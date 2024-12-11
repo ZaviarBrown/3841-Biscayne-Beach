@@ -16,7 +16,7 @@ export default function TermsOfService() {
                 </div>
                 <p className=" mb-5 rounded-2xl p-4 ">
                     {`These Terms of Service govern your use of this website 
-                    located at 3841biscaynebeach.com. 
+                    located at cheersbeaches.house. 
                     Please read these Terms of Service carefully
                     before accessing or using the Website. By accessing this
                     Website, you are agreeing to be bound by these Website Terms
