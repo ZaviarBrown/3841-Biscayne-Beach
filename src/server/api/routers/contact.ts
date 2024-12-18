@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
 
 export const contactRouter = createTRPCRouter({
     confirmationEmail: publicProcedure
@@ -13,7 +13,7 @@ export const contactRouter = createTRPCRouter({
         )
         .mutation(async ({ input, ctx }) => {
             await ctx.sendEmail(input);
-            return "Success";
+            return 'Success';
         }),
     contactSupportEmail: publicProcedure
         .input(
@@ -25,6 +25,6 @@ export const contactRouter = createTRPCRouter({
         )
         .mutation(async ({ input, ctx }) => {
             await ctx.sendEmail(input);
-            return "Success";
+            return 'Success';
         }),
 });
