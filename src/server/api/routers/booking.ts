@@ -1,12 +1,12 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 import {
     createTRPCRouter,
     publicProcedure,
     protectedProcedure,
     adminProcedure,
-} from "~/server/api/trpc";
-import { convertToUTCNoonCST } from "~/utils/booking";
+} from '~/server/api/trpc';
+import { convertToUTCNoonCST } from '~/utils/booking';
 
 export const bookingRouter = createTRPCRouter({
     getForCalendar: publicProcedure.query(async ({ ctx }) => {
@@ -33,7 +33,7 @@ export const bookingRouter = createTRPCRouter({
                 },
             },
             orderBy: {
-                startDate: "asc",
+                startDate: 'asc',
             },
         });
     }),
@@ -46,7 +46,7 @@ export const bookingRouter = createTRPCRouter({
                 },
             },
             orderBy: {
-                startDate: "desc",
+                startDate: 'desc',
             },
         });
     }),
@@ -62,7 +62,7 @@ export const bookingRouter = createTRPCRouter({
                 },
             },
             orderBy: {
-                cancelDate: "desc",
+                cancelDate: 'desc',
             },
         });
     }),
@@ -95,7 +95,7 @@ export const bookingRouter = createTRPCRouter({
             return await ctx.prisma.booking.findMany({
                 where: { userId: input },
                 // include: { Review: true },
-                orderBy: { startDate: "asc" },
+                orderBy: { startDate: 'asc' },
             });
         }),
 
@@ -122,7 +122,7 @@ export const bookingRouter = createTRPCRouter({
             const newBooking = await ctx.prisma.booking.create({
                 data: {
                     ...bookingInfo,
-                    status: "admin",
+                    status: 'admin',
                     startDate: convertToUTCNoonCST(bookingInfo.startDate),
                     endDate: convertToUTCNoonCST(bookingInfo.endDate),
                 },
@@ -150,7 +150,7 @@ export const bookingRouter = createTRPCRouter({
             const newBooking = await ctx.prisma.booking.create({
                 data: {
                     ...bookingInfo,
-                    status: "pending",
+                    status: 'pending',
                     startDate: convertToUTCNoonCST(bookingInfo.startDate),
                     endDate: convertToUTCNoonCST(bookingInfo.endDate),
                 },
@@ -186,7 +186,7 @@ export const bookingRouter = createTRPCRouter({
                 return updatedBooking;
             }
 
-            throw new Error("Invalid userId");
+            throw new Error('Invalid userId');
         }),
 
     delete: protectedProcedure
@@ -219,7 +219,14 @@ export const bookingRouter = createTRPCRouter({
                         amount: refundPrice,
                     });
 
+                    const adminEmail = {
+                        replyTo: emailInfo.to,
+                        html: emailInfo.html,
+                        subject: emailInfo.subject,
+                    };
+
                     void ctx.sendEmail(emailInfo);
+                    void ctx.sendEmail(adminEmail);
 
                     await ctx.prisma.cancelledBooking.create({
                         data: {
@@ -235,7 +242,7 @@ export const bookingRouter = createTRPCRouter({
                     where: { id },
                 });
 
-                return "Successfully deleted";
+                return 'Successfully deleted';
             }
         ),
 
@@ -246,6 +253,6 @@ export const bookingRouter = createTRPCRouter({
                 where: { id },
             });
 
-            return "Successfully deleted";
+            return 'Successfully deleted';
         }),
 });
