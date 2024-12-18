@@ -1,5 +1,5 @@
-import nodemailer from "nodemailer";
-import { env } from "~/env.mjs";
+import nodemailer from 'nodemailer';
+import { env } from '~/env.mjs';
 
 type EmailDetailsType = {
     html: string;
@@ -10,7 +10,7 @@ type EmailDetailsType = {
 };
 
 export const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: 'smtp.gmail.com',
     port: 587,
     auth: {
         user: env.EMAIL_USER,
@@ -27,8 +27,8 @@ export const sendEmail = async ({
 }: EmailDetailsType) =>
     transporter.sendMail({
         to: to || env.EMAIL_USER, // "contact@3841biscaynebeach.com",
-        from: from || "contact@3841biscaynebeach.com",
-        replyTo: replyTo || "contact@3841biscaynebeach.com",
+        from: from || env.EMAIL_USER, // 'cheersbeachescrystalbeach@gmail.com',
+        replyTo: replyTo || env.EMAIL_USER, // 'cheersbeachescrystalbeach@gmail.com',
         // to: to || "zaviar.brown@gmail.com",
         // from: from || "zaviar.brown@gmail.com",
         // replyTo: replyTo || "zaviar.brown@gmail.com",
