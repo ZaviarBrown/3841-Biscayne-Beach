@@ -59,7 +59,7 @@ export default function StripeReturn() {
 
             adminEmail({
                 replyTo: booking.email,
-                subject: 'New Booking',
+                subject: `New Booking By ${booking.name}`,
                 html: render(<BookingConfirmationEmail {...booking} />),
             });
 
