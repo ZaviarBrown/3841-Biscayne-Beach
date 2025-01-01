@@ -6,13 +6,13 @@ const dates = [
     {
         startDate: null,
         endDate: null,
-        price: 30000,
+        price: 28500,
         note: "Default price",
     },
     {
         startDate: null,
         endDate: null,
-        price: 45000,
+        price: 30000,
         note: "Weekend price",
     },
     {

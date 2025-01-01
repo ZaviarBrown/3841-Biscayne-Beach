@@ -39,8 +39,8 @@ export const pricingRouter = createTRPCRouter({
         })) as PricingWindowType[];
 
         return {
-            defaultPrice: defaultPrice?.price ?? 30000,
-            weekendPrice: weekendPrice?.price ?? 45000,
+            defaultPrice: defaultPrice?.price ?? 28500,
+            weekendPrice: weekendPrice?.price ?? 30000,
             customPrices,
         };
     }),
