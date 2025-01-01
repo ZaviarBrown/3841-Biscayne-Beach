@@ -57,11 +57,11 @@ export const BookingConfirmationEmail = ({
                                 </Text>
 
                                 <Text className='text-lg text-black'>
-                                    Check-in starts at 3pm on{' '}
+                                    Check-in starts at 12pm on{' '}
                                     {startDate.toLocaleDateString()}.
                                 </Text>
                                 <Text className='text-lg text-black'>
-                                    You must check-out by 11am on{' '}
+                                    You must check-out by 4pm on{' '}
                                     {endDate.toLocaleDateString()}.
                                 </Text>
                                 <Text className='text-lg text-black'>

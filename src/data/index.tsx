@@ -299,11 +299,11 @@ export const rules = [
 ];
 
 export const checkout = [
-    'Contactless check-in at 3pm, check-out at 11am.',
+    'Contactless check-in at 12pm (noon), check-out at 4pm.',
     'Your host is local for your assistance and to ensure the rules are followed.',
     'You will be provided the gate code and door code within 48 hours of your stay.',
     'Please remove everything you brought including refrigerated food, trash, and consumable products.',
-    'Upon checkout, please bundle used bedclothes on the floor and we will wash them for the next guest.',
+    'Upon check-out, please bundle used bedclothes on the floor and we will wash them for the next guest.',
     'Please start the dishwasher for us and leave things as you found them.',
     'All trash should be taken out in bags and tied up.',
     'Please do not throw loose trash in the cans and do not overfill the cans.',
@@ -316,12 +316,12 @@ export const policies = [
     'You must be 25 to book a reservation through this site.',
     'There must be an equal ratio of Adult guests over 25 to prevent unwanted adolescent parties.',
     'Purchases through our platform are 100% handled by Stripe: we never see your card info.',
-    'Stripe charges a card processing fee for every transaction. We cover this fee when you book with us, but this fee is non-refundable for cancellations. Card processing fees are non-refundable.',
-    'Once selected, your dates are reserved for 15 minutes so you can complete your purchase. If you do not complete your purchase during that time, your booking will be deleted and you will not be charged.',
     'There is a 5 night minimum for every booking.',
     'You must pay for the entirety of your stay at the time of booking.',
+    'Stripe charges a card processing fee for every transaction. We cover this fee when you book with us, but in the event you cancel your booking, this processing fee is non-refundable.',
+    'Once your dates are  selected, they are reserved for 15 minutes while you complete your purchase. If you do not complete your purchase during that time, your booking will be deleted and you will not be charged.',
     'Bookings cancelled with more than 14 days notice will receive a full refund, minus the aforementioned Stripe fee.',
-    'Bookings cancelled with at least 3 days notice will receive a refund equivalent to 50% of the total booking cost.',
+    'Bookings cancelled with at least 3 days notice will receive a 50% refund, minus the aforementioned Stripe fee.',
     'Bookings cancelled with less than 3 days notice will receive no refund.',
     <>
         If you wish to cancel a Booking, you can do so on the{' '}
