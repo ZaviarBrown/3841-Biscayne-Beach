@@ -1,10 +1,7 @@
 # 3841 Biscayne Beach
 
-cheers-beaches.com
-cheers-beach.house
-crystalbeaches.house
-bolivarbeach.house
-cheerscrystalbeach.house
-crystalgetaway.com
-cheerscrystalbeaches.com
-cheersbeachescrystalbeach.com
+- Calendar sync
+- Update descriptions
+- 4 night minimum stay
+- Add ashleymariehill027@icloud.com
+- Admin "booked on" date column remove

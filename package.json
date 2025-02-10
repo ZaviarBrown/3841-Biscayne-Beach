@@ -27,6 +27,7 @@
         "@trpc/next": "^10.18.0",
         "@trpc/react-query": "^10.18.0",
         "@trpc/server": "^10.18.0",
+        "cors": "^2.8.5",
         "date-fns": "^2.30.0",
         "date-fns-tz": "^2.0.0",
         "default-passive-events": "^2.0.0",
@@ -45,6 +46,7 @@
         "zod": "^3.21.4"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.17",
         "@types/eslint": "^8.21.3",
         "@types/node": "^18.15.5",
         "@types/nodemailer": "^6.4.14",

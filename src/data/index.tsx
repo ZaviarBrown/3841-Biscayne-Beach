@@ -299,7 +299,7 @@ export const rules = [
 ];
 
 export const checkout = [
-    'Contactless check-in at 12pm (noon), check-out at 4pm.',
+    'Check-in is at noon. Check-out is 4:00 pm.',
     'Your host is local for your assistance and to ensure the rules are followed.',
     'You will be provided the gate code and door code within 48 hours of your stay.',
     'Please remove everything you brought including refrigerated food, trash, and consumable products.',

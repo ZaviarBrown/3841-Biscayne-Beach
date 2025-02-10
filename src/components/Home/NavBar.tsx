@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useScrollContext } from "~/context/ScrollContext";
-import DesktopNavBar from "./Desktop/NavBar";
-import { useMobileContext } from "~/context/MobileContext";
-import MobileNavBar from "./Mobile/NavBar";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useScrollContext } from '~/context/ScrollContext';
+import DesktopNavBar from './Desktop/NavBar';
+import { useMobileContext } from '~/context/MobileContext';
+import MobileNavBar from './Mobile/NavBar';
 
 const NavBar = () => {
     const { isMobile } = useMobileContext();
@@ -13,13 +13,13 @@ const NavBar = () => {
     const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
-        if (pathname === "/" || pathname === "/gallery") {
+        if (pathname === '/' || pathname === '/gallery') {
             if (scrollY <= height / 3) {
                 setHideNav(false);
-            } else setHideNav(scrollDirection === "down");
+            } else setHideNav(scrollDirection === 'down');
         }
 
-        if (pathname.startsWith("/confirm-and-pay")) {
+        if (pathname.startsWith('/confirm-and-pay')) {
             setHideNav(true);
         }
 
@@ -37,7 +37,39 @@ const NavBar = () => {
                 setShowMenu={setShowMenu}
             />
         );
-    else return <DesktopNavBar hideNav={hideNav} pathname={pathname} />;
+    // else return <DesktopNavBar hideNav={hideNav} pathname={pathname} />;
+    else
+        return (
+            <nav
+                className={`absolute left-0 right-0 top-0 z-50 flex transform items-center justify-between overflow-hidden border-b border-white border-opacity-80 p-2 text-center text-white`}
+                aria-label="Main Navigation"
+            >
+                <div className="mx-2 font-extralight">
+                    <span className="border-r border-opacity-70 p-3">
+                        3841 Biscayne Beach Rd
+                    </span>
+                    <span className="p-3">Port Bolivar, TX</span>
+                </div>
+                <div className="mx-2 font-extralight">
+                    <span className="border-r border-opacity-70 px-2">
+                        Gallery
+                    </span>
+                    <span className="border-r border-opacity-70 px-2">
+                        House Rules
+                    </span>
+                    <span className="border-r border-opacity-70 px-2">
+                        Location
+                    </span>
+                    <span className="border-r border-opacity-70 px-2">
+                        Book
+                    </span>
+                    <span className="border-r border-opacity-70 px-2">
+                        Contact
+                    </span>
+                    <span className="border-opacity-70 px-2">Sign In</span>
+                </div>
+            </nav>
+        );
 };
 
 export default NavBar;
