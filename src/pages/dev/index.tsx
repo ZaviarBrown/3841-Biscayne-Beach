@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { useMobileContext } from '~/context/MobileContext';
-import { useScrollContext } from '~/context/ScrollContext';
-import { carouselImages as images } from '~/data';
-import HomeDetails from '~/components/Home/HomeDetails';
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { useMobileContext } from "~/context/MobileContext";
+import { useScrollContext } from "~/context/ScrollContext";
+import { carouselImages as images } from "~/data";
+import HomeDetails from "~/components/Home/HomeDetails";
 
 export default function Dev() {
     const { showCarousel } = useScrollContext();
@@ -39,7 +39,7 @@ export default function Dev() {
                     <div
                         key={src}
                         className={`${
-                            index === currentImage ? 'opacity-100' : 'opacity-0'
+                            index === currentImage ? "opacity-100" : "opacity-0"
                         } fixed -z-10 h-full w-full transition-opacity duration-1000`}
                     >
                         <Image
@@ -68,22 +68,22 @@ export default function Dev() {
                         onClick={previousImage}
                         className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
                     >
-                        {'<'}
+                        {"<"}
                     </button>
 
                     <button
                         onClick={nextImage}
                         className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
                     >
-                        {'>'}
+                        {">"}
                     </button>
                 </div>
 
                 <div
                     className={`absolute font-extralight tracking-[0.2em] transition-all duration-700 ease-in-out ${
                         isMobile
-                            ? 'left-[4%] top-[5%] text-2xl'
-                            : 'left-[5%] top-[6%] text-5xl'
+                            ? "left-[4%] top-[5%] text-2xl"
+                            : "left-[5%] top-[6%] text-5xl"
                     } text-white`}
                 >
                     <p>Cheers Beaches</p>
@@ -92,8 +92,8 @@ export default function Dev() {
                 <div
                     className={`z-50 pb-5 transition-all duration-700 ease-in-out ${
                         isMobile
-                            ? 'bottom-[5%] right-[50%]'
-                            : 'bottom-[10%] left-[50%] right-[50%]'
+                            ? "bottom-[5%] right-[50%]"
+                            : "bottom-[10%] left-[50%] right-[50%]"
                     } flex space-x-2`}
                 >
                     {images.map((_, index) => (
@@ -104,11 +104,11 @@ export default function Dev() {
                         >
                             <div
                                 className={`h-0.5 ${
-                                    isMobile ? 'w-8' : 'w-10'
+                                    isMobile ? "w-8" : "w-10"
                                 } rounded-full bg-white ${
                                     index === currentImage
-                                        ? 'animate-pulse'
-                                        : ''
+                                        ? "animate-pulse"
+                                        : ""
                                 }`}
                             ></div>
                         </div>

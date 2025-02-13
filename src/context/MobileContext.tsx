@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
 
 const MobileContext = createContext({ isMobile: true, isIOS: true });
 
@@ -33,8 +33,8 @@ export function MobileContextProvider({
         const resize = () => setIsMobile(window.innerWidth <= 767);
         resize();
 
-        window.addEventListener('resize', resize);
-        return () => window.removeEventListener('resize', resize);
+        window.addEventListener("resize", resize);
+        return () => window.removeEventListener("resize", resize);
     }, []);
 
     return (

@@ -1,24 +1,24 @@
-import Image from 'next/image';
-import React from 'react';
-import { useMobileContext } from '~/context/MobileContext';
-import { env } from '~/env.mjs';
+import Image from "next/image";
+import React from "react";
+import { useMobileContext } from "~/context/MobileContext";
+import { env } from "~/env.mjs";
 
 export default function GoogleMapsEmbed() {
     const { isMobile } = useMobileContext();
 
     const src = `https://www.google.com/maps/embed/v1/place?key=${
         env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-    }&q=${encodeURIComponent('3841 Biscayne Beach Rd Port Bolivar, TX')}`;
+    }&q=${encodeURIComponent("3841 Biscayne Beach Rd Port Bolivar, TX")}`;
 
     // if (isMobile)
     return (
         <>
-            <div className='relative flex min-h-screen flex-col border-t border-white'>
+            <div className="relative flex min-h-screen flex-col border-t border-white">
                 <Image
-                    className='-z-10 overflow-visible object-cover blur-sm'
+                    className="-z-10 overflow-visible object-cover blur-sm"
                     fill
-                    src='/images/aerial-view.jpg'
-                    alt='Birds-eye view'
+                    src="/images/aerial-view.jpg"
+                    alt="Birds-eye view"
                 />
 
                 <div
@@ -26,22 +26,22 @@ export default function GoogleMapsEmbed() {
                 >
                     <div
                         className={`m-auto break-words ${
-                            isMobile ? 'text-lg' : 'max-w-[70vw] text-2xl'
+                            isMobile ? "text-lg" : "max-w-[70vw] text-2xl"
                         }`}
                     >
-                        <p className='p-3'>
+                        <p className="p-3">
                             The Bolivar Peninsula is located across the ferry
                             from Galveston. When you come across the bay to the
                             peninsula via ferry boat, the landscape changes from
                             urban port to small beach town charm.
                         </p>
-                        <p className='p-3'>
+                        <p className="p-3">
                             There are local amenities and restaurants and a few
                             well stocked stores. For local events, activities,
-                            and all kinds of information, visit{' '}
+                            and all kinds of information, visit{" "}
                             <a
-                                className='text-blue-500 hover:underline'
-                                href='https://www.bolivarpeninsulatexas.com'
+                                className="text-blue-500 hover:underline"
+                                href="https://www.bolivarpeninsulatexas.com"
                             >
                                 bolivarpeninsulatexas.com
                             </a>
@@ -50,17 +50,17 @@ export default function GoogleMapsEmbed() {
 
                     <div
                         className={`m-auto w-full break-words ${
-                            isMobile ? 'text-base' : 'text-xl'
+                            isMobile ? "text-base" : "text-xl"
                         }`}
                     >
                         <h2
                             className={`pb-5 ${
-                                isMobile ? 'text-xl' : 'text-3xl'
+                                isMobile ? "text-xl" : "text-3xl"
                             }`}
                         >
                             {"Here's some of our nearby favorites"}
                         </h2>
-                        <div className='grid w-full grid-flow-row grid-cols-2 justify-items-center gap-2'>
+                        <div className="grid w-full grid-flow-row grid-cols-2 justify-items-center gap-2">
                             <p>Bolivar Ferry</p>
                             <p>Fishing Charters</p>
                             <p>Bolivar Lighthouse</p>
@@ -74,15 +74,15 @@ export default function GoogleMapsEmbed() {
                         </div>
                     </div>
                 </div>
-                <div className='h-screen w-full p-5'>
+                <div className="h-screen w-full p-5">
                     <iframe
-                        title='Google Map'
+                        title="Google Map"
                         src={src}
-                        width='100%'
-                        height='100%'
+                        width="100%"
+                        height="100%"
                         allowFullScreen
-                        loading='lazy'
-                        className='m-auto rounded-2xl border bg-white p-3'
+                        loading="lazy"
+                        className="m-auto rounded-2xl border bg-white p-3"
                     />
                 </div>
             </div>

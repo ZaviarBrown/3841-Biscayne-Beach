@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useScrollContext } from '~/context/ScrollContext';
-import DesktopNavBar from './Desktop/NavBar';
-import { useMobileContext } from '~/context/MobileContext';
-import MobileNavBar from './Mobile/NavBar';
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useScrollContext } from "~/context/ScrollContext";
+import DesktopNavBar from "./Desktop/NavBar";
+import { useMobileContext } from "~/context/MobileContext";
+import MobileNavBar from "./Mobile/NavBar";
 
 const NavBar = () => {
     const { isMobile } = useMobileContext();
@@ -13,13 +13,13 @@ const NavBar = () => {
     const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
-        if (pathname === '/' || pathname === '/gallery') {
+        if (pathname === "/" || pathname === "/gallery") {
             if (scrollY <= height / 3) {
                 setHideNav(false);
-            } else setHideNav(scrollDirection === 'down');
+            } else setHideNav(scrollDirection === "down");
         }
 
-        if (pathname.startsWith('/confirm-and-pay')) {
+        if (pathname.startsWith("/confirm-and-pay")) {
             setHideNav(true);
         }
 

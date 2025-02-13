@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { useMobileContext } from '~/context/MobileContext';
-import type { HomeDetailsType } from '~/data';
+import Image from "next/image";
+import { useMobileContext } from "~/context/MobileContext";
+import type { HomeDetailsType } from "~/data";
 
 type BackgroundImageProps = {
     src: string;
@@ -9,12 +9,12 @@ type BackgroundImageProps = {
 };
 
 export const ParallaxImage = ({ src, alt, children }: BackgroundImageProps) => {
-    const bandAid = src === '/images/house-sunset.jpg';
+    const bandAid = src === "/images/house-sunset.jpg";
 
     return (
         <div
             className={`relative flex h-screen flex-col bg-cover bg-fixed ${
-                bandAid ? 'bg-bottom' : 'bg-center'
+                bandAid ? "bg-bottom" : "bg-center"
             }`}
             aria-label={alt}
             style={{
@@ -38,7 +38,7 @@ export const ParallaxDetailScene = ({ alt, src, textArr }: HomeDetailsType) => {
                     <p
                         key={i}
                         className={`break-words p-2 ${
-                            isMobile ? 'text-lg' : 'max-w-[70vw] text-2xl'
+                            isMobile ? "text-lg" : "max-w-[70vw] text-2xl"
                         }`}
                     >
                         {text}
@@ -58,7 +58,7 @@ export const ParallaxDetailScene = ({ alt, src, textArr }: HomeDetailsType) => {
                         unoptimized // I hate to do this and I blame Apple
                         src={src}
                         alt={alt}
-                        className='object-cover object-bottom'
+                        className="object-cover object-bottom"
                     />
                 </div>
             </>

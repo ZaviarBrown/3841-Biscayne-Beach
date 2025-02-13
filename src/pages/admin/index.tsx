@@ -25,7 +25,7 @@ export default function AdminPage() {
         return (
             <>
                 <NavBarSpacer />
-                <div className="flex min-h-screen w-full justify-between ">
+                <div className="flex min-h-screen w-full justify-between">
                     <SideBar page={page} setPage={setPage} />
 
                     <div className="m-5 w-full">

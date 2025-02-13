@@ -9,9 +9,6 @@ const BookingSummary = ({
     endDate: string;
     totalPrice: string;
 }) => {
-
-
-
     return (
         <div className="mb-6">
             <h2 className="mb-4 text-2xl font-bold">Booking Summary</h2>

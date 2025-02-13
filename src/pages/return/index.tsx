@@ -1,13 +1,13 @@
-import { render } from '@react-email/render';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import BookingConfirmationEmail from '~/emails/BookingConfirmation';
-import { api } from '~/utils/api';
+import { render } from "@react-email/render";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import BookingConfirmationEmail from "~/emails/BookingConfirmation";
+import { api } from "~/utils/api";
 
 export default function StripeReturn() {
     const router = useRouter();
-    const [status, setStatus] = useState('');
-    const [customerEmail, setCustomerEmail] = useState('');
+    const [status, setStatus] = useState("");
+    const [customerEmail, setCustomerEmail] = useState("");
     const [emailSent, setEmailSent] = useState(false);
 
     const { data: checkoutSession } = api.stripe.getCheckoutSession.useQuery(
@@ -29,7 +29,7 @@ export default function StripeReturn() {
                 updateBooking({
                     id: booking.id,
                     userId: booking.userId,
-                    status: 'complete',
+                    status: "complete",
                     paymentId: checkoutSession.paymentIntent as string,
                 });
         },
@@ -40,20 +40,20 @@ export default function StripeReturn() {
 
     useEffect(() => {
         if (checkoutSession) {
-            setStatus(checkoutSession.status ?? '');
-            setCustomerEmail(checkoutSession.customerEmail ?? '');
+            setStatus(checkoutSession.status ?? "");
+            setCustomerEmail(checkoutSession.customerEmail ?? "");
         }
     }, [checkoutSession]);
 
     useEffect(() => {
         if (
             !emailSent &&
-            status === 'complete' &&
-            booking?.status === 'pending'
+            status === "complete" &&
+            booking?.status === "pending"
         ) {
             sendEmail({
                 to: booking.email,
-                subject: 'Booking Confirmation',
+                subject: "Booking Confirmation",
                 html: render(<BookingConfirmationEmail {...booking} />),
             });
 
@@ -67,30 +67,30 @@ export default function StripeReturn() {
         }
     }, [status, booking, emailSent, sendEmail, adminEmail]);
 
-    if (status === 'open') {
-        return router.replace('/');
+    if (status === "open") {
+        return router.replace("/");
     }
 
-    if (booking && status === 'complete') {
+    if (booking && status === "complete") {
         return (
             <section
-                className='m-auto rounded-lg bg-slate-700 px-5 py-2 text-center text-xl text-white shadow-3xl md:text-3xl'
-                id='success'
+                className="m-auto rounded-lg bg-slate-700 px-5 py-2 text-center text-xl text-white shadow-3xl md:text-3xl"
+                id="success"
             >
-                <p className='break-words'>
+                <p className="break-words">
                     We appreciate you booking with us!
                 </p>
-                <p className='break-words'>
+                <p className="break-words">
                     A confirmation email will be sent to {customerEmail}
                 </p>
 
-                <p className='break-words'>
+                <p className="break-words">
                     If you have any questions, please email
                     <a
-                        className='break-all text-blue-300 underline underline-offset-4'
-                        href='mailto:cheersbeachescrystalbeach@gmail.com'
+                        className="break-all text-blue-300 underline underline-offset-4"
+                        href="mailto:cheersbeachescrystalbeach@gmail.com"
                     >
-                        {' '}
+                        {" "}
                         cheersbeachescrystalbeach@gmail.com
                     </a>
                 </p>

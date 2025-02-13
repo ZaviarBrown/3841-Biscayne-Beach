@@ -1,3 +1,3 @@
-export default function UpdatePricingWindow () {
-    return <div></div>
+export default function UpdatePricingWindow() {
+    return <div></div>;
 }

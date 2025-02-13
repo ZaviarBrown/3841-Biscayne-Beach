@@ -1,5 +1,5 @@
-import { homeDetails } from '~/data';
-import { ParallaxDetailScene } from './Parallax';
+import { homeDetails } from "~/data";
+import { ParallaxDetailScene } from "./Parallax";
 
 export default function HomeDetails() {
     return (

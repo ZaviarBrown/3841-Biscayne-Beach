@@ -1,10 +1,10 @@
 // https://www.airbnb.com/calendar/ical/1124115159193989789.ics?s=1e0f560ce9919cbaa6b94a3578a50b37
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-import Cors from 'cors';
+import type { NextApiRequest, NextApiResponse } from "next";
+import Cors from "cors";
 
 const cors = Cors({
-    methods: ['GET'],
+    methods: ["GET"],
 });
 
 type MiddlewareFunction = (
@@ -32,5 +32,5 @@ function runMiddleware(
 export default async function iCal(req: NextApiRequest, res: NextApiResponse) {
     await runMiddleware(req, res, cors);
 
-    res.json({ message: 'Hello Everyone!' });
+    res.json({ message: "Hello Everyone!" });
 }

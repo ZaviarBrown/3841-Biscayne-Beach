@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { galleryImages as images } from '~/data';
-import type { StaticImagesType } from '~/data';
+import Image from "next/image";
+import { galleryImages as images } from "~/data";
+import type { StaticImagesType } from "~/data";
 
 export default function Header({
     title,
