@@ -1,6 +1,5 @@
 import Head from "next/head";
-import NavBar from "./Home/NavBar";
-import Footer from "./Home/Footer";
+import NavBar from "./NavBar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -33,7 +32,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex min-h-screen flex-col">
                 <NavBar />
                 <main className="flex flex-grow flex-col">{children}</main>
-                <Footer />
             </div>
         </>
     );

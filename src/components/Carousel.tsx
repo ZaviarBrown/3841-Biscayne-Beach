@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useMobileContext } from "~/context/MobileContext";
 import { useScrollContext } from "~/context/ScrollContext";
 import { carouselImages as images } from "~/data";
-import DarkFilter from "../DarkFilter";
+import DarkFilter from "./DarkFilter";
 
 const Carousel = () => {
     const { showCarousel } = useScrollContext();

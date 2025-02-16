@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Carousel from "~/components/Home/Carousel";
-import TripleLink from "~/components/Home/TripleLink";
+import Carousel from "~/components/Carousel";
+import TripleLink from "~/components/TripleLink";
 
 const Home: NextPage = () => {
     return (

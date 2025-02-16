@@ -1,9 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useScrollContext } from "~/context/ScrollContext";
-import DesktopNavBar from "./Desktop/NavBar";
 import { useMobileContext } from "~/context/MobileContext";
-import MobileNavBar from "./Mobile/NavBar";
 
 const NavBar = () => {
     const { isMobile } = useMobileContext();
@@ -28,16 +26,7 @@ const NavBar = () => {
         return () => setHideNav(false);
     }, [scrollY, height, scrollDirection, pathname]);
 
-    if (isMobile)
-        return (
-            <MobileNavBar
-                hideNav={hideNav}
-                pathname={pathname}
-                showMenu={showMenu}
-                setShowMenu={setShowMenu}
-            />
-        );
-    // else return <DesktopNavBar hideNav={hideNav} pathname={pathname} />;
+    if (isMobile) return null;
     else
         return (
             <nav
