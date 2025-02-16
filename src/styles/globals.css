@@ -3,5 +3,31 @@
 @tailwind utilities;
 
 html {
-    background-color: rgb("FEFCFB");
+    background-color: #fefcfb;
+}
+
+@layer utilities {
+    .clip-tr {
+        clip-path: polygon(0% 0%, 100% 18%, 100% 100%, 0% 100%);
+    }
+
+    .clip-tl {
+        clip-path: polygon(0% 18%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    .clip-br {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 82%, 0% 100%);
+    }
+
+    .clip-bl {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 82%);
+    }
+
+    .clip-tr-bl {
+        clip-path: polygon(0% 0%, 100% 18%, 100% 100%, 0% 82%);
+    }
+
+    .clip-tl-br {
+        clip-path: polygon(0% 18%, 100% 0%, 100% 82%, 0% 100%);
+    }
 }
