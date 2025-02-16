@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useMobileContext } from "~/context/MobileContext";
 import { useScrollContext } from "~/context/ScrollContext";
 import { carouselImages as images } from "~/data";
+import DarkFilter from "../DarkFilter";
 
 const Carousel = () => {
     const { showCarousel } = useScrollContext();
@@ -32,61 +33,44 @@ const Carousel = () => {
     // TODO: Image optimization
 
     return (
-        <div className="flex h-screen w-full items-center justify-between bg-black bg-opacity-40">
+        <div className="flex h-screen w-full flex-col items-center justify-between">
+            <h1 className="absolute left-[3%] top-[7%] text-5xl font-thin  tracking-[0.25em] text-white transition-all duration-700 ease-in-out">
+                Cheers Beaches
+            </h1>
+
+            <DarkFilter />
+
             {images.map(({ src, alt }, index) => (
                 <div
                     key={src}
                     className={`${
                         index === currentImage ? "opacity-100" : "opacity-0"
-                    } fixed -z-10 h-screen w-full transition-opacity duration-1000`}
+                    } fixed -z-50 h-screen w-full transition-opacity duration-1000`}
                 >
-                    <Image
-                        src={src}
-                        alt={alt}
-                        className="scale-125 object-scale-down"
-                        fill
-                    />
-                    <Image
-                        src={src}
-                        alt={alt}
-                        className="-z-20 object-cover blur"
-                        fill
-                    />
+                    <Image src={src} alt={alt} className="object-cover" fill />
                 </div>
             ))}
 
-            <button
-                onClick={previousImage}
-                className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
-            >
-                {"<"}
-            </button>
+            {/* Spacer */}
+            <div />
+            {/* Spacer */}
 
-            <button
-                onClick={nextImage}
-                className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
-            >
-                {">"}
-            </button>
+            <div className="flex w-full justify-between">
+                <button
+                    onClick={previousImage}
+                    className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
+                >
+                    {"<"}
+                </button>
 
-            <div
-                className={`absolute transition-all duration-700 ease-in-out ${
-                    isMobile
-                        ? "bottom-[10%] left-[5%] text-2xl"
-                        : "bottom-[10%] left-[10%] text-5xl"
-                } text-white`}
-            >
-                <p>3841 Biscayne Beach Rd</p>
-                <p>Port Bolivar, TX</p>
+                <button
+                    onClick={nextImage}
+                    className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
+                >
+                    {">"}
+                </button>
             </div>
-
-            <div
-                className={`absolute transition-all duration-700 ease-in-out ${
-                    isMobile
-                        ? "bottom-[5%] right-[5%]"
-                        : "bottom-[10%] right-[10%]"
-                } flex space-x-2`}
-            >
+            <div className="flex space-x-2 pb-5">
                 {images.map((_, index) => (
                     <div
                         className="py-2 hover:cursor-pointer"
