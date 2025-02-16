@@ -1,122 +1,66 @@
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { useMobileContext } from "~/context/MobileContext";
-import { useScrollContext } from "~/context/ScrollContext";
-import { carouselImages as images } from "~/data";
-import HomeDetails from "~/components/Home/HomeDetails";
+import Link from "next/link";
 
 export default function Dev() {
-    const { showCarousel } = useScrollContext();
-    const { isMobile } = useMobileContext();
-    const [currentImage, setCurrentImage] = useState(0);
-
-    const nextImage = () => {
-        setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-    };
-
-    const previousImage = () => {
-        setCurrentImage(
-            (prevImage) => (prevImage - 1 + images.length) % images.length
-        );
-    };
-
-    useEffect(() => {
-        if (!showCarousel) return;
-
-        const interval = setInterval(() => {
-            setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
-        }, 4000);
-
-        return () => clearInterval(interval);
-    }, [currentImage, showCarousel]);
-
-    // TODO: Image optimization
-
     return (
-        <>
-            <div className="relative flex h-[98vh] w-full flex-col items-center justify-between">
-                {images.map(({ src, alt }, index) => (
-                    <div
-                        key={src}
-                        className={`${
-                            index === currentImage ? "opacity-100" : "opacity-0"
-                        } fixed -z-10 h-full w-full transition-opacity duration-1000`}
-                    >
-                        <Image
-                            src={src}
-                            alt={alt}
-                            className="scale-125 object-scale-down"
-                            fill
-                        />
-                        <Image
-                            src={src}
-                            alt={alt}
-                            className="-z-20 object-cover blur"
-                            fill
-                        />
-                    </div>
-                ))}
-                <div className="absolute top-0 h-1/2 w-full bg-gradient-to-b from-black to-transparent opacity-60" />
-                <div className="absolute bottom-0 h-1/2 w-full bg-gradient-to-b from-transparent to-black opacity-60" />
-
-                {/* Spacer */}
-                <div />
-                {/* Spacer */}
-
-                <div className="flex w-full justify-between">
-                    <button
-                        onClick={previousImage}
-                        className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
-                    >
-                        {"<"}
-                    </button>
-
-                    <button
-                        onClick={nextImage}
-                        className="mx-5 rounded-md bg-black px-4 py-2 text-white opacity-50 duration-200 hover:opacity-90"
-                    >
-                        {">"}
-                    </button>
+        <div className="flex h-screen max-w-full flex-col overflow-hidden">
+            <div className="flex flex-col gap-8 md:flex-row">
+                <div className="md:w-2/3">
+                    <h1 className="text-4xl font-bold">
+                        <span>Feel at Home</span>
+                    </h1>
+                    <p className="mt-4 text-gray-700">
+                        {`
+                                Live the way you've always wanted without
+                                compromising style or quality. At The Carson, our
+                                large brand new construction homes are designed with
+                                you in mind. With impressive finishes, two-car
+                                direct access garages, and great amenities, our
+                                brand-new construction homes make it possible to
+                                live beyond your expectations. Walk out your front
+                                door to Gilbert Town Square for a meal at your
+                                favorite restaurant or take a short bike ride to the
+                                famed Heritage District or a short drive to Downtown
+                                Chandler for world-class dining & entertainment. The
+                                Carson is the perfect place to call home.
+                            `}
+                    </p>
                 </div>
 
-                <div
-                    className={`absolute font-extralight tracking-[0.2em] transition-all duration-700 ease-in-out ${
-                        isMobile
-                            ? "left-[4%] top-[5%] text-2xl"
-                            : "left-[5%] top-[6%] text-5xl"
-                    } text-white`}
-                >
-                    <p>Cheers Beaches</p>
-                </div>
-
-                <div
-                    className={`z-50 pb-5 transition-all duration-700 ease-in-out ${
-                        isMobile
-                            ? "bottom-[5%] right-[50%]"
-                            : "bottom-[10%] left-[50%] right-[50%]"
-                    } flex space-x-2`}
-                >
-                    {images.map((_, index) => (
-                        <div
-                            className="py-2 hover:cursor-pointer"
-                            onClick={() => setCurrentImage(index)}
-                            key={index}
-                        >
-                            <div
-                                className={`h-0.5 ${
-                                    isMobile ? "w-8" : "w-10"
-                                } rounded-full bg-white ${
-                                    index === currentImage
-                                        ? "animate-pulse"
-                                        : ""
-                                }`}
-                            ></div>
-                        </div>
-                    ))}
+                <div className="flex flex-col gap-4 md:w-1/3">
+                    <Link
+                        className="rounded-lg bg-blue-600 px-4 py-2 text-center text-white hover:bg-blue-700"
+                        href="/amenities/"
+                    >
+                        <p className="">View Amenities</p>
+                    </Link>
+                    <Link
+                        className="rounded-lg bg-blue-600 px-4 py-2 text-center text-white hover:bg-blue-700"
+                        href="/gallery/"
+                    >
+                        <p className="">View Gallery</p>
+                    </Link>
                 </div>
             </div>
-            <div className="h-screen w-full bg-white"></div>
-        </>
+            <div className="flex aspect-[3/2] w-full flex-col md:aspect-[3/1] md:flex-row">
+                <div className="md:clip-tr clip-br relative h-full w-full overflow-hidden bg-cover bg-center md:h-auto md:w-1/2">
+                    <Image
+                        className="object-cover object-right-bottom"
+                        src={"/images/house.jpg"}
+                        alt={"0"}
+                        fill
+                    />
+                </div>
+                <div className="md:clip-tl clip-tl relative -mt-[7%] h-full w-full overflow-hidden bg-cover bg-center md:mt-0 md:h-auto md:w-1/2">
+                    <Image
+                        className="object-cover object-left-bottom"
+                        src={"/images/house.jpg"}
+                        alt={"0"}
+                        fill
+                    />
+                </div>
+            </div>
+        </div>
     );
 }
 

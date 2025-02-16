@@ -1,14 +1,12 @@
 import type { NextPage } from "next";
 import Carousel from "~/components/Home/Carousel";
-import HomeDetails from "~/components/Home/HomeDetails";
-import GoogleMapsEmbed from "~/components/Home/GoogleMapsEmbed";
+import TripleLink from "~/components/Home/TripleLink";
 
 const Home: NextPage = () => {
     return (
         <>
             <Carousel />
-            <HomeDetails />
-            <GoogleMapsEmbed />
+            <TripleLink />
         </>
     );
 };
