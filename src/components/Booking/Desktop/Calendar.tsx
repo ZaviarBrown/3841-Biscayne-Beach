@@ -2,6 +2,7 @@ import { DayPicker } from "react-day-picker";
 import { api } from "~/utils/api";
 import { isBefore, isAfter, addYears } from "date-fns";
 import type { DateRange } from "react-day-picker";
+import { ClockLoader } from "react-spinners";
 
 // TODO: Refactor to be reusable across all calendar instances
 
@@ -69,26 +70,34 @@ const DesktopCalendar = ({
 
     return (
         <div className="m-12">
-            <DayPicker
-                mode="range"
-                selected={dates}
-                onSelect={(range, justSelected) => {
-                    if (!range) return setDates({ from: undefined });
+            {booked.length ? (
+                <DayPicker
+                    mode="range"
+                    selected={dates}
+                    onSelect={(range, justSelected) => {
+                        if (!range) return setDates({ from: undefined });
 
-                    if (booked && range?.from && range.to) {
-                        for (const { from } of booked) {
-                            if (isBefore(range.from, from)) {
-                                if (isAfter(range.to, from)) {
-                                    return setDates({ from: justSelected });
+                        if (booked && range?.from && range.to) {
+                            for (const { from } of booked) {
+                                if (isBefore(range.from, from)) {
+                                    if (isAfter(range.to, from)) {
+                                        return setDates({ from: justSelected });
+                                    }
                                 }
                             }
                         }
-                    }
-                    setDates(range);
-                }}
-                className="scale-125 bg-white text-xl"
-                {...createCalendarOptions(booked)}
-            />
+                        setDates(range);
+                    }}
+                    className="scale-125 bg-white text-xl"
+                    {...createCalendarOptions(booked)}
+                />
+            ) : (
+                <ClockLoader
+                    className="m-10 mb-20"
+                    size={240}
+                    color="#149BD6"
+                />
+            )}
         </div>
     );
 };

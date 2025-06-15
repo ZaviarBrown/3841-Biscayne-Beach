@@ -1,12 +1,49 @@
-import { z } from 'zod';
+import { z } from "zod";
+import ical from "node-ical";
 
 import {
     createTRPCRouter,
     publicProcedure,
     protectedProcedure,
     adminProcedure,
-} from '~/server/api/trpc';
-import { convertToUTCNoonCST } from '~/utils/booking';
+} from "~/server/api/trpc";
+import { convertToUTCNoonCST } from "~/utils/booking";
+
+const get3rdPartyDates = async () => {
+    const airbnbData = await ical.async.fromURL(
+        "https://www.airbnb.com/calendar/ical/1124115159193989789.ics?s=1e0f560ce9919cbaa6b94a3578a50b37"
+    );
+    const vrboData = await ical.async.fromURL(
+        "http://www.vrbo.com/icalendar/2dd45e8fad584978820f10ab8ee53a18.ics?nonTentative"
+    );
+
+    const dates = [];
+
+    for (const key in airbnbData) {
+        const val = airbnbData[key] as { start: Date; end: Date; uid: string };
+        if (val.start) {
+            dates.push({
+                from: val.start,
+                to: val.end,
+                id: val.uid,
+            });
+        }
+    }
+
+    for (const key in vrboData) {
+        const val = vrboData[key] as { start: Date; end: Date; uid: string };
+
+        if (val.start) {
+            dates.push({
+                from: val.start,
+                to: val.end,
+                id: val.uid,
+            });
+        }
+    }
+
+    return dates;
+};
 
 export const bookingRouter = createTRPCRouter({
     getForCalendar: publicProcedure.query(async ({ ctx }) => {
@@ -17,12 +54,16 @@ export const bookingRouter = createTRPCRouter({
                 },
             },
         });
+        const outsideBookings = await get3rdPartyDates();
 
-        return bookedArr.map((el) => ({
-            id: el.id,
-            from: el.startDate,
-            to: el.endDate,
-        }));
+        return [
+            ...bookedArr.map((el) => ({
+                id: el.id,
+                from: el.startDate,
+                to: el.endDate,
+            })),
+            ...outsideBookings,
+        ];
     }),
 
     getAllFuture: publicProcedure.query(async ({ ctx }) => {
@@ -33,7 +74,7 @@ export const bookingRouter = createTRPCRouter({
                 },
             },
             orderBy: {
-                startDate: 'asc',
+                startDate: "asc",
             },
         });
     }),
@@ -46,7 +87,7 @@ export const bookingRouter = createTRPCRouter({
                 },
             },
             orderBy: {
-                startDate: 'desc',
+                startDate: "desc",
             },
         });
     }),
@@ -62,7 +103,7 @@ export const bookingRouter = createTRPCRouter({
                 },
             },
             orderBy: {
-                cancelDate: 'desc',
+                cancelDate: "desc",
             },
         });
     }),
@@ -95,7 +136,7 @@ export const bookingRouter = createTRPCRouter({
             return await ctx.prisma.booking.findMany({
                 where: { userId: input },
                 // include: { Review: true },
-                orderBy: { startDate: 'asc' },
+                orderBy: { startDate: "asc" },
             });
         }),
 
@@ -122,7 +163,7 @@ export const bookingRouter = createTRPCRouter({
             const newBooking = await ctx.prisma.booking.create({
                 data: {
                     ...bookingInfo,
-                    status: 'admin',
+                    status: "admin",
                     startDate: convertToUTCNoonCST(bookingInfo.startDate),
                     endDate: convertToUTCNoonCST(bookingInfo.endDate),
                 },
@@ -150,7 +191,7 @@ export const bookingRouter = createTRPCRouter({
             const newBooking = await ctx.prisma.booking.create({
                 data: {
                     ...bookingInfo,
-                    status: 'pending',
+                    status: "pending",
                     startDate: convertToUTCNoonCST(bookingInfo.startDate),
                     endDate: convertToUTCNoonCST(bookingInfo.endDate),
                 },
@@ -186,7 +227,7 @@ export const bookingRouter = createTRPCRouter({
                 return updatedBooking;
             }
 
-            throw new Error('Invalid userId');
+            throw new Error("Invalid userId");
         }),
 
     delete: protectedProcedure
@@ -242,7 +283,7 @@ export const bookingRouter = createTRPCRouter({
                     where: { id },
                 });
 
-                return 'Successfully deleted';
+                return "Successfully deleted";
             }
         ),
 
@@ -253,6 +294,6 @@ export const bookingRouter = createTRPCRouter({
                 where: { id },
             });
 
-            return 'Successfully deleted';
+            return "Successfully deleted";
         }),
 });
