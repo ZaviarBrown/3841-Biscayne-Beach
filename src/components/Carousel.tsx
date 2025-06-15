@@ -33,8 +33,8 @@ const Carousel = () => {
     // TODO: Image optimization
 
     return (
-        <div className="flex h-screen w-full flex-col items-center justify-between">
-            <h1 className="absolute left-[3%] top-[7%] text-5xl font-thin  tracking-[0.25em] text-white transition-all duration-700 ease-in-out">
+        <div className="flex h-screen flex-col items-center justify-between">
+            <h1 className="absolute left-[3%] top-[7%] text-5xl font-thin tracking-[0.25em] text-white transition-all duration-700 ease-in-out">
                 Cheers Beaches
             </h1>
 
@@ -45,7 +45,7 @@ const Carousel = () => {
                     key={src}
                     className={`${
                         index === currentImage ? "opacity-100" : "opacity-0"
-                    } fixed -z-50 h-screen w-full transition-opacity duration-1000`}
+                    } fixed -z-50 h-screen w-full max-w-full transition-opacity duration-1000`}
                 >
                     <Image src={src} alt={alt} className="object-cover" fill />
                 </div>

@@ -3,63 +3,30 @@ import Link from "next/link";
 
 export default function Dev() {
     return (
-        <div className="flex h-screen max-w-full flex-col overflow-hidden">
-            <div className="flex flex-col gap-8 md:flex-row">
-                <div className="md:w-2/3">
-                    <h1 className="text-4xl font-bold">
-                        <span>Feel at Home</span>
-                    </h1>
-                    <p className="mt-4 text-gray-700">
-                        {`
-                                Live the way you've always wanted without
-                                compromising style or quality. At The Carson, our
-                                large brand new construction homes are designed with
-                                you in mind. With impressive finishes, two-car
-                                direct access garages, and great amenities, our
-                                brand-new construction homes make it possible to
-                                live beyond your expectations. Walk out your front
-                                door to Gilbert Town Square for a meal at your
-                                favorite restaurant or take a short bike ride to the
-                                famed Heritage District or a short drive to Downtown
-                                Chandler for world-class dining & entertainment. The
-                                Carson is the perfect place to call home.
-                            `}
-                    </p>
-                </div>
+        <div className="flex items-center justify-center py-8">
+            {/* Left Line */}
+            <div className="flex-grow border-t border-gray-300"></div>
 
-                <div className="flex flex-col gap-4 md:w-1/3">
-                    <Link
-                        className="rounded-lg bg-blue-600 px-4 py-2 text-center text-white hover:bg-blue-700"
-                        href="/amenities/"
-                    >
-                        <p className="">View Amenities</p>
-                    </Link>
-                    <Link
-                        className="rounded-lg bg-blue-600 px-4 py-2 text-center text-white hover:bg-blue-700"
-                        href="/gallery/"
-                    >
-                        <p className="">View Gallery</p>
-                    </Link>
-                </div>
+            {/* Buttons */}
+            <div className="mx-6 flex space-x-4">
+                <a
+                    href="/schedule-a-tour/"
+                    target="_self"
+                    className="bg-black px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-gray-800"
+                >
+                    Book A Tour
+                </a>
+                <a
+                    href="https://carsontownhomes.securecafe.com/onlineleasing/carson-the/floorplans.aspx"
+                    target="_blank"
+                    className="bg-black px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-gray-800"
+                >
+                    Apply Today
+                </a>
             </div>
-            <div className="flex aspect-[3/2] w-full flex-col md:aspect-[3/1] md:flex-row">
-                <div className="md:clip-tr clip-br relative h-full w-full overflow-hidden bg-cover bg-center md:h-auto md:w-1/2">
-                    <Image
-                        className="object-cover object-right-bottom"
-                        src={"/images/house.jpg"}
-                        alt={"0"}
-                        fill
-                    />
-                </div>
-                <div className="md:clip-tl clip-tl relative -mt-[7%] h-full w-full overflow-hidden bg-cover bg-center md:mt-0 md:h-auto md:w-1/2">
-                    <Image
-                        className="object-cover object-left-bottom"
-                        src={"/images/house.jpg"}
-                        alt={"0"}
-                        fill
-                    />
-                </div>
-            </div>
+
+            {/* Right Line */}
+            <div className="flex-grow border-t border-gray-300"></div>
         </div>
     );
 }

@@ -1,6 +1,13 @@
 import Head from "next/head";
 import NavBar from "./NavBar";
 
+import { Roboto_Slab } from "next/font/google";
+
+const roboto = Roboto_Slab({
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    subsets: ["latin"],
+});
+
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -29,9 +36,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 />
                 <link rel="manifest" href="/favicon/site.webmanifest" />
             </Head>
-            <div className="flex min-h-screen flex-col">
+            <div className="flex min-h-screen max-w-full flex-col">
                 <NavBar />
-                <main className="flex flex-grow flex-col">{children}</main>
+                <main className={`flex flex-grow flex-col ${roboto.className}`}>
+                    {children}
+                </main>
             </div>
         </>
     );
