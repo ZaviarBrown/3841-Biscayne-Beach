@@ -87,7 +87,7 @@ const DesktopPayPreview = ({ selected }: { selected: DateRange }) => {
             setSubTotal("...");
             setTaxPrice("...");
         } else {
-            if (numberOfNights < 5) {
+            if (numberOfNights < 3) {
                 setDisabled(true);
                 setTotalPrice("...");
                 setSubTotal("...");
@@ -128,7 +128,7 @@ const DesktopPayPreview = ({ selected }: { selected: DateRange }) => {
                             : "scale-100 font-normal"
                     }`}
                 >
-                    5 night minimum
+                    3 night minimum
                 </h3>
             </div>
             <div className="w-3/4 self-center border border-slate-200" />
