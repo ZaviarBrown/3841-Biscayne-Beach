@@ -87,7 +87,7 @@ const MobilePayPreview = ({ selected }: { selected: DateRange }) => {
             setSubTotal("...");
             setTaxPrice("...");
         } else {
-            if (numberOfNights < 3) {
+            if (numberOfNights < 4) {
                 setDisabled(true);
                 setTotalPrice("...");
                 setSubTotal("...");
@@ -128,7 +128,7 @@ const MobilePayPreview = ({ selected }: { selected: DateRange }) => {
                             : "scale-100 font-normal"
                     }`}
                 >
-                    3 night minimum
+                    4 night minimum
                 </h3>
             </div>
             <div className="w-3/4 self-center border border-slate-200" />
