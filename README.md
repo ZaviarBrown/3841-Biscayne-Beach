@@ -1,10 +1,8 @@
-# 3841 Biscayne Beach
+# Updates:
 
-cheers-beaches.com
-cheers-beach.house
-crystalbeaches.house
-bolivarbeach.house
-cheerscrystalbeach.house
-crystalgetaway.com
-cheerscrystalbeaches.com
-cheersbeachescrystalbeach.com
+## Pricing
+
+Admin view to block out dates on calendar
+
+- Select color of block out bar
+- Submit note to display in tooltip when hovering on calendar

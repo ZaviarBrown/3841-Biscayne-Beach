@@ -5,6 +5,7 @@ import {
     isSaturday,
     isBefore,
     isAfter,
+    subDays,
 } from "date-fns";
 import { env } from "~/env.mjs";
 import type { PricingWindowType } from "~/server/api/routers/pricing";
@@ -38,9 +39,12 @@ export const calculateSubtotal = (
     let currentPricingWindow = 0;
     const endOfWindow = customPrices.length;
 
+    // Calculate price by number of nights
+    const finalNight = subDays(to, 1);
+
     eachDayOfInterval({
         start: from,
-        end: to,
+        end: finalNight,
     }).forEach((selectedDay) => {
         let priceForTheDay = defaultPrice;
 
